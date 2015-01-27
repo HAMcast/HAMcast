@@ -1,0 +1,32 @@
+#! /bin/bash
+
+fail=0
+if [ ! `which aclocal` ]; then
+    echo "aclocal is missing, please install automake first (e.g., sudo apt-get install automake)"
+    fail=1
+fi
+
+if [ ! `which libtoolize` ]; then
+    echo "libtoolize is missing, please install libtool first (e.g., sudo apt-get install libtool)"
+    fail=1
+fi
+
+if [ $fail -eq 1 ]; then
+    echo "** Script aborted due to errors."
+    exit 1;
+fi
+
+echo "Running autotools..."
+
+aclocal \
+&& libtoolize --force \
+&& autoheader \
+&& automake -a --foreign --add-missing \
+&& autoreconf
+
+echo "Done."
+echo "Now type:"
+echo "> ./configure"
+echo "> make"
+echo "> sudo make install"
+echo "> sudo ldconfig"

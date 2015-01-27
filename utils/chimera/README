@@ -1,0 +1,54 @@
+NAME
+    libchimera - utility shared library for HAMcast modules
+
+BUILD/INSTALL
+
+Requirements
+    - cmake (Version 2.6+)
+    - openssl libraries developers edition
+    - pthread library
+
+Build
+    We recommend an 'out-of-source' cmake-build. Create a new folder, e.g.
+    'build' within the source directory. Change to new folder (cd build)
+    and run:
+
+        cmake ../
+
+    This will initialize build environment, if no errors occure run:
+
+        make
+
+    afterwards. If build was successful you find the library in build folder.
+
+Install
+    Not supported
+
+SYNOPSIS
+    None.
+
+DESCRIPTION
+    libchimera provides an pastry based P2P overlay network to be used by
+    certain HAMcast modules such as Scribe and BIDIR-SAM.
+
+EXIT STATUS
+    None.
+
+OPTIONS
+    None.
+
+EXAMPLES
+    None.
+
+FILES
+    No other files required or used.
+
+ENVIRONMENT
+    NONE.
+
+NOTES
+    None.
+
+AUTHOR
+    Sebastian Meiling <sebastian.meiling (at) haw-hamburg.de>
+    visit our website <http://hamcast.realmv6.org/developers>

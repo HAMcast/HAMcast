@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html> 
+	<head> 
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+		<title>H&forall;Mcast</title> 
+		<style type="text/css" media="screen"> 
+			body { text-align:left; font-size:90%; font-family:Verdana, Geneva, Arial, Helvetica, sans-serif; margin:1em 4em; }
+			/*canvas { border: 2px solid black; }*/
+		</style> 
+	</head> 
+	<script type="text/javascript">
+
+		function disableMagic() {
+			netscape.security.PrivilegeManager.enablePrivilege('UniversalXPConnect');
+			var file = Components.classes["@mozilla.org/file/local;1"]
+			                     .createInstance(Components.interfaces.nsILocalFile);
+			file.initWithPath("/Users/neverlord/disable_magic.sh");
+
+			var process = Components.classes["@mozilla.org/process/util;1"]
+			                        .createInstance(Components.interfaces.nsIProcess);
+			process.init(file);
+
+			var args = [];
+			process.run(true, args, args.length);
+		}
+
+		function imgWatchdog() {
+			setTimeout(function() {
+				var newColor;
+				if (isMagicOn()) {
+					newColor = '#00CC00';
+				} else {
+					newColor = '#CC0000';
+				}
+				document.getElementById('img_state').style.backgroundColor = newColor;
+				imgWatchdog();
+			}, 500);
+		}
+
+		function loadCallback() {
+			drawCanvas();
+			imgWatchdog();
+		}
+
+		// Die Canvas-Funktion beim Laden der Seite aufrufen
+		if(window.addEventListener){
+			addEventListener("load", loadCallback, false);
+		}
+
+		var maxY = 396;
+		var maxW = 300;
+		var maxH = 76;
+		var maxIndentW = 76;
+		var xPadding = 4;
+		var yPadding = 4;
+		var y0 = maxY - (maxH * 3) - (yPadding * 3) - 1;
+
+		function drawCanvas() {
+			var canvas = document.getElementById('testcanvas1');
+			if(canvas.getContext) {
+				var context = canvas.getContext('2d');
+				canvasContext = context;
+				context.font = "16px menlo";
+				context.textAlign = "center";
+				drawLayers(context, 4, 0, 0, 0, 0);
+				//animate(context, 0, y0, 2, 2);
+				//animate(context, 31, 69, 1, -1, 8, 25, 1, 1);
+			}
+		}
+
+ 		function drawLayers(context, appLayerOffset, x, y, w, h) {
+
+			var blue = "rgba(0, 0, 255, 0.3)";
+			var red = "rgba(255, 100, 0, 0.6)";
+			var black = "rgba(0, 0, 0, 1)";
+
+			context.clearRect(0, 0, maxW, maxY);
+
+ 			// application layer
+ 			var ly = maxY - (maxH * 4) - (yPadding * 2) - appLayerOffset - h;
+ 			context.fillStyle = blue;
+ 			context.fillRect(0, ly, maxW, maxH);
+			context.fillStyle = black;
+			context.fillText("Application", (maxW/2), ly + (maxH / 2) + 8);
+ 			
+ 			// future internet layer
+ 			if (w != 0)
+ 			{
+				context.fillStyle = red;
+				context.fillRect(x, y - (h / 2), w, h);
+				if (h == maxH)
+				{
+					context.fillStyle = black;
+					context.fillText("HAMcast", (maxW/2), y + 8);
+				}
+			}
+ 			
+ 			// transport layer part of future internet layer
+ 			if (w > (maxW - (maxIndentW + xPadding))) {
+				context.fillStyle = red;
+				context.fillRect(0, maxY - (maxH * 3) - (yPadding * 3), w - (maxW - maxIndentW), maxH + yPadding);
+ 			}
+ 			
+ 			// transport layer
+			ly = maxY - (maxH * 3) - (yPadding * 2);
+			var lx;
+			if (w <= (maxW - (maxIndentW + xPadding))) lx = 0;
+			else {
+				lx = w - (maxW - (maxIndentW + xPadding));
+			}
+ 			context.fillStyle = blue;
+ 			context.fillRect(lx, ly, maxW, maxH);
+			context.fillStyle = black;
+			context.fillText("Transport", (maxW/2) + (lx/2), ly + (maxH / 2) + 8);
+ 			
+ 			// internet layer
+			ly = maxY - (maxH * 2) - (yPadding * 1);
+ 			context.fillStyle = blue;
+ 			context.fillRect(0, ly, maxW, maxH);
+			context.fillStyle = black;
+			context.fillText("Internet", (maxW/2), ly + (maxH / 2) + 8);
+ 			
+ 			// link layer
+			ly = maxY - maxH;
+ 			context.fillStyle = blue;
+ 			context.fillRect(0, ly, maxW, maxH);
+			context.fillStyle = black;
+			context.fillText("Link", (maxW/2), ly + (maxH / 2) + 8);
+ 			
+ 		}
+
+		function fadeHamcastLayer(inout, context, x, y, w, h) {
+			var nextW;
+			var nextH;
+			var nextY;
+			if (inout == "in") {
+				nextW = (w < maxW ? w + 2 : w);
+				nextH = (w < maxW ? h : h + 2);
+				nextY = (h == nextH ? y : y - 1);
+			} else if (inout == "out") {
+				nextW = (h == 2     ? w - 2 : w    );
+				nextH = (h >  2     ? h - 2 : 2    );
+				nextY = (h == nextH ? y     : y + 1);
+			}
+			setTimeout(function() {
+				drawLayers(context, 8, x, y, w, h);
+				if (inout == "in") {
+					if (h != maxH) {
+						self.fadeHamcastLayer("in", context, x, nextY, nextW, nextH);
+					} else {
+						document.getElementById("fadeOutBtn").disabled = false;
+					}
+				} else if (inout == "out") {
+					if (nextW == 0) {
+						self.moveAppLayer("down", context, 8);
+					} else {
+						self.fadeHamcastLayer("out", context, x, nextY, nextW, nextH);
+					}
+				}
+			}, 20);
+		}
+
+		function moveAppLayer(direction, context, value) {
+			setTimeout(function() {
+				drawLayers(context, value, 0, 0, 0, 0);
+				if (direction == "up") {
+					if (value == 8) {
+						self.fadeHamcastLayer("in", context, 0, y0, 2, 2);
+					} else {
+						self.moveAppLayer("up", context, value + 1);
+					}
+				} else if (direction == "down") {
+					if (value > 4) {
+						self.moveAppLayer("down", context, value - 1);
+					} else {
+						document.getElementById("fadeInBtn").disabled = false;
+					}
+				}
+			}, 20);
+		}
+
+		function fadeIn() {
+			document.getElementById("fadeInBtn").disabled = true;
+			var canvas = document.getElementById('testcanvas1');
+			if(canvas.getContext) {
+				var context = canvas.getContext('2d');
+				moveAppLayer("up", context, 4);
+			}
+		}
+		
+		function fadeOut() {
+			document.getElementById("fadeOutBtn").disabled = true;
+			var canvas = document.getElementById('testcanvas1');
+			if(canvas.getContext) {
+				var context = canvas.getContext('2d');
+				fadeHamcastLayer("out", context, 0, y0 - (maxH / 2) + 1, maxW, maxH);
+			}
+		}
+ 
+ 		function executeBash(sh_file) {
+			netscape.security.PrivilegeManager.enablePrivilege('UniversalXPConnect');
+			var file = Components.classes["@mozilla.org/file/local;1"]
+			                     .createInstance(Components.interfaces.nsILocalFile);
+			file.initWithPath(sh_file);
+
+			var process = Components.classes["@mozilla.org/process/util;1"]
+			                        .createInstance(Components.interfaces.nsIProcess);
+			process.init(file);
+
+			var args = [];
+			//process.run(true, args, args.length);
+			//alert(process.exitValue);
+
+			process.runAsync(args, args.length);
+
+		}
+
+		function isMagicOn() {
+			netscape.security.PrivilegeManager.enablePrivilege('UniversalXPConnect');
+			var file = Components.classes["@mozilla.org/file/local;1"]
+			                     .createInstance(Components.interfaces.nsILocalFile);
+			file.initWithPath("/Users/neverlord/get_magic_state.sh");
+
+			var process = Components.classes["@mozilla.org/process/util;1"]
+			                        .createInstance(Components.interfaces.nsIProcess);
+			process.init(file);
+
+			var args = [];
+			process.run(true, args, args.length);
+			return (process.exitValue == 1);
+		}
+		
+		function enableMagic() {
+			fadeIn();
+			executeBash("/Users/neverlord/enable_magic.sh");
+		}
+		
+		function disableMagic() {
+			fadeOut();
+			executeBash("/Users/neverlord/disable_magic.sh");
+		}
+		
+	</script>
+	<body style="width: 900px; margin: auto; padding-top: 180px; font-family: verdana;">
+		<div id="img_state" style="position:absolute; left: 3px; top: 3px; width: 6px; height: 6px; border-radius: 3px; border: 1px solid white; background-color: #C00;">&nbsp;</div>
+		<fieldset style="border: 7px solid #911922; border-radius: 20px; text-align: center; height: 600px; margin: 0px; padding: 60px 0px 0px 0px;">
+			<legend align="center" style="text-align: center; border: 3px solid #911922; border-radius: 10px; padding: 0px 20px 0px 20px;">
+                <h2>H&forall;Mcast:</h2>
+                <h3>Enabling Service Evolution in the Future Internet</h3>
+            </legend>
+            <div style="float: left; width: 30%; height: 400px">
+            	<img src="img/logo_inet.png" style="width: 50%">
+            	<br><br><br><br>
+            	<img src="img/logo_haw.png" style="width: 60%">
+            	<br><br><br><br>
+            	<img src="img/logo_glab.png" style="width: 60%">
+            </div>
+			<div style="float: right; width: 30%">
+            	<img src="img/logo_um.png" style="width: 50%">
+            	<br><br><br><br>
+            	<img src="img/logo_llab.png" style="width: 60%">
+            	<br><br><br><br>
+            	<img src="img/logo_bcix.png" style="width: 60%">
+			</div>
+            <div style="width: 40%; margin: auto;">
+				<canvas id="testcanvas1" width="300" height="396"> 
+					Dein Browser kann diese Grafik nicht darstellen.
+				</canvas>
+				<br>
+				<input id="fadeInBtn"
+					   type="button"
+					   onClick="enableMagic();"
+					   value ="Enable Future Internet!">
+				<input id="fadeOutBtn"
+					   type="button"
+					   disabled="disabled"
+					   onClick="disableMagic();"
+					   value="Disable Future Internet!">
+			</div>
+		</fieldset>
+	</body> 
+</html>

@@ -1,0 +1,20 @@
+\section{Introduction}
+
+Many application in the Internet are based on data distribution between
+one or more sender and many receivers, a scheme also known as group
+communication. Instead of using many single links between each sender and
+receiver pair, i.e. unicast, it is more efficient to use multicast.
+Though there exists a wide range of different multicast technologies,
+e.g. IP- or overlay-multicast (based on a P2P network), two things are
+missing. First, there is no common multicast service API to develope
+group applications independent of the underlying protocol. And second,
+until now there is no universal multicast service available over the
+Internet. It seams that both reasons are connected.
+
+In this document we describe the system architecture of \hamcast\, first
+in general (see section~\ref{sec:design}) and second the structure of its
+prototype implementation (see section~\ref{sec:code}). We also give an
+introduction for the usage of our prototype in section~\ref{sec:usage}
+and how to develope group communication applications, that implement the
+\hamcast-API. Finally we also present detailed insights in the source code
+based on Doxygen in section~\ref{sec:doxygen}.

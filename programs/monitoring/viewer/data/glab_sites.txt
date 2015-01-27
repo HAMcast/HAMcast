@@ -1,0 +1,8 @@
+ip://129.13.0.0 Karlsruhe KIT 49.008 8.403
+ip://129.187.0.0 Muenchen TUM 48.139 11.574
+ip://130.75.0.0 Hannover UH 52.371 9.738
+ip://130.83.0.0 Darmstadt TUD 49.872 8.656
+ip://131.246.0.0 Kaiserslautern UKL 49.442 7.764
+ip://132.187.0.0 Wuerzburg UWU 49.796 9.928
+ip://141.22.0.0 Hamburg HAW 53.552 9.986
+ip://195.37.0.0 Passau UP 48.573 13.459

@@ -1,0 +1,7 @@
+# ignore the following files
+main.pdf
+*.swp
+*.aux
+*.log
+*.bbl
+*.blg

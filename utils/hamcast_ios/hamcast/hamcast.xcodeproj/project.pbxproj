@@ -1,0 +1,597 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3435292A15B6CE6900244F72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3435292915B6CE6900244F72 /* Foundation.framework */; };
+		3435293015B6CE6900244F72 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3435292E15B6CE6900244F72 /* InfoPlist.strings */; };
+		3435294F15B6CEB600244F72 /* channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435293815B6CEB600244F72 /* channel.cpp */; };
+		3435295015B6CEB600244F72 /* client_channel_msg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435293915B6CEB600244F72 /* client_channel_msg.cpp */; };
+		3435295115B6CEB600244F72 /* client_channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435293A15B6CEB600244F72 /* client_channel.cpp */; };
+		3435295215B6CEB600244F72 /* const_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435293B15B6CEB600244F72 /* const_buffer.cpp */; };
+		3435295315B6CEB600244F72 /* deserializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435293C15B6CEB600244F72 /* deserializer.cpp */; };
+		3435295415B6CEB600244F72 /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435293D15B6CEB600244F72 /* exception.cpp */; };
+		3435295515B6CEB600244F72 /* fake_client_channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435293E15B6CEB600244F72 /* fake_client_channel.cpp */; };
+		3435295615B6CEB600244F72 /* hamcast_logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435293F15B6CEB600244F72 /* hamcast_logging.cpp */; };
+		3435295715B6CEB600244F72 /* hamcast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294015B6CEB600244F72 /* hamcast.cpp */; };
+		3435295815B6CEB600244F72 /* interface_property.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294115B6CEB600244F72 /* interface_property.cpp */; };
+		3435295915B6CEB600244F72 /* ipc_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294215B6CEB600244F72 /* ipc_api.cpp */; };
+		3435295A15B6CEB600244F72 /* membership_event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294315B6CEB600244F72 /* membership_event.cpp */; };
+		3435295B15B6CEB600244F72 /* message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294415B6CEB600244F72 /* message.cpp */; };
+		3435295C15B6CEB600244F72 /* middleware_configuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294515B6CEB600244F72 /* middleware_configuration.cpp */; };
+		3435295D15B6CEB600244F72 /* multicast_packet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294615B6CEB600244F72 /* multicast_packet.cpp */; };
+		3435295E15B6CEB600244F72 /* multicast_socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294715B6CEB600244F72 /* multicast_socket.cpp */; };
+		3435295F15B6CEB600244F72 /* read_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294815B6CEB600244F72 /* read_buffer.cpp */; };
+		3435296015B6CEB600244F72 /* ref_counted.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294915B6CEB600244F72 /* ref_counted.cpp */; };
+		3435296115B6CEB600244F72 /* serialization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294A15B6CEB600244F72 /* serialization.cpp */; };
+		3435296215B6CEB600244F72 /* serializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294B15B6CEB600244F72 /* serializer.cpp */; };
+		3435296315B6CEB600244F72 /* sink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294C15B6CEB600244F72 /* sink.cpp */; };
+		3435296415B6CEB600244F72 /* socket_io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294D15B6CEB600244F72 /* socket_io.cpp */; };
+		3435296515B6CEB600244F72 /* uri.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435294E15B6CEB600244F72 /* uri.cpp */; };
+		3435296D15B6CF0B00244F72 /* tunnel_message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435296915B6CF0B00244F72 /* tunnel_message.cpp */; };
+		3435296E15B6CF0B00244F72 /* tunnel_message.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435296A15B6CF0B00244F72 /* tunnel_message.hpp */; };
+		3435296F15B6CF0B00244F72 /* tunnel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435296B15B6CF0B00244F72 /* tunnel.cpp */; };
+		3435297015B6CF0B00244F72 /* tunnel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435296C15B6CF0B00244F72 /* tunnel.hpp */; };
+		3435297515B6CF2400244F72 /* ip_exceptions.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435297115B6CF2400244F72 /* ip_exceptions.hpp */; };
+		3435297615B6CF2400244F72 /* ip_instance.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435297215B6CF2400244F72 /* ip_instance.hpp */; };
+		3435297715B6CF2400244F72 /* ip_module.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435297315B6CF2400244F72 /* ip_module.hpp */; };
+		3435297815B6CF2400244F72 /* ip_socket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435297415B6CF2400244F72 /* ip_socket.hpp */; };
+		3435297B15B6CF3100244F72 /* ip_instance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435297915B6CF3100244F72 /* ip_instance.cpp */; };
+		3435297C15B6CF3100244F72 /* ip_socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3435297A15B6CF3100244F72 /* ip_socket.cpp */; };
+		3435299115B6CF6B00244F72 /* config.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435297D15B6CF6B00244F72 /* config.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		3435299215B6CF6B00244F72 /* detail in Headers */ = {isa = PBXBuildFile; fileRef = 3435297E15B6CF6B00244F72 /* detail */; settings = {ATTRIBUTES = (Public, ); }; };
+		3435299315B6CF6B00244F72 /* exception.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435297F15B6CF6B00244F72 /* exception.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		3435299415B6CF6B00244F72 /* hamcast_logging.h in Headers */ = {isa = PBXBuildFile; fileRef = 3435298015B6CF6B00244F72 /* hamcast_logging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3435299515B6CF6B00244F72 /* hamcast_module.h in Headers */ = {isa = PBXBuildFile; fileRef = 3435298115B6CF6B00244F72 /* hamcast_module.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3435299615B6CF6B00244F72 /* hamcast.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435298215B6CF6B00244F72 /* hamcast.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		3435299715B6CF6B00244F72 /* interface_id.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435298315B6CF6B00244F72 /* interface_id.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		3435299815B6CF6B00244F72 /* interface_property.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435298415B6CF6B00244F72 /* interface_property.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		3435299915B6CF6B00244F72 /* intrusive_ptr.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435298515B6CF6B00244F72 /* intrusive_ptr.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		3435299A15B6CF6B00244F72 /* ipc in Headers */ = {isa = PBXBuildFile; fileRef = 3435298615B6CF6B00244F72 /* ipc */; settings = {ATTRIBUTES = (Public, ); }; };
+		3435299B15B6CF6B00244F72 /* ipc.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435298715B6CF6B00244F72 /* ipc.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		3435299C15B6CF6B00244F72 /* membership_event_type.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435298815B6CF6B00244F72 /* membership_event_type.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		3435299D15B6CF6B00244F72 /* membership_event.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435298915B6CF6B00244F72 /* membership_event.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		3435299E15B6CF6B00244F72 /* multicast_packet.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435298A15B6CF6B00244F72 /* multicast_packet.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		3435299F15B6CF6B00244F72 /* multicast_socket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435298B15B6CF6B00244F72 /* multicast_socket.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		343529A015B6CF6B00244F72 /* ref_counted.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435298C15B6CF6B00244F72 /* ref_counted.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		343529A115B6CF6B00244F72 /* socket_id.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435298D15B6CF6B00244F72 /* socket_id.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		343529A215B6CF6B00244F72 /* uri.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435298E15B6CF6B00244F72 /* uri.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		343529A315B6CF6B00244F72 /* util in Headers */ = {isa = PBXBuildFile; fileRef = 3435298F15B6CF6B00244F72 /* util */; settings = {ATTRIBUTES = (Public, ); }; };
+		343529A415B6CF6B00244F72 /* util.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3435299015B6CF6B00244F72 /* util.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		343529A615B6CF9B00244F72 /* hamcast.framework in copy framework into utils */ = {isa = PBXBuildFile; fileRef = 3435292615B6CE6900244F72 /* hamcast.framework */; };
+		343529A815B6CFE700244F72 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 343529A715B6CFE700244F72 /* boost.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		343529A515B6CF8B00244F72 /* copy framework into utils */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(SRCROOT)/..";
+			dstSubfolderSpec = 0;
+			files = (
+				343529A615B6CF9B00244F72 /* hamcast.framework in copy framework into utils */,
+			);
+			name = "copy framework into utils";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3435292615B6CE6900244F72 /* hamcast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = hamcast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3435292915B6CE6900244F72 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3435292D15B6CE6900244F72 /* hamcast-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "hamcast-Info.plist"; sourceTree = "<group>"; };
+		3435292F15B6CE6900244F72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3435293115B6CE6900244F72 /* hamcast-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "hamcast-Prefix.pch"; sourceTree = "<group>"; };
+		3435293815B6CEB600244F72 /* channel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = channel.cpp; path = ../../../../libhamcast/src/channel.cpp; sourceTree = "<group>"; };
+		3435293915B6CEB600244F72 /* client_channel_msg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = client_channel_msg.cpp; path = ../../../../libhamcast/src/client_channel_msg.cpp; sourceTree = "<group>"; };
+		3435293A15B6CEB600244F72 /* client_channel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = client_channel.cpp; path = ../../../../libhamcast/src/client_channel.cpp; sourceTree = "<group>"; };
+		3435293B15B6CEB600244F72 /* const_buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = const_buffer.cpp; path = ../../../../libhamcast/src/const_buffer.cpp; sourceTree = "<group>"; };
+		3435293C15B6CEB600244F72 /* deserializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = deserializer.cpp; path = ../../../../libhamcast/src/deserializer.cpp; sourceTree = "<group>"; };
+		3435293D15B6CEB600244F72 /* exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = exception.cpp; path = ../../../../libhamcast/src/exception.cpp; sourceTree = "<group>"; };
+		3435293E15B6CEB600244F72 /* fake_client_channel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fake_client_channel.cpp; path = ../../../../libhamcast/src/fake_client_channel.cpp; sourceTree = "<group>"; };
+		3435293F15B6CEB600244F72 /* hamcast_logging.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hamcast_logging.cpp; path = ../../../../libhamcast/src/hamcast_logging.cpp; sourceTree = "<group>"; };
+		3435294015B6CEB600244F72 /* hamcast.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hamcast.cpp; path = ../../../../libhamcast/src/hamcast.cpp; sourceTree = "<group>"; };
+		3435294115B6CEB600244F72 /* interface_property.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interface_property.cpp; path = ../../../../libhamcast/src/interface_property.cpp; sourceTree = "<group>"; };
+		3435294215B6CEB600244F72 /* ipc_api.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ipc_api.cpp; path = ../../../../libhamcast/src/ipc_api.cpp; sourceTree = "<group>"; };
+		3435294315B6CEB600244F72 /* membership_event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = membership_event.cpp; path = ../../../../libhamcast/src/membership_event.cpp; sourceTree = "<group>"; };
+		3435294415B6CEB600244F72 /* message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = message.cpp; path = ../../../../libhamcast/src/message.cpp; sourceTree = "<group>"; };
+		3435294515B6CEB600244F72 /* middleware_configuration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = middleware_configuration.cpp; path = ../../../../libhamcast/src/middleware_configuration.cpp; sourceTree = "<group>"; };
+		3435294615B6CEB600244F72 /* multicast_packet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = multicast_packet.cpp; path = ../../../../libhamcast/src/multicast_packet.cpp; sourceTree = "<group>"; };
+		3435294715B6CEB600244F72 /* multicast_socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = multicast_socket.cpp; path = ../../../../libhamcast/src/multicast_socket.cpp; sourceTree = "<group>"; };
+		3435294815B6CEB600244F72 /* read_buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = read_buffer.cpp; path = ../../../../libhamcast/src/read_buffer.cpp; sourceTree = "<group>"; };
+		3435294915B6CEB600244F72 /* ref_counted.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ref_counted.cpp; path = ../../../../libhamcast/src/ref_counted.cpp; sourceTree = "<group>"; };
+		3435294A15B6CEB600244F72 /* serialization.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = serialization.cpp; path = ../../../../libhamcast/src/serialization.cpp; sourceTree = "<group>"; };
+		3435294B15B6CEB600244F72 /* serializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = serializer.cpp; path = ../../../../libhamcast/src/serializer.cpp; sourceTree = "<group>"; };
+		3435294C15B6CEB600244F72 /* sink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sink.cpp; path = ../../../../libhamcast/src/sink.cpp; sourceTree = "<group>"; };
+		3435294D15B6CEB600244F72 /* socket_io.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = socket_io.cpp; path = ../../../../libhamcast/src/socket_io.cpp; sourceTree = "<group>"; };
+		3435294E15B6CEB600244F72 /* uri.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = uri.cpp; path = ../../../../libhamcast/src/uri.cpp; sourceTree = "<group>"; };
+		3435296915B6CF0B00244F72 /* tunnel_message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tunnel_message.cpp; path = ../../../../modules/tunnel/src/tunnel_message.cpp; sourceTree = "<group>"; };
+		3435296A15B6CF0B00244F72 /* tunnel_message.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = tunnel_message.hpp; path = ../../../../modules/tunnel/src/tunnel_message.hpp; sourceTree = "<group>"; };
+		3435296B15B6CF0B00244F72 /* tunnel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tunnel.cpp; path = ../../../../modules/tunnel/src/tunnel.cpp; sourceTree = "<group>"; };
+		3435296C15B6CF0B00244F72 /* tunnel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = tunnel.hpp; path = ../../../../modules/tunnel/src/tunnel.hpp; sourceTree = "<group>"; };
+		3435297115B6CF2400244F72 /* ip_exceptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ip_exceptions.hpp; path = ../../../../modules/ipm/include/ip_exceptions.hpp; sourceTree = "<group>"; };
+		3435297215B6CF2400244F72 /* ip_instance.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ip_instance.hpp; path = ../../../../modules/ipm/include/ip_instance.hpp; sourceTree = "<group>"; };
+		3435297315B6CF2400244F72 /* ip_module.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ip_module.hpp; path = ../../../../modules/ipm/include/ip_module.hpp; sourceTree = "<group>"; };
+		3435297415B6CF2400244F72 /* ip_socket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ip_socket.hpp; path = ../../../../modules/ipm/include/ip_socket.hpp; sourceTree = "<group>"; };
+		3435297915B6CF3100244F72 /* ip_instance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ip_instance.cpp; path = ../../../../modules/ipm/src/ip_instance.cpp; sourceTree = "<group>"; };
+		3435297A15B6CF3100244F72 /* ip_socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ip_socket.cpp; path = ../../../../modules/ipm/src/ip_socket.cpp; sourceTree = "<group>"; };
+		3435297D15B6CF6B00244F72 /* config.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = config.hpp; path = ../../../libhamcast/hamcast/config.hpp; sourceTree = "<group>"; };
+		3435297E15B6CF6B00244F72 /* detail */ = {isa = PBXFileReference; lastKnownFileType = folder; name = detail; path = ../../../libhamcast/hamcast/detail; sourceTree = "<group>"; };
+		3435297F15B6CF6B00244F72 /* exception.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = exception.hpp; path = ../../../libhamcast/hamcast/exception.hpp; sourceTree = "<group>"; };
+		3435298015B6CF6B00244F72 /* hamcast_logging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hamcast_logging.h; path = ../../../libhamcast/hamcast/hamcast_logging.h; sourceTree = "<group>"; };
+		3435298115B6CF6B00244F72 /* hamcast_module.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hamcast_module.h; path = ../../../libhamcast/hamcast/hamcast_module.h; sourceTree = "<group>"; };
+		3435298215B6CF6B00244F72 /* hamcast.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = hamcast.hpp; path = ../../../libhamcast/hamcast/hamcast.hpp; sourceTree = "<group>"; };
+		3435298315B6CF6B00244F72 /* interface_id.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = interface_id.hpp; path = ../../../libhamcast/hamcast/interface_id.hpp; sourceTree = "<group>"; };
+		3435298415B6CF6B00244F72 /* interface_property.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = interface_property.hpp; path = ../../../libhamcast/hamcast/interface_property.hpp; sourceTree = "<group>"; };
+		3435298515B6CF6B00244F72 /* intrusive_ptr.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = intrusive_ptr.hpp; path = ../../../libhamcast/hamcast/intrusive_ptr.hpp; sourceTree = "<group>"; };
+		3435298615B6CF6B00244F72 /* ipc */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ipc; path = ../../../libhamcast/hamcast/ipc; sourceTree = "<group>"; };
+		3435298715B6CF6B00244F72 /* ipc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ipc.hpp; path = ../../../libhamcast/hamcast/ipc.hpp; sourceTree = "<group>"; };
+		3435298815B6CF6B00244F72 /* membership_event_type.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = membership_event_type.hpp; path = ../../../libhamcast/hamcast/membership_event_type.hpp; sourceTree = "<group>"; };
+		3435298915B6CF6B00244F72 /* membership_event.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = membership_event.hpp; path = ../../../libhamcast/hamcast/membership_event.hpp; sourceTree = "<group>"; };
+		3435298A15B6CF6B00244F72 /* multicast_packet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = multicast_packet.hpp; path = ../../../libhamcast/hamcast/multicast_packet.hpp; sourceTree = "<group>"; };
+		3435298B15B6CF6B00244F72 /* multicast_socket.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = multicast_socket.hpp; path = ../../../libhamcast/hamcast/multicast_socket.hpp; sourceTree = "<group>"; };
+		3435298C15B6CF6B00244F72 /* ref_counted.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ref_counted.hpp; path = ../../../libhamcast/hamcast/ref_counted.hpp; sourceTree = "<group>"; };
+		3435298D15B6CF6B00244F72 /* socket_id.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = socket_id.hpp; path = ../../../libhamcast/hamcast/socket_id.hpp; sourceTree = "<group>"; };
+		3435298E15B6CF6B00244F72 /* uri.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = uri.hpp; path = ../../../libhamcast/hamcast/uri.hpp; sourceTree = "<group>"; };
+		3435298F15B6CF6B00244F72 /* util */ = {isa = PBXFileReference; lastKnownFileType = folder; name = util; path = ../../../libhamcast/hamcast/util; sourceTree = "<group>"; };
+		3435299015B6CF6B00244F72 /* util.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = util.hpp; path = ../../../libhamcast/hamcast/util.hpp; sourceTree = "<group>"; };
+		343529A715B6CFE700244F72 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = boost.framework; path = ../../boost_ios/boost.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3435292015B6CE6900244F72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3435292A15B6CE6900244F72 /* Foundation.framework in Frameworks */,
+				343529A815B6CFE700244F72 /* boost.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3435291715B6CE6800244F72 = {
+			isa = PBXGroup;
+			children = (
+				3435297D15B6CF6B00244F72 /* config.hpp */,
+				3435297E15B6CF6B00244F72 /* detail */,
+				3435297F15B6CF6B00244F72 /* exception.hpp */,
+				3435298015B6CF6B00244F72 /* hamcast_logging.h */,
+				3435298115B6CF6B00244F72 /* hamcast_module.h */,
+				3435298215B6CF6B00244F72 /* hamcast.hpp */,
+				3435298315B6CF6B00244F72 /* interface_id.hpp */,
+				3435298415B6CF6B00244F72 /* interface_property.hpp */,
+				3435298515B6CF6B00244F72 /* intrusive_ptr.hpp */,
+				3435298615B6CF6B00244F72 /* ipc */,
+				3435298715B6CF6B00244F72 /* ipc.hpp */,
+				3435298815B6CF6B00244F72 /* membership_event_type.hpp */,
+				3435298915B6CF6B00244F72 /* membership_event.hpp */,
+				3435298A15B6CF6B00244F72 /* multicast_packet.hpp */,
+				3435298B15B6CF6B00244F72 /* multicast_socket.hpp */,
+				3435298C15B6CF6B00244F72 /* ref_counted.hpp */,
+				3435298D15B6CF6B00244F72 /* socket_id.hpp */,
+				3435298E15B6CF6B00244F72 /* uri.hpp */,
+				3435298F15B6CF6B00244F72 /* util */,
+				3435299015B6CF6B00244F72 /* util.hpp */,
+				3435292B15B6CE6900244F72 /* hamcast */,
+				3435292815B6CE6900244F72 /* Frameworks */,
+				3435292715B6CE6900244F72 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3435292715B6CE6900244F72 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3435292615B6CE6900244F72 /* hamcast.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3435292815B6CE6900244F72 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				343529A715B6CFE700244F72 /* boost.framework */,
+				3435292915B6CE6900244F72 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3435292B15B6CE6900244F72 /* hamcast */ = {
+			isa = PBXGroup;
+			children = (
+				3435296615B6CEBD00244F72 /* modules */,
+				3435293715B6CE9B00244F72 /* src */,
+				3435292C15B6CE6900244F72 /* Supporting Files */,
+			);
+			path = hamcast;
+			sourceTree = "<group>";
+		};
+		3435292C15B6CE6900244F72 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3435292D15B6CE6900244F72 /* hamcast-Info.plist */,
+				3435292E15B6CE6900244F72 /* InfoPlist.strings */,
+				3435293115B6CE6900244F72 /* hamcast-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3435293715B6CE9B00244F72 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				3435293815B6CEB600244F72 /* channel.cpp */,
+				3435293915B6CEB600244F72 /* client_channel_msg.cpp */,
+				3435293A15B6CEB600244F72 /* client_channel.cpp */,
+				3435293B15B6CEB600244F72 /* const_buffer.cpp */,
+				3435293C15B6CEB600244F72 /* deserializer.cpp */,
+				3435293D15B6CEB600244F72 /* exception.cpp */,
+				3435293E15B6CEB600244F72 /* fake_client_channel.cpp */,
+				3435293F15B6CEB600244F72 /* hamcast_logging.cpp */,
+				3435294015B6CEB600244F72 /* hamcast.cpp */,
+				3435294115B6CEB600244F72 /* interface_property.cpp */,
+				3435294215B6CEB600244F72 /* ipc_api.cpp */,
+				3435294315B6CEB600244F72 /* membership_event.cpp */,
+				3435294415B6CEB600244F72 /* message.cpp */,
+				3435294515B6CEB600244F72 /* middleware_configuration.cpp */,
+				3435294615B6CEB600244F72 /* multicast_packet.cpp */,
+				3435294715B6CEB600244F72 /* multicast_socket.cpp */,
+				3435294815B6CEB600244F72 /* read_buffer.cpp */,
+				3435294915B6CEB600244F72 /* ref_counted.cpp */,
+				3435294A15B6CEB600244F72 /* serialization.cpp */,
+				3435294B15B6CEB600244F72 /* serializer.cpp */,
+				3435294C15B6CEB600244F72 /* sink.cpp */,
+				3435294D15B6CEB600244F72 /* socket_io.cpp */,
+				3435294E15B6CEB600244F72 /* uri.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		3435296615B6CEBD00244F72 /* modules */ = {
+			isa = PBXGroup;
+			children = (
+				3435296815B6CEDE00244F72 /* ipm */,
+				3435296715B6CED200244F72 /* tunnel */,
+			);
+			name = modules;
+			sourceTree = "<group>";
+		};
+		3435296715B6CED200244F72 /* tunnel */ = {
+			isa = PBXGroup;
+			children = (
+				3435296915B6CF0B00244F72 /* tunnel_message.cpp */,
+				3435296A15B6CF0B00244F72 /* tunnel_message.hpp */,
+				3435296B15B6CF0B00244F72 /* tunnel.cpp */,
+				3435296C15B6CF0B00244F72 /* tunnel.hpp */,
+			);
+			name = tunnel;
+			sourceTree = "<group>";
+		};
+		3435296815B6CEDE00244F72 /* ipm */ = {
+			isa = PBXGroup;
+			children = (
+				3435297915B6CF3100244F72 /* ip_instance.cpp */,
+				3435297A15B6CF3100244F72 /* ip_socket.cpp */,
+				3435297115B6CF2400244F72 /* ip_exceptions.hpp */,
+				3435297215B6CF2400244F72 /* ip_instance.hpp */,
+				3435297315B6CF2400244F72 /* ip_module.hpp */,
+				3435297415B6CF2400244F72 /* ip_socket.hpp */,
+			);
+			name = ipm;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3435292115B6CE6900244F72 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3435299115B6CF6B00244F72 /* config.hpp in Headers */,
+				3435299215B6CF6B00244F72 /* detail in Headers */,
+				3435299315B6CF6B00244F72 /* exception.hpp in Headers */,
+				3435299415B6CF6B00244F72 /* hamcast_logging.h in Headers */,
+				3435299515B6CF6B00244F72 /* hamcast_module.h in Headers */,
+				3435299615B6CF6B00244F72 /* hamcast.hpp in Headers */,
+				3435299715B6CF6B00244F72 /* interface_id.hpp in Headers */,
+				3435299815B6CF6B00244F72 /* interface_property.hpp in Headers */,
+				3435299915B6CF6B00244F72 /* intrusive_ptr.hpp in Headers */,
+				3435299A15B6CF6B00244F72 /* ipc in Headers */,
+				3435299B15B6CF6B00244F72 /* ipc.hpp in Headers */,
+				3435299C15B6CF6B00244F72 /* membership_event_type.hpp in Headers */,
+				3435299D15B6CF6B00244F72 /* membership_event.hpp in Headers */,
+				3435299E15B6CF6B00244F72 /* multicast_packet.hpp in Headers */,
+				3435299F15B6CF6B00244F72 /* multicast_socket.hpp in Headers */,
+				343529A015B6CF6B00244F72 /* ref_counted.hpp in Headers */,
+				343529A115B6CF6B00244F72 /* socket_id.hpp in Headers */,
+				343529A215B6CF6B00244F72 /* uri.hpp in Headers */,
+				343529A315B6CF6B00244F72 /* util in Headers */,
+				343529A415B6CF6B00244F72 /* util.hpp in Headers */,
+				3435296E15B6CF0B00244F72 /* tunnel_message.hpp in Headers */,
+				3435297015B6CF0B00244F72 /* tunnel.hpp in Headers */,
+				3435297515B6CF2400244F72 /* ip_exceptions.hpp in Headers */,
+				3435297615B6CF2400244F72 /* ip_instance.hpp in Headers */,
+				3435297715B6CF2400244F72 /* ip_module.hpp in Headers */,
+				3435297815B6CF2400244F72 /* ip_socket.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3435292515B6CE6900244F72 /* hamcast */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3435293415B6CE6900244F72 /* Build configuration list for PBXNativeTarget "hamcast" */;
+			buildPhases = (
+				3435291E15B6CE6900244F72 /* ShellScript */,
+				3435291F15B6CE6900244F72 /* Sources */,
+				3435292015B6CE6900244F72 /* Frameworks */,
+				3435292115B6CE6900244F72 /* Headers */,
+				3435292215B6CE6900244F72 /* Resources */,
+				3435292315B6CE6900244F72 /* ShellScript */,
+				3435292415B6CE6900244F72 /* ShellScript */,
+				343529A515B6CF8B00244F72 /* copy framework into utils */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = hamcast;
+			productName = hamcast;
+			productReference = 3435292615B6CE6900244F72 /* hamcast.framework */;
+			productType = "com.apple.product-type.framework.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3435291915B6CE6800244F72 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 3435291C15B6CE6800244F72 /* Build configuration list for PBXProject "hamcast" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3435291715B6CE6800244F72;
+			productRefGroup = 3435292715B6CE6900244F72 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3435292515B6CE6900244F72 /* hamcast */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3435292215B6CE6900244F72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3435293015B6CE6900244F72 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3435291E15B6CE6900244F72 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n\tUFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version  from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\nONLY_ACTIVE_PLATFORM=${ONLY_ACTIVE_PLATFORM:-$ONLY_ACTIVE_ARCH}\n\n# Short-circuit if all binaries are up to date\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && \\\n   [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n   [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n  ([[ \"${ONLY_ACTIVE_PLATFORM}\" == \"YES\" ]] || \\\n    ([[ -f \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && \\\n     [[ -f \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && \\\n     [[ ! \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\n    )\n  )\nthen\n    exit 0\nfi\n\n\n# Clean other platform if needed\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && [[ \"${ONLY_ACTIVE_PLATFORM}\" != \"YES\" ]]\nthen\n\techo \"Platform \\\"$UFW_SDK_PLATFORM\\\" was cleaned recently. Cleaning \\\"$UFW_OTHER_PLATFORM\\\" as well\"\n\techo xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" clean\n\txcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" clean\nfi\n\n\n# Make sure we are building from fresh binaries\n\nrm -rf \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\n\nif [[ \"${ONLY_ACTIVE_PLATFORM}\" != \"YES\" ]]\nthen\n    rm -rf \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\n    rm -rf \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nfi\n";
+		};
+		3435292315B6CE6900244F72 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "HEADERS_ROOT=$SRCROOT/$PRODUCT_NAME\nFRAMEWORK_HEADERS_DIR=\"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Versions/$FRAMEWORK_VERSION/Headers\"\n\n## only header files expected at this point\nPUBLIC_HEADERS=$(find $FRAMEWORK_HEADERS_DIR/. -not -type d 2> /dev/null | sed -e \"s@.*/@@g\")\n\nFIND_OPTS=\"\"\nfor PUBLIC_HEADER in $PUBLIC_HEADERS; do\n  if [ -n \"$FIND_OPTS\" ]; then\n    FIND_OPTS=\"$FIND_OPTS -o\"\n  fi\n  FIND_OPTS=\"$FIND_OPTS -name '$PUBLIC_HEADER'\"\ndone\n\nif [ -n \"$FIND_OPTS\" ]; then\n  for ORIG_HEADER in $(eval \"find $HEADERS_ROOT/. $FIND_OPTS\" 2> /dev/null | sed -e \"s@^$HEADERS_ROOT/./@@g\"); do\n    PUBLIC_HEADER=$(basename $ORIG_HEADER)\n    RELATIVE_PATH=$(dirname $ORIG_HEADER)\n    if [ -e $FRAMEWORK_HEADERS_DIR/$PUBLIC_HEADER ]; then\n      mkdir -p \"$FRAMEWORK_HEADERS_DIR/$RELATIVE_PATH\"\n      mv \"$FRAMEWORK_HEADERS_DIR/$PUBLIC_HEADER\" \"$FRAMEWORK_HEADERS_DIR/$RELATIVE_PATH/$PUBLIC_HEADER\"\n    fi\n  done\nfi\n";
+		};
+		3435292415B6CE6900244F72 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nset +u\nif [[ $UFW_MASTER_SCRIPT_RUNNING ]]\nthen\n    # Nothing for the slave script to do\n    exit 0\nfi\nset -u\nexport UFW_MASTER_SCRIPT_RUNNING=1\n\n\n# Functions\n\n## List files in the specified directory, storing to the specified array.\n#\n# @param $1 The path to list\n# @param $2 The name of the array to fill\n#\n##\nlist_files ()\n{\n    filelist=$(ls \"$1\")\n    while read line\n    do\n        eval \"$2[\\${#$2[*]}]=\\\"\\$line\\\"\"\n    done <<< \"$filelist\"\n}\n\n\n# Sanity check\n\nif [[ ! -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]]\nthen\n    echo \"Framework target \\\"${TARGET_NAME}\\\" had no source files to build from. Make sure your source files have the correct target membership\"\n    exit 1\nfi\n\n\n# Gather information\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\n    UFW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\n    UFW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n    echo \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\n    exit 1\nfi\n\nif [[ \"$UFW_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\n    UFW_OTHER_PLATFORM=iphonesimulator\nelse\n    UFW_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$UFW_SDK_PLATFORM$ ]]\nthen\n    UFW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${UFW_OTHER_PLATFORM}\"\nelse\n    echo \"Could not find $UFW_SDK_PLATFORM in $BUILT_PRODUCTS_DIR\"\n    exit 1\nfi\n\nONLY_ACTIVE_PLATFORM=${ONLY_ACTIVE_PLATFORM:-$ONLY_ACTIVE_ARCH}\n\n# Short-circuit if all binaries are up to date.\n# We already checked the other platform in the prerun script.\n\nif [[ -f \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" ]] && [[ -f \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]] && [[ ! \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -nt \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/${EXECUTABLE_PATH}\" ]]\nthen\n    exit 0\nfi\n\nif [ \"${ONLY_ACTIVE_PLATFORM}\" == \"YES\" ]\nthen\n    echo \"ONLY_ACTIVE_PLATFORM=${ONLY_ACTIVE_PLATFORM}: Skipping other platform build\"\nelse\n    # Make sure the other platform gets built\n    \n    echo \"Build other platform\"\n    \n    echo xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\n    xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${UFW_OTHER_PLATFORM}${UFW_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" CONFIGURATION_TEMP_DIR=\"${PROJECT_TEMP_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\" $ACTION\n    \n    \n    # Build the fat static library binary\n    \n    echo \"Create universal static library\"\n    \n    echo \"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n    \"$PLATFORM_DEVELOPER_BIN_DIR/libtool\" -static \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" \"${UFW_OTHER_BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\" -o \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\"\n    \n    echo mv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\n    mv \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}.temp\" \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\"\nfi\n\n# Build embedded framework structure\n\necho \"Build Embedded Framework\"\n\necho rm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework\"\necho mkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources\"\necho cp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\ncp -a \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/\"\n\ndeclare -a UFW_FILE_LIST\nlist_files \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" UFW_FILE_LIST\nfor filename in \"${UFW_FILE_LIST[@]}\"\ndo\n    if [[ \"${filename}\" != \"Info.plist\" ]] && [[ ! \"${filename}\" =~ .*\\.lproj$ ]]\n    then\n        echo ln -sfh \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n        ln -sfh \"../${WRAPPER_NAME}/Resources/${filename}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.embeddedframework/Resources/${filename}\"\n    fi\ndone\n\n\nif [ \"${ONLY_ACTIVE_PLATFORM}\" != \"YES\" ]\nthen\n    # Replace other platform's framework with a copy of this one (so that both have the same universal binary)\n    \n    echo \"Copy from $UFW_SDK_PLATFORM to $UFW_OTHER_PLATFORM\"\n    \n    echo rm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n    rm -rf \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n    echo cp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\n    cp -a \"${BUILD_DIR}/${CONFIGURATION}-${UFW_SDK_PLATFORM}\" \"${BUILD_DIR}/${CONFIGURATION}-${UFW_OTHER_PLATFORM}\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3435291F15B6CE6900244F72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3435294F15B6CEB600244F72 /* channel.cpp in Sources */,
+				3435295015B6CEB600244F72 /* client_channel_msg.cpp in Sources */,
+				3435295115B6CEB600244F72 /* client_channel.cpp in Sources */,
+				3435295215B6CEB600244F72 /* const_buffer.cpp in Sources */,
+				3435295315B6CEB600244F72 /* deserializer.cpp in Sources */,
+				3435295415B6CEB600244F72 /* exception.cpp in Sources */,
+				3435295515B6CEB600244F72 /* fake_client_channel.cpp in Sources */,
+				3435295615B6CEB600244F72 /* hamcast_logging.cpp in Sources */,
+				3435295715B6CEB600244F72 /* hamcast.cpp in Sources */,
+				3435295815B6CEB600244F72 /* interface_property.cpp in Sources */,
+				3435295915B6CEB600244F72 /* ipc_api.cpp in Sources */,
+				3435295A15B6CEB600244F72 /* membership_event.cpp in Sources */,
+				3435295B15B6CEB600244F72 /* message.cpp in Sources */,
+				3435295C15B6CEB600244F72 /* middleware_configuration.cpp in Sources */,
+				3435295D15B6CEB600244F72 /* multicast_packet.cpp in Sources */,
+				3435295E15B6CEB600244F72 /* multicast_socket.cpp in Sources */,
+				3435295F15B6CEB600244F72 /* read_buffer.cpp in Sources */,
+				3435296015B6CEB600244F72 /* ref_counted.cpp in Sources */,
+				3435296115B6CEB600244F72 /* serialization.cpp in Sources */,
+				3435296215B6CEB600244F72 /* serializer.cpp in Sources */,
+				3435296315B6CEB600244F72 /* sink.cpp in Sources */,
+				3435296415B6CEB600244F72 /* socket_io.cpp in Sources */,
+				3435296515B6CEB600244F72 /* uri.cpp in Sources */,
+				3435296D15B6CF0B00244F72 /* tunnel_message.cpp in Sources */,
+				3435296F15B6CF0B00244F72 /* tunnel.cpp in Sources */,
+				3435297B15B6CF3100244F72 /* ip_instance.cpp in Sources */,
+				3435297C15B6CF3100244F72 /* ip_socket.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3435292E15B6CE6900244F72 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3435292F15B6CE6900244F72 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3435293215B6CE6900244F72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3435293315B6CE6900244F72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3435293515B6CE6900244F72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../boost_ios\"",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "hamcast/hamcast-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../libhamcast/";
+				INFOPLIST_FILE = "hamcast/hamcast-Info.plist";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DHC_USE_FAKE_MIDDLEWARE",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		3435293615B6CE6900244F72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../boost_ios\"",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "hamcast/hamcast-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../libhamcast/";
+				INFOPLIST_FILE = "hamcast/hamcast-Info.plist";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DHC_USE_FAKE_MIDDLEWARE",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3435291C15B6CE6800244F72 /* Build configuration list for PBXProject "hamcast" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3435293215B6CE6900244F72 /* Debug */,
+				3435293315B6CE6900244F72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3435293415B6CE6900244F72 /* Build configuration list for PBXNativeTarget "hamcast" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3435293515B6CE6900244F72 /* Debug */,
+				3435293615B6CE6900244F72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3435291915B6CE6800244F72 /* Project object */;
+}

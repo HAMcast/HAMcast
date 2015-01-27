@@ -1,0 +1,11 @@
+Place these scripts on an OpenWRT 12.09-RC1 device to make the
+benchmark.sh script work normally.
+
+/bin/sudo
+/usr/bin/ssh
+/usr/bin/scp
+
+Also do:
+  mkdir /usr/bin/scp-id/
+  mv /usr/bin/scp /usr/bin/scp-id/
+  ln -s /usr/sbin/dropbear /usr/bin/scp-id/scp

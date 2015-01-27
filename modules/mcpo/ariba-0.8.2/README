@@ -1,0 +1,29 @@
+This is the Ariba Underlay Abstraction software package
+bringing you seamless connectivity that "Just Works":
+
+- it greatly simplifies programming of networked applications
+- provides a per-application networking context and connectivity
+- abstracts network heterogeneity and mobility away
+- requires no infrastructure support
+- is fully self organzing
+
+Please see also the Spontaneous Virtual Networs project
+web site http://spovnet.de/ for further information
+about Ariba and its application.
+
+Documentation 
+-------------
+http://ariba-underlay.org/wiki/BaseGuide
+
+Installation
+------------
+Please see file INSTALL
+or
+consult the latest Installation instructions on http://ariba-underlay.org/
+here: http://ariba-underlay.org/trac/spovnet-base/wiki/BaseInstall
+
+Contact
+-------
+Check the web site for latest info, but you can also try to
+- directly contact us through info[at]ariba-underlay[dot]org
+- join the SpoVNet Google Groups here SpoVNet Google Groups 

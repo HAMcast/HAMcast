@@ -1,0 +1,101 @@
+NAME
+    pktgen - Send and receive multicast packets
+
+BUILD/INSTALL
+
+Requirements
+    - cmake (Version 2.6+)
+    - cmake macro 'FindLibHamcast.cmake'
+    - boost libraries developers edition
+    - HAMcast library and middleware
+
+Build
+    We recommend an 'out-of-source' cmake-build. Create a new folder, e.g.
+    'build' within the source directory. Change to new folder (cd build)
+    and run:
+
+        cmake ../
+
+    if you have not install libhamcast to standard directories, run:
+
+        cmake -DHAMCAST_INCLUDE_PATH=<path-to-headers> \
+              -DHAMCAST_LIBRARY_PATH=<path-to-libhamcast> ../
+
+    'path-to-headers' is the absolute path where 'hamcast/hamcast.hpp' can
+    be found. 'path-to-libhamcast' is the absolute path where 'libhamcast.so'
+    can be found. If both are the same, you have to provide only one of them.
+    This will initialize build environment, if no errors occure run:
+
+        make
+
+    If build was successful you find the binary in 'build' folder.
+
+Install
+    Currently not supported. Just run pktgen from build directory.
+
+SYNOPSIS
+    pktgen [OPTION]...
+
+DESCRIPTION
+
+    The program can send and receive multicast packets using HAMcast or
+    standard IP multicast. It was written to perform delay measurements.
+
+EXIT STATUS
+
+    pktgen exits with status 0 (EXIT_SUCCESS) if send or receive was
+    successful with respect to given options, otherwise 1 (EXIT_FAILURE)
+    is returned.
+
+OPTIONS
+    -h, --help
+            Print this help screen.
+
+    -i, --interval TIME
+            Set packet interval TIME, in msec (1000)
+
+    -n, --network-interface ID
+            Set interface ID, default is 0 = ALL
+
+    -m, --mode MODE
+            Set multicast MODE: hamcast or ip (hamcast)
+
+    -o, --offset OFFSET
+            Set OFFSET to generate packet hash id from (70).
+
+    -l, --length LENGTH
+            Set offset LENGTH to generate packet hash id from (50).
+
+    -p, --payload SIZE
+            Set packet payload SIZE in Bytes (100)
+
+    -r, --recv GROUP
+            Receive from multicast GROUP.
+
+    -s, --send GROUP
+            Send to multicast GROUP.
+
+    -t, --time RUNTIME
+            Set RUNTIME of experiment, in sec (60)
+
+EXAMPLES
+    Receiver:   ./pktgen -r ip://239.238.237.236:1234
+
+    Sender:     ./pktgen -s ip://239.1.2.3:7890 -p 1000 -t 30
+
+FILES
+    No other files required or used.
+
+ENVIRONMENT
+    LD_LIBRARY_PATH must be set if libhamcast is not installed into
+    standard directories, e.g. /usr/lib.
+
+NOTES
+    You MUST provide either option '-r' or '-s' with a valid multicast
+    group URI. On send and receive strictly ensure that: OFFSET < PAYLOAD
+    and LENGTH < OFFSET!
+
+AUTHOR
+    Sebastian Meiling <sebastian.meiling (at) haw-hamburg.de>
+
+    visit our website <http://hamcast.realmv6.org/developers>

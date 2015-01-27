@@ -1,0 +1,5 @@
+nodename=mcpo01
+endpoint=tcp{5004};
+bootstrap=hamcast{ip{141.22.26.249};tcp{5005}};
+spovnetname=hamcast
+port=666

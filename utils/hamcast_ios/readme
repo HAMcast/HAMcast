@@ -1,0 +1,1 @@
+In dem Ordner "frameworkpatch" befinden sich im Ordner "Real Framework" ein install-script. Dieses fuegt Xcode die Templates zum framework bauen hinzu. Anschließend kann das Xcode Project im Ordner "hamcast" geoeffnet und ausgeführt werden. Dar Framework landet zunächst lokal in Library/... wird dann in den uebgergeordneten Ordner hamcast_ios kopiert.

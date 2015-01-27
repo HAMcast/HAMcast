@@ -1,0 +1,576 @@
+#AUTHOR
+#    Dominik Charousset <dominik.charousset (at) haw-hamburg.de>
+#    Sebastian Meiling <sebastian.meiling (at) haw-hamburg.de>
+#    Moritz Duge <moritz.duge (at) haw-hamburg.de>
+#
+#    visit our website <http://hamcast.realmv6.org/developers>
+#
+#
+#
+#CREATED
+#    October 2012
+#LAST UPDATED
+#    May 2013
+#
+#
+#
+#REQUIREMENTS
+# Don't know for shure, but this was successfully in use with OpenWRT
+# 12.09-rc1, which can be received by this command:
+#    svn co svn://svn.openwrt.org/openwrt/branches/attitude_adjustment@34185
+# OpenWRT 10.03.1 probably won't work, specially because it's gcc is
+# too old.
+# Platforms this was tested on: ar71xx_generic_WRT160NL (Linksys WRT160NL)
+#
+#
+#
+#HOW TO USE
+# 1.
+# To build HAMcast, put this Makefile into:
+#   OpenWRT-Dir/package/hamcast/
+# And put at least the following directories from the HAMcast 0.6
+# sources into: OpenWRT-Dir/package/hamcast/src/hamcast/
+#   libhamcast
+#   middleware
+#   modules/bidirsam
+#   modules/ipm
+#   modules/scribe
+#   modules/tunnel
+#   programs/hc_chat
+#   programs/hc_status
+#   programs/img
+#   programs/monitoring/daemon
+#   programs/monitoring/utils
+#   programs/pktgen
+#   utils/chimera
+# ----
+# 2.
+# HAMcast needs some software the usual OpenWRT sources don't come with.
+# So you have to recieve this software from an OpenWRT repository using
+# this commands in the OpenWRT-Dir:
+#   ./scripts/feeds update -a
+#   ./scripts/feeds install boost boost-filesystem boost-regex boost-system boost-thread
+# Maybe you'll need some more stuff I missed here. But I'm pretty shure
+# that's it.
+# ----
+# 3.
+# Run the OpenWRT "make menuconfig" and select the desired HAMcast
+# packages from "Network/HAMcast".
+# ----
+# 4. Run ONE of those commands to start compiling:
+#   make
+#   make package/hamcast/compile
+# You can add "V=99" at the end of the command to get more detailed
+# build information.
+# If everything went fine, you'll find the ipk packages in:
+#   OpenWRT-Dir/bin/PLATFORM-ARCHITECTURE/packages
+# If you don't need ipk packages, you can extract the build libraries
+# and executables from:
+#   OpenWRT-Dir/build_dir/target-PLATFORM-ARCHITECTURE-AND-VERSION/hamcast-VERSION/
+#
+#
+#
+#KNOWN PROBLEMS:
+# - You need to select ether the middleware or the libhamcast-lite to
+#   get a working HAMcast installation. If you want to use modules
+#   you will need to use the middleware.
+#   There are currently no dependencies which enforce this.
+#
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=hamcast
+PKG_VERSION:=0.6.0
+PKG_RELEASE:=1
+
+include $(INCLUDE_DIR)/package.mk
+
+
+define Package/hamcast/Default
+	SECTION:=net
+	CATEGORY:=Network
+	TITLE:=hamcast
+	DEPENDS:=+libstdcpp +boost-date_time +boost-filesystem +boost-regex +boost-system +boost-thread
+	URL:=http://hamcast.realmv6.org/developers
+	SUBMENU:=HAMcast
+endef
+
+define Package/hamcast/Module
+	$(call Package/hamcast/Default)
+	DEPENDS+= +hamcast-libhamcast_full
+endef
+
+define Package/hamcast/Program
+	$(call Package/hamcast/Default)
+	DEPENDS+= +hamcast-libhamcast_full
+endef
+
+define Package/hamcast-libchimera
+	$(call Package/hamcast/Default)
+	TITLE+= chimera
+	DEPENDS:= +libpthread +libopenssl
+endef
+define Package/hamcast-libchimera/description
+libchimera is a utility shared library for HAMcast modules
+endef
+
+define Package/hamcast-libhamcast_full
+	$(call Package/hamcast/Default)
+	TITLE+= libhamcast and middleware
+endef
+define Package/hamcast-libhamcast_full/description
+You need this package if you want to run any HAMcast
+software by using the middleware and any of the HAMcast
+modules.
+----
+libhamcast is the core library of the HAMcast project and
+is mandatory for all other software parts. The Library also
+provides a C++ implementation of the common multicast API
+used by HAMcast.
+The middleware provides the HAMcast multicast stack to be
+used by C++ or Java API.
+endef
+
+define Package/hamcast-libhamcast_full/config
+	config HAMCAST-LIBHAMCAST_FULL_DEBUG
+		bool "Debug enabled (all hamcast packages)"
+		help
+			Builds all hamcast packages (not just libhamcast) with debug option.
+		default n
+	config HAMCAST-LIBHAMCAST_HC_DEFAULT_MAX_BUFFER_SIZE
+		int "maximum buffer size for full and lite (some multiple of 512)"
+		help
+			The maximum buffer size in byte.
+			
+			HAMCast full: Maximum size for BOTH (memory-usage x2) buffers.
+			The one in the middleware and the one in the application.
+			
+			HAMcast lite: The buffer (memory usage x1) between the
+			libhamcast-lite-thread and application-thread.
+			
+			WARNING: Must be a multiple of max_buffered_sends in config.hpp,
+			which is usually 512.
+			
+			Suggestion: 16777216 byte = 16 * 1024 * 1024 byte = 16 MB
+			Default: -1 uses value from libhamcast/hamcast/config.hpp
+		default -1
+endef
+
+define Package/hamcast-libhamcast_lite
+	$(call Package/hamcast/Default)
+	TITLE+= libhamcast without middleware
+	DEPENDS+= +hamcast-libchimera
+endef
+define Package/hamcast-libhamcast_lite/description
+You need this package if you want to run any HAMcast
+software without using the middleware. This package
+includes the ip-, chimera-, scribe- and tunnel-modules.
+If you wan't to use any other HAMcast modules, you'll need
+hamcast-libhamcast_full.
+----
+libhamcast is the core library of the HAMcast project and
+is mandatory for all other software parts. The Library also
+provides a C++ implementation of the common multicast API
+used by HAMcast.
+endef
+
+define Package/hamcast-libhamcast_lite/config
+	config HAMCAST-LIBHAMCAST_HC_MAX_CHANNEL_QUEUE_SIZE
+		int "Buffer size of the internal queue for incoming messages in byte."
+		help
+			The maximum buffer size of the internal queue for incoming messages
+			(only used in HAMcast lite).
+			
+			Suggestion: 16777216 byte = 16 * 1024 * 1024 byte = 16 MB
+			Default: -1 uses value from libhamcast/hamcast/config.hpp
+		default -1
+endef
+
+define Package/hamcast-libbidirsammodule
+	$(call Package/hamcast/Module)
+	TITLE+= bidirsam module
+	DEPENDS+= +hamcast-libchimera
+endef
+define Package/hamcast-libbidirsammodule/description
+HAMcast bidir-sam overlay multicast module
+endef
+
+define Package/hamcast-libipmodule
+	$(call Package/hamcast/Module)
+	TITLE+= ip module
+endef
+define Package/hamcast-libipmodule/description
+HAMcast IP multicast module
+endef
+
+define Package/hamcast-libscribemodule
+	$(call Package/hamcast/Module)
+	TITLE+= scribe module
+	DEPENDS+= +hamcast-libchimera
+endef
+define Package/hamcast-libscribemodule/description
+HAMcast scribe overlay multicast module
+endef
+
+define Package/hamcast-libtunnelmodule
+	$(call Package/hamcast/Module)
+	TITLE+= tunnel module
+endef
+define Package/hamcast-libtunnelmodule/description
+HAMcast tunnel module
+endef
+
+define Package/hamcast-hc_chat
+	$(call Package/hamcast/Program)
+	TITLE+= hc_chat
+endef
+define Package/hamcast-hc_chat/description
+Simple chat using the HAMcast stack
+endef
+
+define Package/hamcast-hc_status
+	$(call Package/hamcast/Program)
+	TITLE+= hc_status
+endef
+define Package/hamcast-hc_status/description
+Shows status information for HAMcast middleware
+endef
+
+define Package/hamcast-img
+	$(call Package/hamcast/Program)
+	TITLE+= img
+endef
+define Package/hamcast-img/description
+interdomain multicast gateway
+endef
+
+define Package/hamcast-monitoring_daemon
+	$(call Package/hamcast/Program)
+	TITLE+= monitoring daemon
+endef
+define Package/hamcast-monitoring_daemon/description
+monitoring daemon to retrieve node information
+endef
+
+define Package/hamcast-pktgen
+	$(call Package/hamcast/Program)
+	TITLE+= pktgen
+endef
+define Package/hamcast-pktgen/description
+Send and receive multicast packets
+endef
+
+define Package/hamcast-benchmark
+	$(call Package/hamcast/Program)
+	TITLE+= benchmark
+endef
+define Package/hamcast-benchmark/description
+Benchmark for HAMcast. Generating lots of packages with different
+packagesizes and logging the cpu- and other resource-usages.
+endef
+
+
+
+
+
+
+ifneq ($(findstring c,$(OPENWRT_VERBOSE)),)
+	MAKE_FLAGS+=VERBOSE=1
+endif
+ifeq ($(CONFIG_CCACHE),)
+	ifeq ($(CONFIG_EXTERNAL_TOOLCHAIN),)
+		CMAKE_C_COMPILER=$(TOOLCHAIN_DIR)/bin/$(TARGET_CC)
+		CMAKE_C_COMPILER_ARG1=
+		CMAKE_CXX_COMPILER=$(TOOLCHAIN_DIR)/bin/$(TARGET_CXX)
+		CMAKE_CXX_COMPILER_ARG1=
+		CMAKE_C_COMPILER:=$(TOOLCHAIN_DIR)/bin/$(TARGET_CC)
+		CMAKE_C_COMPILER_ARG1:=
+		CMAKE_CXX_COMPILER:=$(TOOLCHAIN_DIR)/bin/$(TARGET_CXX)
+		CMAKE_CXX_COMPILER_ARG1:=
+	else
+		CMAKE_C_COMPILER:=$(shell which $(TARGET_CC))
+		CMAKE_C_COMPILER_ARG1:=
+		CMAKE_CXX_COMPILER:=$(shell which $(TARGET_CXX))
+		CMAKE_CXX_COMPILER_ARG1:=
+	endif
+else
+	CCACHE:=$(shell which ccache)
+	ifeq ($(CCACHE),)
+		CCACHE:=$(STAGING_DIR_HOST)/bin/ccache
+	endif
+	CMAKE_C_COMPILER:=$(CCACHE)
+	CMAKE_C_COMPILER_ARG1:=$(filter-out ccache,$(TARGET_CC))
+	CMAKE_CXX_COMPILER:=$(CCACHE)
+	CMAKE_CXX_COMPILER_ARG1:=$(filter-out ccache,$(TARGET_CXX))
+endif
+
+ifneq ($(CONFIG_HAMCAST-LIBHAMCAST_HC_DEFAULT_MAX_BUFFER_SIZE), -1)
+	HAMCAST_BUFFER_SIZE_FLAGS+= -DHC_DEFAULT_MAX_BUFFER_SIZE=$(CONFIG_HAMCAST-LIBHAMCAST_HC_DEFAULT_MAX_BUFFER_SIZE)
+endif
+ifneq ($(CONFIG_HAMCAST-LIBHAMCAST_HC_MAX_CHANNEL_QUEUE_SIZE), -1)
+	HAMCAST_BUFFER_SIZE_FLAGS+= -DHC_MAX_CHANNEL_QUEUE_SIZE=$(CONFIG_HAMCAST-LIBHAMCAST_HC_MAX_CHANNEL_QUEUE_SIZE)
+endif
+CMAKE_C_COMPILER_ARG1+=$(HAMCAST_BUFFER_SIZE_FLAGS)
+CMAKE_CXX_COMPILER_ARG1+=$(HAMCAST_BUFFER_SIZE_FLAGS)
+ifeq ($(CONFIG_HAMCAST-LIBHAMCAST_FULL_DEBUG),y)
+	PREPARED_BUILD_TYPE=-DCMAKE_BUILD_TYPE=Debug
+	PREPARED_C_FLAGS_RELEASE+= -DDEBUG
+	PREPARED_CXX_FLAGS_RELEASE+= -DDEBUG
+else
+	PREPARED_BUILD_TYPE=-DCMAKE_BUILD_TYPE=Release
+	PREPARED_C_FLAGS_RELEASE+= -DNDEBUG
+	PREPARED_CXX_FLAGS_RELEASE+= -DNDEBUG
+endif
+
+CMAKE_CONF=CFLAGS="$(TARGET_CFLAGS) $(EXTRA_CFLAGS)" \
+	CXXFLAGS="$(TARGET_CFLAGS) $(EXTRA_CFLAGS)" \
+	LDFLAGS="$(TARGET_LDFLAGS) $(EXTRA_LDFLAGS)" \
+	cmake \
+		-DCMAKE_SYSTEM_NAME=Linux \
+		-DCMAKE_SYSTEM_VERSION=1 \
+		-DCMAKE_SYSTEM_PROCESSOR=$(ARCH) \
+		-DCMAKE_BUILD_TYPE=$(PREPARED_BUILD_TYPE) \
+		-DCMAKE_C_FLAGS_RELEASE="$(PREPARED_C_FLAGS_RELEASE)" \
+		-DCMAKE_CXX_FLAGS_RELEASE="$(PREPARED_CXX_FLAGS_RELEASE)" \
+		-DCMAKE_C_COMPILER="$(CMAKE_C_COMPILER)" \
+		-DCMAKE_C_COMPILER_ARG1="$(CMAKE_C_COMPILER_ARG1)" \
+		-DCMAKE_CXX_COMPILER="$(CMAKE_CXX_COMPILER)" \
+		-DCMAKE_CXX_COMPILER_ARG1="$(CMAKE_CXX_COMPILER_ARG1)" \
+		-DCMAKE_EXE_LINKER_FLAGS:STRING="$(TARGET_LDFLAGS)" \
+		-DCMAKE_MODULE_LINKER_FLAGS:STRING="$(TARGET_LDFLAGS)" \
+		-DCMAKE_SHARED_LINKER_FLAGS:STRING="$(TARGET_LDFLAGS)" \
+		-DCMAKE_FIND_ROOT_PATH=$(STAGING_DIR) \
+		-DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=BOTH \
+		-DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
+		-DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
+		-DCMAKE_STRIP=: \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DDL_LIBRARY=$(STAGING_DIR) \
+		-DCMAKE_PREFIX_PATH=$(STAGING_DIR) \
+		$(CMAKE_OPTIONS)
+
+define Build/Prepare
+	mkdir -p $(PKG_BUILD_DIR)
+	$(CP) ./src/* $(PKG_BUILD_DIR)/
+endef
+
+DIR_HAMCAST                  = $(PKG_BUILD_DIR)/hamcast
+DIR_CHIMERA                  = $(DIR_HAMCAST)/utils/chimera
+BUILD_DIR_CHIMERA            = $(DIR_CHIMERA)/build
+DIR_LIBHAMCAST               = $(DIR_HAMCAST)/libhamcast
+BUILD_DIR_LIBHAMCAST_FULL    = $(DIR_LIBHAMCAST)/build
+BUILD_DIR_LIBHAMCAST_LITE    = $(DIR_LIBHAMCAST)/build_lite
+BUILD_DIR_MIDDLEWARE         = $(DIR_HAMCAST)/middleware/build
+BUILD_DIR_BIDIRSAM           = $(DIR_HAMCAST)/modules/bidirsam/build
+BUILD_DIR_IPM                = $(DIR_HAMCAST)/modules/ipm/build
+BUILD_DIR_SCRIBE             = $(DIR_HAMCAST)/modules/scribe/build
+BUILD_DIR_TUNNEL             = $(DIR_HAMCAST)/modules/tunnel/build
+BUILD_DIR_IMG                = $(DIR_HAMCAST)/programs/img/build
+BUILD_DIR_MONITORING_DAEMON  = $(DIR_HAMCAST)/programs/monitoring/daemon/build
+BUILD_DIR_PKTGEN             = $(DIR_HAMCAST)/programs/pktgen/build
+BUILD_DIR_HC_STATUS          = $(DIR_HAMCAST)/programs/hc_status/build
+BUILD_DIR_HC_CHAT            = $(DIR_HAMCAST)/programs/hc_chat/build
+BUILD_DIR_BENCHMARK          = $(DIR_HAMCAST)/testing/benchmark/build
+
+INCLUDE_CHIMERA    = -DCHIMERA_INCLUDE=$(DIR_CHIMERA)/include -DCHIMERA_LIBRARY=$(BUILD_DIR_CHIMERA)/libchimera.so
+INCLUDE_LIBHAMCAST = -DHAMCAST_INCLUDE=$(DIR_LIBHAMCAST) -DHAMCAST_LIBRARY=$(BUILD_DIR_LIBHAMCAST_FULL)/libhamcast.so
+
+
+ifneq ($(CONFIG_PACKAGE_hamcast-libchimera),)
+  define Build/Compile/hamcast-libchimera
+		( mkdir -p $(BUILD_DIR_CHIMERA); cd $(BUILD_DIR_CHIMERA); $(CMAKE_CONF) ../; make)
+  endef
+endif
+
+ifneq ($(CONFIG_PACKAGE_hamcast-libhamcast_full),)
+  define Build/Compile/hamcast-libhamcast_full
+		( mkdir -p $(BUILD_DIR_LIBHAMCAST_FULL); cd $(BUILD_DIR_LIBHAMCAST_FULL); $(CMAKE_CONF) ../; make)
+		( mkdir -p $(BUILD_DIR_MIDDLEWARE); cd $(BUILD_DIR_MIDDLEWARE); $(CMAKE_CONF) $(INCLUDE_LIBHAMCAST) ../; make)
+  endef
+endif
+
+ifneq ($(CONFIG_PACKAGE_hamcast-libhamcast_lite),)
+  define Build/Compile/hamcast-libhamcast_lite
+		( mkdir -p $(BUILD_DIR_LIBHAMCAST_LITE); cd $(BUILD_DIR_LIBHAMCAST_LITE); $(CMAKE_CONF) -DHAMCAST_LITE="true" $(INCLUDE_CHIMERA) ../; make)
+  endef
+endif
+
+ifneq ($(CONFIG_PACKAGE_hamcast-libbidirsammodule),)
+  define Build/Compile/hamcast-libbidirsammodule
+		( mkdir -p $(BUILD_DIR_BIDIRSAM); cd $(BUILD_DIR_BIDIRSAM); $(CMAKE_CONF) $(INCLUDE_LIBHAMCAST) $(INCLUDE_CHIMERA) ../; make)
+  endef
+endif
+
+ifneq ($(CONFIG_PACKAGE_hamcast-libipmodule),)
+  define Build/Compile/hamcast-ipm
+		( mkdir -p $(BUILD_DIR_IPM); cd $(BUILD_DIR_IPM); $(CMAKE_CONF) $(INCLUDE_LIBHAMCAST) ../; make)
+  endef
+endif
+
+ifneq ($(CONFIG_PACKAGE_hamcast-libscribemodule),)
+  define Build/Compile/hamcast-libscribemodule
+		( mkdir -p $(BUILD_DIR_SCRIBE); cd $(BUILD_DIR_SCRIBE); $(CMAKE_CONF) $(INCLUDE_LIBHAMCAST) $(INCLUDE_CHIMERA) ../; make)
+  endef
+endif
+
+ifneq ($(CONFIG_PACKAGE_hamcast-libtunnelmodule),)
+  define Build/Compile/hamcast-libtunnelmodule
+		( mkdir -p $(BUILD_DIR_TUNNEL); cd $(BUILD_DIR_TUNNEL); $(CMAKE_CONF) $(INCLUDE_LIBHAMCAST) ../; make)
+  endef
+endif
+
+ifneq ($(CONFIG_PACKAGE_hamcast-hc_status),)
+  define Build/Compile/hamcast-hc_status
+		( mkdir -p $(BUILD_DIR_HC_STATUS); cd $(BUILD_DIR_HC_STATUS); $(CMAKE_CONF) $(INCLUDE_LIBHAMCAST) ../; make)
+  endef
+endif
+
+ifneq ($(CONFIG_PACKAGE_hamcast-hc_chat),)
+  define Build/Compile/hamcast-hc_chat
+		( mkdir -p $(BUILD_DIR_HC_CHAT); cd $(BUILD_DIR_HC_CHAT); $(CMAKE_CONF) $(INCLUDE_LIBHAMCAST) ../; make)
+  endef
+endif
+
+ifneq ($(CONFIG_PACKAGE_hamcast-img),)
+  define Build/Compile/hamcast-img
+		( mkdir -p $(BUILD_DIR_IMG); cd $(BUILD_DIR_IMG); $(CMAKE_CONF) $(INCLUDE_LIBHAMCAST) ../; make)
+  endef
+endif
+
+ifneq ($(CONFIG_PACKAGE_hamcast-monitoring_daemon),)
+  define Build/Compile/hamcast-monitoring_daemon
+		( mkdir -p $(BUILD_DIR_MONITORING_DAEMON); cd $(BUILD_DIR_MONITORING_DAEMON); $(CMAKE_CONF) $(INCLUDE_LIBHAMCAST) ../; make)
+  endef
+endif
+
+ifneq ($(CONFIG_PACKAGE_hamcast-pktgen),)
+  define Build/Compile/hamcast-pktgen
+		( mkdir -p $(BUILD_DIR_PKTGEN); cd $(BUILD_DIR_PKTGEN); $(CMAKE_CONF) $(INCLUDE_LIBHAMCAST) ../; make)
+  endef
+endif
+
+ifneq ($(CONFIG_PACKAGE_hamcast-benchmark),)
+  define Build/Compile/hamcast-benchmark
+		( mkdir -p $(BUILD_DIR_BENCHMARK); cd $(BUILD_DIR_BENCHMARK); $(CMAKE_CONF) $(INCLUDE_LIBHAMCAST) ../; make)
+  endef
+endif
+
+define Build/Compile
+	$(call Build/Compile/hamcast-libchimera)
+	$(call Build/Compile/hamcast-libhamcast_full)
+	$(call Build/Compile/hamcast-libhamcast_lite)
+	$(call Build/Compile/hamcast-ipm)
+	$(call Build/Compile/hamcast-hc_status)
+	$(call Build/Compile/hamcast-hc_chat)
+	$(call Build/Compile/hamcast-libscribemodule)
+	$(call Build/Compile/hamcast-libtunnelmodule)
+	$(call Build/Compile/hamcast-libbidirsammodule)
+	$(call Build/Compile/hamcast-pktgen)
+	$(call Build/Compile/hamcast-img)
+	$(call Build/Compile/hamcast-monitoring_daemon)
+	$(call Build/Compile/hamcast-benchmark)
+endef
+
+
+
+define Package/hamcast-libchimera/install
+	echo Package_hamcast-libchimera_install
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(BUILD_DIR_CHIMERA)/libchimera.so* $(1)/usr/lib/
+endef
+
+define Package/hamcast-libhamcast_full/install
+	echo Package_hamcast-libhamcast_full_install
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(BUILD_DIR_LIBHAMCAST_FULL)/libhamcast.so* $(1)/usr/lib/
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(CP) $(BUILD_DIR_MIDDLEWARE)/middleware $(1)/usr/bin/
+endef
+
+define Package/hamcast-libhamcast_lite/install
+	echo Package_hamcast-libhamcast_lite_install
+	$(INSTALL_DIR) $(1)/usr/lib/libhamcast_lite
+	$(CP) $(BUILD_DIR_LIBHAMCAST_LITE)/libhamcast.so* $(1)/usr/lib/libhamcast_lite/
+endef
+
+define Package/hamcast-libipmodule/install
+	echo Package_hamcast-libipmodule_install
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(BUILD_DIR_IPM)/libipmodule.so* $(1)/usr/lib/
+endef
+
+define Package/hamcast-libscribemodule/install
+	echo Package_hamcast-libscribemodule_install
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(BUILD_DIR_SCRIBE)/libscribemodule.so* $(1)/usr/lib/
+endef
+
+define Package/hamcast-libtunnelmodule/install
+	echo Package_hamcast-libtunnelmodule_install
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(BUILD_DIR_TUNNEL)/libtunnelmodule.so* $(1)/usr/lib/
+endef
+
+define Package/hamcast-libbidirsammodule/install
+	echo Package_hamcast-libbidirsammodule_install
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(BUILD_DIR_BIDIRSAM)/libbidirsammodule.so* $(1)/usr/lib/
+endef
+
+define Package/hamcast-hc_chat/install
+	echo Package_hamcast-hc_chat_install
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(CP) $(BUILD_DIR_HC_CHAT)/hc_chat $(1)/usr/bin/
+endef
+
+define Package/hamcast-hc_status/install
+	echo Package_hamcast-hc_status_install
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(CP) $(BUILD_DIR_HC_STATUS)/hc_status $(1)/usr/bin/
+endef
+
+define Package/hamcast-img/install
+	echo Package_hamcast-img_install
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(CP) $(BUILD_DIR_IMG)/img $(1)/usr/bin/
+	$(CP) $(BUILD_DIR_IMG)/noimg $(1)/usr/bin/
+endef
+
+define Package/hamcast-monitoring_daemon/install
+	echo Package_hamcast-monitoring_daemon_install
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(CP) $(BUILD_DIR_MONITORING_DAEMON)/mdaemon $(1)/usr/bin/
+endef
+
+define Package/hamcast-pktgen/install
+	echo Package_hamcast-pktgen_install
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(CP) $(BUILD_DIR_PKTGEN)/pktgen $(1)/usr/bin/
+	$(CP) $(BUILD_DIR_PKTGEN)/upktgen $(1)/usr/bin/
+endef
+
+define Package/hamcast-benchmark/install
+	echo Package_hamcast-benchmark_install
+	$(INSTALL_DIR) $(1)/usr/lib/hamcast/benchmark/hamcast/bin
+	$(CP) $(BUILD_DIR_BENCHMARK)/benchmark $(1)/usr/lib/hamcast/benchmark/hamcast/bin/
+	$(CP) $(BUILD_DIR_BENCHMARK)/../benchmark.sh $(1)/usr/lib/hamcast/benchmark/hamcast/bin/
+	$(INSTALL_DIR) $(1)/usr/lib/hamcast/benchmark/hamcast/script
+	$(CP) $(BUILD_DIR_BENCHMARK)/../script/concat.sh $(1)/usr/lib/hamcast/benchmark/hamcast/script/
+	$(CP) $(BUILD_DIR_BENCHMARK)/../script/file2stat.pl $(1)/usr/lib/hamcast/benchmark/hamcast/script/
+	$(CP) $(BUILD_DIR_BENCHMARK)/../script/stat.all.sh $(1)/usr/lib/hamcast/benchmark/hamcast/script/
+endef
+
+
+$(eval $(call BuildPackage,hamcast-libchimera))
+$(eval $(call BuildPackage,hamcast-libhamcast_full))
+$(eval $(call BuildPackage,hamcast-libhamcast_lite))
+$(eval $(call BuildPackage,hamcast-libbidirsammodule))
+$(eval $(call BuildPackage,hamcast-libipmodule))
+$(eval $(call BuildPackage,hamcast-libscribemodule))
+$(eval $(call BuildPackage,hamcast-libtunnelmodule))
+$(eval $(call BuildPackage,hamcast-hc_chat))
+$(eval $(call BuildPackage,hamcast-hc_status))
+$(eval $(call BuildPackage,hamcast-img))
+$(eval $(call BuildPackage,hamcast-monitoring_daemon))
+$(eval $(call BuildPackage,hamcast-pktgen))
+$(eval $(call BuildPackage,hamcast-benchmark))

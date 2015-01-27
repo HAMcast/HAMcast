@@ -1,0 +1,65 @@
+NAME
+    libscribemodule - HAMcast scribe overlay multicast module
+
+BUILD/INSTALL
+
+Requirements
+    - cmake (Version 2.6+)
+    - boost libraries developers edition
+    - openssl libraries developers edition
+    - libchimera
+
+Build
+    We recommend an 'out-of-source' cmake-build. Create a new folder, e.g.
+    'build' within the source directory. Change to new folder (cd build)
+    and run:
+
+        cmake ../
+
+    if you have not install libhamcast and libchimera to standard directories,
+    run:
+
+        cmake -DHAMCAST_INCLUDE_PATH=<path-to-hamcast-headers> \
+              -DHAMCAST_LIBRARY_PATH=<path-to-libhamcast> \
+              -DCHIMERA_INCLUDE_PATH=<path-to-chimera-headers> \
+              -DCHIMERA_LIBRARY_PATH=<path-to-libchimera> ../
+
+    'path-to-headers' is the absolute path where 'hamcast/hamcast.hpp' can
+    be found. 'path-to-libhamcast' is the absolute path where 'libhamcast.so'
+    can be found. If both are the same, you have to provide only one of them.
+    This will initialize build environment, if no errors occure run:
+
+        make
+
+    afterwards. If build was successful you find the library in build folder.
+
+Install
+    Not supported
+
+SYNOPSIS
+    None.
+
+DESCRIPTION
+    libscribemodule provides scribe overlay multicast technology to the
+    HAMcast middleware.
+EXIT STATUS
+    None.
+
+OPTIONS
+    None.
+
+EXAMPLES
+    None.
+
+FILES
+    No other files required or used.
+
+ENVIRONMENT
+    NONE.
+
+NOTES
+    None.
+
+AUTHOR
+    Sebastian Meiling <sebastian.meiling (at) haw-hamburg.de>
+    visit our website <http://hamcast.realmv6.org/developers>

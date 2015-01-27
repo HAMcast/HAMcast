@@ -1,0 +1,34 @@
+\documentclass{scrartcl}
+
+%% PACKAGES
+\usepackage[utf8]{inputenc}
+\usepackage{floatflt}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage[hang]{subfigure}
+%% HAMcast symbol
+\newcommand{\hamcast}{\mbox{\sf H\boldmath$\forall$Mcast}}
+
+\author{Sebastian Meiling \& Dominik Charousset}
+\title{The \hamcast\ Guide \\ \small An introduction to its design and
+code}
+
+\begin{document}
+
+\maketitle
+
+\input{intro}
+\input{design}
+\input{usage}
+\input{code}
+\input{doxygen}
+
+\section{Acknowledgements}
+We would like to thank Fabian Holler, Sebastian Wölke and Sebastian
+Zagaria for valueable input and fruitful discussions while working on
+\hamcast, its prototype and this documentation.
+
+%% BIB
+\bibliography{/bib/ids,/bib/internet,/bib/ngi,/bib/own,/bib/overlay,/bib/rfcs}
+
+\end{document}

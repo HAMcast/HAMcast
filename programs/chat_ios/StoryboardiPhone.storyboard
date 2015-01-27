@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="iDi-hh-S5t">
+    <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
+        <development defaultVersion="4200" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="fM2-Pe-4Ed">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zFd-r8-1CE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController modalTransitionStyle="crossDissolve" id="iDi-hh-S5t" sceneMemberID="viewController">
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="o1f-7b-aOc">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="uvC-8M-6xa" kind="relationship" relationship="rootViewController" id="wmQ-wd-r7B"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-468" y="-182"/>
+        </scene>
+        <!--RootVC - Multicast Chat-->
+        <scene sceneID="S53-7s-8vE">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0pg-5I-LC4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="uvC-8M-6xa" customClass="RootVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H1F-QV-UFI">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="joseph" borderStyle="roundedRect" placeholder="Nickname" minimumFontSize="17" clearButtonMode="whileEditing" id="jcK-YV-S3m">
+                                <rect key="frame" x="20" y="120" width="280" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="join"/>
+                                <connections>
+                                    <outlet property="delegate" destination="uvC-8M-6xa" id="Iyx-et-tvg"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ip://239.255.0.1:30001" borderStyle="roundedRect" placeholder="Group" minimumFontSize="17" clearButtonMode="whileEditing" id="d7K-cQ-87X">
+                                <rect key="frame" x="20" y="159" width="280" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="join"/>
+                                <connections>
+                                    <outlet property="delegate" destination="uvC-8M-6xa" id="Sp9-Y0-32a"/>
+                                </connections>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="inet_logo.jpg" id="Q7s-xd-nGQ">
+                                <rect key="frame" x="20" y="20" width="70" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="haw_logo_side.jpg" id="gMz-1z-6pp">
+                                <rect key="frame" x="100" y="20" width="200" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Multicast Chat" id="bmC-c4-dIs">
+                        <barButtonItem key="rightBarButtonItem" title="Config" id="cCC-Xe-rbZ">
+                            <connections>
+                                <segue destination="34T-jk-VOX" kind="push" identifier="ConfigSegue" id="tQu-Tj-bOT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <connections>
+                        <outlet property="TextFieldGroup" destination="d7K-cQ-87X" id="KEr-Rn-cDE"/>
+                        <outlet property="TextFieldNick" destination="jcK-YV-S3m" id="N1E-dB-Eqe"/>
+                        <segue destination="7ve-Se-eI6" kind="push" identifier="ChatSegue" id="PlU-Nf-XGU"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-16" y="-189"/>
+        </scene>
+        <!--ConfigVC - Configuration-->
+        <scene sceneID="3JU-Qp-qiv">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bsb-Cv-yZm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="34T-jk-VOX" customClass="ConfigVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ah0-Dp-ROp">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tunnel Interface IP" minimumFontSize="17" clearButtonMode="whileEditing" id="UxF-o8-WvS">
+                                <rect key="frame" x="20" y="20" width="280" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="34T-jk-VOX" id="3gr-r7-GTt"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tunnel Interface Port" minimumFontSize="17" clearButtonMode="whileEditing" id="yxr-jX-enT">
+                                <rect key="frame" x="20" y="59" width="280" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="34T-jk-VOX" id="GyQ-lE-3dQ"/>
+                                </connections>
+                            </textField>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="wrq-L6-AY5">
+                                <rect key="frame" x="221" y="98" width="79" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tunnel Interface" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="6lA-nu-3QK">
+                                <rect key="frame" x="20" y="101" width="193" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Configuration" id="xPk-fZ-RuA"/>
+                    <connections>
+                        <outlet property="TextFieldIp" destination="UxF-o8-WvS" id="iko-gk-qCj"/>
+                        <outlet property="TextFieldPort" destination="yxr-jX-enT" id="9nX-UH-eTw"/>
+                        <outlet property="TunnelISwitch" destination="wrq-L6-AY5" id="ZkL-RD-ScE"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="509" y="-429"/>
+        </scene>
+        <!--ChatVC - Chat!-->
+        <scene sceneID="VgE-qG-e2J">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WKc-xr-45v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="7ve-Se-eI6" customClass="ChatVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rIt-8r-ZVg">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message" minimumFontSize="17" id="UbJ-Ip-Fmy">
+                                <rect key="frame" x="26" y="159" width="280" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="send"/>
+                                <connections>
+                                    <outlet property="delegate" destination="7ve-Se-eI6" id="7KP-R5-brk"/>
+                                </connections>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" editable="NO" id="Sh2-b6-yCF">
+                                <rect key="frame" x="26" y="20" width="280" height="131"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="7ve-Se-eI6" id="7bp-9E-hvX"/>
+                                </connections>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="42" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="JDw-x7-2Rl">
+                                <rect key="frame" x="139" y="293" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Chat!" id="g12-ts-Jhk"/>
+                    <connections>
+                        <outlet property="TextFieldChatInput" destination="UbJ-Ip-Fmy" id="SSX-bb-iQP"/>
+                        <outlet property="TextViewChat" destination="Sh2-b6-yCF" id="Mqd-9X-0gb"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="509" y="175"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="haw_logo_side.jpg" width="516" height="155"/>
+        <image name="inet_logo.jpg" width="184" height="175"/>
+    </resources>
+    <classes>
+        <class className="ChatVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChatVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="TextFieldChatInput" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="TextViewChat" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="ConfigVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ConfigVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="TextFieldIp" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="TextFieldPort" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="TunnelISwitch" candidateClass="UISwitch"/>
+            </relationships>
+        </class>
+        <class className="RootVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RootVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="TextFieldGroup" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="TextFieldNick" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

@@ -1,0 +1,32 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="CLOUD">data/cloud.png</file>
+        <file alias="GROUP">data/group.png</file>
+        <file alias="IMG_IP_IP6">data/img_ip_ip6_om.png</file>
+        <file>data/img_ip_ip6.png</file>
+        <file alias="IMG_IP_OM">data/img_ip_om.png</file>
+        <file alias="IMG_IP">data/img_ip.png</file>
+        <file alias="IMG_OM">data/img_om.png</file>
+        <file alias="IMG">data/img.png</file>
+        <file alias="LOGO">data/logo.png</file>
+        <file alias="MIN_GROUP">data/min_group.png</file>
+        <file>data/mini_img.png</file>
+        <file alias="MIN_NETWORK">data/min_network.png</file>
+        <file alias="MIN_NODE">data/min_node.png</file>
+        <file alias="NETWORK">data/network.png</file>
+        <file alias="NODE_IP_IP6_OM">data/node_ip_ip6_om.png</file>
+        <file>data/node_ip_ip6.png</file>
+        <file alias="NODE_IP_OM">data/node_ip_om.png</file>
+        <file alias="NODE_IP">data/node_ip.png</file>
+        <file alias="NODE">data/node.png</file>
+        <file alias="REFRESH">data/refresh.png</file>
+        <file alias="NODE_OM">data/node_om.png</file>
+        <file alias="power">data/Soeb_Power_symbol.png</file>
+        <file alias="UP">data/darkarrowup.png</file>
+        <file alias="DOWN">data/darkarrowdown.png</file>
+        <file alias="FULLSCRREN">data/ftwindow_fullscreen.png</file>
+        <file alias="MULTICAST">data/multicast_128.png</file>
+        <file alias="OVERLAY">data/overlay_128.png</file>
+        <file alias="TUNNEL">data/tunnel_128.png</file>
+    </qresource>
+</RCC>

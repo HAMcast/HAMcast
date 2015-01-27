@@ -1,0 +1,529 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5460BF941598A62C00576252 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5460BF931598A62C00576252 /* UIKit.framework */; };
+		5460BF961598A62C00576252 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5460BF951598A62C00576252 /* Foundation.framework */; };
+		5460BF981598A62C00576252 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5460BF971598A62C00576252 /* CoreGraphics.framework */; };
+		5460BF9E1598A62D00576252 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5460BF9C1598A62D00576252 /* InfoPlist.strings */; };
+		5460BFA01598A62D00576252 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5460BF9F1598A62D00576252 /* main.m */; };
+		5460BFA41598A62D00576252 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFA31598A62D00576252 /* AppDelegate.m */; };
+		5460BFA71598A62D00576252 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5460BFA51598A62D00576252 /* MainStoryboard_iPhone.storyboard */; };
+		5460BFAA1598A62D00576252 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5460BFA81598A62D00576252 /* MainStoryboard_iPad.storyboard */; };
+		5460BFAD1598A62D00576252 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFAC1598A62D00576252 /* ViewController.mm */; };
+		5460BFBC1598A6E100576252 /* function_wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFB41598A6E100576252 /* function_wrapper.cpp */; };
+		5460BFBE1598A6E100576252 /* multicast_module.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFB71598A6E100576252 /* multicast_module.cpp */; };
+		5460BFC01598A6E100576252 /* tcp_client_connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFBA1598A6E100576252 /* tcp_client_connection.cpp */; };
+		5460BFCB1598A6F400576252 /* group.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFC21598A6F400576252 /* group.cpp */; };
+		5460BFCC1598A6F400576252 /* http_message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFC41598A6F400576252 /* http_message.cpp */; };
+		5460BFCD1598A6F400576252 /* interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFC61598A6F400576252 /* interface.cpp */; };
+		5460BFCE1598A6F400576252 /* node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFC91598A6F400576252 /* node.cpp */; };
+		5460BFD01598A73900576252 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5460BFCF1598A73900576252 /* boost.framework */; };
+		5460BFE91598A9BD00576252 /* channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFD21598A9BC00576252 /* channel.cpp */; };
+		5460BFEA1598A9BD00576252 /* client_channel_msg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFD31598A9BC00576252 /* client_channel_msg.cpp */; };
+		5460BFEB1598A9BD00576252 /* client_channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFD41598A9BC00576252 /* client_channel.cpp */; };
+		5460BFEC1598A9BD00576252 /* const_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFD51598A9BC00576252 /* const_buffer.cpp */; };
+		5460BFED1598A9BD00576252 /* deserializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFD61598A9BC00576252 /* deserializer.cpp */; };
+		5460BFEE1598A9BD00576252 /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFD71598A9BC00576252 /* exception.cpp */; };
+		5460BFEF1598A9BD00576252 /* fake_client_channel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFD81598A9BC00576252 /* fake_client_channel.cpp */; };
+		5460BFF01598A9BD00576252 /* hamcast_logging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFD91598A9BC00576252 /* hamcast_logging.cpp */; };
+		5460BFF11598A9BD00576252 /* hamcast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFDA1598A9BC00576252 /* hamcast.cpp */; };
+		5460BFF21598A9BD00576252 /* interface_property.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFDB1598A9BC00576252 /* interface_property.cpp */; };
+		5460BFF31598A9BD00576252 /* ipc_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFDC1598A9BC00576252 /* ipc_api.cpp */; };
+		5460BFF41598A9BD00576252 /* membership_event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFDD1598A9BC00576252 /* membership_event.cpp */; };
+		5460BFF51598A9BD00576252 /* message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFDE1598A9BC00576252 /* message.cpp */; };
+		5460BFF61598A9BD00576252 /* middleware_configuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFDF1598A9BC00576252 /* middleware_configuration.cpp */; };
+		5460BFF71598A9BD00576252 /* multicast_packet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFE01598A9BC00576252 /* multicast_packet.cpp */; };
+		5460BFF81598A9BD00576252 /* multicast_socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFE11598A9BC00576252 /* multicast_socket.cpp */; };
+		5460BFF91598A9BD00576252 /* read_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFE21598A9BC00576252 /* read_buffer.cpp */; };
+		5460BFFA1598A9BD00576252 /* ref_counted.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFE31598A9BC00576252 /* ref_counted.cpp */; };
+		5460BFFB1598A9BD00576252 /* serialization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFE41598A9BC00576252 /* serialization.cpp */; };
+		5460BFFC1598A9BD00576252 /* serializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFE51598A9BC00576252 /* serializer.cpp */; };
+		5460BFFD1598A9BD00576252 /* sink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFE61598A9BC00576252 /* sink.cpp */; };
+		5460BFFE1598A9BD00576252 /* socket_io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFE71598A9BC00576252 /* socket_io.cpp */; };
+		5460BFFF1598A9BD00576252 /* uri.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460BFE81598A9BC00576252 /* uri.cpp */; };
+		5460C0091598AD2E00576252 /* tunnel_message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460C0041598AD2E00576252 /* tunnel_message.cpp */; };
+		5460C00A1598AD2E00576252 /* tunnel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460C0061598AD2E00576252 /* tunnel.cpp */; };
+		5460C00D1598AD4F00576252 /* ip_instance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460C00B1598AD4F00576252 /* ip_instance.cpp */; };
+		5460C00E1598AD4F00576252 /* ip_socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460C00C1598AD4F00576252 /* ip_socket.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5460BF8F1598A62C00576252 /* daemon_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = daemon_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5460BF931598A62C00576252 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5460BF951598A62C00576252 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5460BF971598A62C00576252 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5460BF9B1598A62C00576252 /* daemon_ios-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "daemon_ios-Info.plist"; sourceTree = "<group>"; };
+		5460BF9D1598A62D00576252 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5460BF9F1598A62D00576252 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5460BFA11598A62D00576252 /* daemon_ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "daemon_ios-Prefix.pch"; sourceTree = "<group>"; };
+		5460BFA21598A62D00576252 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5460BFA31598A62D00576252 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5460BFA61598A62D00576252 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		5460BFA91598A62D00576252 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		5460BFAB1598A62D00576252 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		5460BFAC1598A62D00576252 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		5460BFB41598A6E100576252 /* function_wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = function_wrapper.cpp; path = ../../daemon/function_wrapper.cpp; sourceTree = "<group>"; };
+		5460BFB51598A6E100576252 /* function_wrapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = function_wrapper.hpp; path = ../../daemon/function_wrapper.hpp; sourceTree = "<group>"; };
+		5460BFB71598A6E100576252 /* multicast_module.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = multicast_module.cpp; path = ../../daemon/multicast_module.cpp; sourceTree = "<group>"; };
+		5460BFB81598A6E100576252 /* multicast_module.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = multicast_module.hpp; path = ../../daemon/multicast_module.hpp; sourceTree = "<group>"; };
+		5460BFBA1598A6E100576252 /* tcp_client_connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tcp_client_connection.cpp; path = ../../daemon/tcp_client_connection.cpp; sourceTree = "<group>"; };
+		5460BFBB1598A6E100576252 /* tcp_client_connection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = tcp_client_connection.hpp; path = ../../daemon/tcp_client_connection.hpp; sourceTree = "<group>"; };
+		5460BFC21598A6F400576252 /* group.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = group.cpp; path = ../../utils/group.cpp; sourceTree = "<group>"; };
+		5460BFC31598A6F400576252 /* group.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = group.hpp; path = ../../utils/group.hpp; sourceTree = "<group>"; };
+		5460BFC41598A6F400576252 /* http_message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = http_message.cpp; path = ../../utils/http_message.cpp; sourceTree = "<group>"; };
+		5460BFC51598A6F400576252 /* http_message.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = http_message.hpp; path = ../../utils/http_message.hpp; sourceTree = "<group>"; };
+		5460BFC61598A6F400576252 /* interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interface.cpp; path = ../../utils/interface.cpp; sourceTree = "<group>"; };
+		5460BFC71598A6F400576252 /* interface.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = interface.hpp; path = ../../utils/interface.hpp; sourceTree = "<group>"; };
+		5460BFC81598A6F400576252 /* method_caller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = method_caller.hpp; path = ../../utils/method_caller.hpp; sourceTree = "<group>"; };
+		5460BFC91598A6F400576252 /* node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = node.cpp; path = ../../utils/node.cpp; sourceTree = "<group>"; };
+		5460BFCA1598A6F400576252 /* node.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = node.hpp; path = ../../utils/node.hpp; sourceTree = "<group>"; };
+		5460BFCF1598A73900576252 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = boost.framework; path = ../../../utils/boost_ios/boost.framework; sourceTree = "<group>"; };
+		5460BFD21598A9BC00576252 /* channel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = channel.cpp; path = ../../../../libhamcast/src/channel.cpp; sourceTree = "<group>"; };
+		5460BFD31598A9BC00576252 /* client_channel_msg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = client_channel_msg.cpp; path = ../../../../libhamcast/src/client_channel_msg.cpp; sourceTree = "<group>"; };
+		5460BFD41598A9BC00576252 /* client_channel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = client_channel.cpp; path = ../../../../libhamcast/src/client_channel.cpp; sourceTree = "<group>"; };
+		5460BFD51598A9BC00576252 /* const_buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = const_buffer.cpp; path = ../../../../libhamcast/src/const_buffer.cpp; sourceTree = "<group>"; };
+		5460BFD61598A9BC00576252 /* deserializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = deserializer.cpp; path = ../../../../libhamcast/src/deserializer.cpp; sourceTree = "<group>"; };
+		5460BFD71598A9BC00576252 /* exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = exception.cpp; path = ../../../../libhamcast/src/exception.cpp; sourceTree = "<group>"; };
+		5460BFD81598A9BC00576252 /* fake_client_channel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fake_client_channel.cpp; path = ../../../../libhamcast/src/fake_client_channel.cpp; sourceTree = "<group>"; };
+		5460BFD91598A9BC00576252 /* hamcast_logging.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hamcast_logging.cpp; path = ../../../../libhamcast/src/hamcast_logging.cpp; sourceTree = "<group>"; };
+		5460BFDA1598A9BC00576252 /* hamcast.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hamcast.cpp; path = ../../../../libhamcast/src/hamcast.cpp; sourceTree = "<group>"; };
+		5460BFDB1598A9BC00576252 /* interface_property.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interface_property.cpp; path = ../../../../libhamcast/src/interface_property.cpp; sourceTree = "<group>"; };
+		5460BFDC1598A9BC00576252 /* ipc_api.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ipc_api.cpp; path = ../../../../libhamcast/src/ipc_api.cpp; sourceTree = "<group>"; };
+		5460BFDD1598A9BC00576252 /* membership_event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = membership_event.cpp; path = ../../../../libhamcast/src/membership_event.cpp; sourceTree = "<group>"; };
+		5460BFDE1598A9BC00576252 /* message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = message.cpp; path = ../../../../libhamcast/src/message.cpp; sourceTree = "<group>"; };
+		5460BFDF1598A9BC00576252 /* middleware_configuration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = middleware_configuration.cpp; path = ../../../../libhamcast/src/middleware_configuration.cpp; sourceTree = "<group>"; };
+		5460BFE01598A9BC00576252 /* multicast_packet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = multicast_packet.cpp; path = ../../../../libhamcast/src/multicast_packet.cpp; sourceTree = "<group>"; };
+		5460BFE11598A9BC00576252 /* multicast_socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = multicast_socket.cpp; path = ../../../../libhamcast/src/multicast_socket.cpp; sourceTree = "<group>"; };
+		5460BFE21598A9BC00576252 /* read_buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = read_buffer.cpp; path = ../../../../libhamcast/src/read_buffer.cpp; sourceTree = "<group>"; };
+		5460BFE31598A9BC00576252 /* ref_counted.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ref_counted.cpp; path = ../../../../libhamcast/src/ref_counted.cpp; sourceTree = "<group>"; };
+		5460BFE41598A9BC00576252 /* serialization.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = serialization.cpp; path = ../../../../libhamcast/src/serialization.cpp; sourceTree = "<group>"; };
+		5460BFE51598A9BC00576252 /* serializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = serializer.cpp; path = ../../../../libhamcast/src/serializer.cpp; sourceTree = "<group>"; };
+		5460BFE61598A9BC00576252 /* sink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sink.cpp; path = ../../../../libhamcast/src/sink.cpp; sourceTree = "<group>"; };
+		5460BFE71598A9BC00576252 /* socket_io.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = socket_io.cpp; path = ../../../../libhamcast/src/socket_io.cpp; sourceTree = "<group>"; };
+		5460BFE81598A9BC00576252 /* uri.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = uri.cpp; path = ../../../../libhamcast/src/uri.cpp; sourceTree = "<group>"; };
+		5460C0041598AD2E00576252 /* tunnel_message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tunnel_message.cpp; path = ../../../../modules/tunnel/src/tunnel_message.cpp; sourceTree = "<group>"; };
+		5460C0051598AD2E00576252 /* tunnel_message.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = tunnel_message.hpp; path = ../../../../modules/tunnel/src/tunnel_message.hpp; sourceTree = "<group>"; };
+		5460C0061598AD2E00576252 /* tunnel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tunnel.cpp; path = ../../../../modules/tunnel/src/tunnel.cpp; sourceTree = "<group>"; };
+		5460C0071598AD2E00576252 /* tunnel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = tunnel.hpp; path = ../../../../modules/tunnel/src/tunnel.hpp; sourceTree = "<group>"; };
+		5460C00B1598AD4F00576252 /* ip_instance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ip_instance.cpp; path = ../../../../modules/ipm/src/ip_instance.cpp; sourceTree = "<group>"; };
+		5460C00C1598AD4F00576252 /* ip_socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ip_socket.cpp; path = ../../../../modules/ipm/src/ip_socket.cpp; sourceTree = "<group>"; };
+		5460C00F1598AD6200576252 /* ip_exceptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ip_exceptions.hpp; path = ../../../../modules/ipm/include/ip_exceptions.hpp; sourceTree = "<group>"; };
+		5460C0101598AD6200576252 /* ip_instance.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ip_instance.hpp; path = ../../../../modules/ipm/include/ip_instance.hpp; sourceTree = "<group>"; };
+		5460C0111598AD6200576252 /* ip_socket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ip_socket.hpp; path = ../../../../modules/ipm/include/ip_socket.hpp; sourceTree = "<group>"; };
+		5460C0121598AD9800576252 /* ip_module.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ip_module.hpp; path = ../../../../modules/ipm/include/ip_module.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5460BF8C1598A62C00576252 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5460BF941598A62C00576252 /* UIKit.framework in Frameworks */,
+				5460BF961598A62C00576252 /* Foundation.framework in Frameworks */,
+				5460BF981598A62C00576252 /* CoreGraphics.framework in Frameworks */,
+				5460BFD01598A73900576252 /* boost.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5460BF841598A62C00576252 = {
+			isa = PBXGroup;
+			children = (
+				5460BF991598A62C00576252 /* daemon_ios */,
+				5460BF921598A62C00576252 /* Frameworks */,
+				5460BF901598A62C00576252 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5460BF901598A62C00576252 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5460BF8F1598A62C00576252 /* daemon_ios.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5460BF921598A62C00576252 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5460BFCF1598A73900576252 /* boost.framework */,
+				5460BF931598A62C00576252 /* UIKit.framework */,
+				5460BF951598A62C00576252 /* Foundation.framework */,
+				5460BF971598A62C00576252 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5460BF991598A62C00576252 /* daemon_ios */ = {
+			isa = PBXGroup;
+			children = (
+				5460BFD11598A97E00576252 /* libhamcast */,
+				5460BFC11598A6E700576252 /* util */,
+				5460BFB31598A6A100576252 /* daemon */,
+				5460BFA21598A62D00576252 /* AppDelegate.h */,
+				5460BFA31598A62D00576252 /* AppDelegate.m */,
+				5460BFA51598A62D00576252 /* MainStoryboard_iPhone.storyboard */,
+				5460BFA81598A62D00576252 /* MainStoryboard_iPad.storyboard */,
+				5460BFAB1598A62D00576252 /* ViewController.h */,
+				5460BFAC1598A62D00576252 /* ViewController.mm */,
+				5460BF9A1598A62C00576252 /* Supporting Files */,
+			);
+			path = daemon_ios;
+			sourceTree = "<group>";
+		};
+		5460BF9A1598A62C00576252 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5460BF9B1598A62C00576252 /* daemon_ios-Info.plist */,
+				5460BF9C1598A62D00576252 /* InfoPlist.strings */,
+				5460BF9F1598A62D00576252 /* main.m */,
+				5460BFA11598A62D00576252 /* daemon_ios-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5460BFB31598A6A100576252 /* daemon */ = {
+			isa = PBXGroup;
+			children = (
+				5460BFB41598A6E100576252 /* function_wrapper.cpp */,
+				5460BFB51598A6E100576252 /* function_wrapper.hpp */,
+				5460BFB71598A6E100576252 /* multicast_module.cpp */,
+				5460BFB81598A6E100576252 /* multicast_module.hpp */,
+				5460BFBA1598A6E100576252 /* tcp_client_connection.cpp */,
+				5460BFBB1598A6E100576252 /* tcp_client_connection.hpp */,
+			);
+			name = daemon;
+			sourceTree = "<group>";
+		};
+		5460BFC11598A6E700576252 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				5460BFC21598A6F400576252 /* group.cpp */,
+				5460BFC31598A6F400576252 /* group.hpp */,
+				5460BFC41598A6F400576252 /* http_message.cpp */,
+				5460BFC51598A6F400576252 /* http_message.hpp */,
+				5460BFC61598A6F400576252 /* interface.cpp */,
+				5460BFC71598A6F400576252 /* interface.hpp */,
+				5460BFC81598A6F400576252 /* method_caller.hpp */,
+				5460BFC91598A6F400576252 /* node.cpp */,
+				5460BFCA1598A6F400576252 /* node.hpp */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		5460BFD11598A97E00576252 /* libhamcast */ = {
+			isa = PBXGroup;
+			children = (
+				5460C0001598AD0100576252 /* modules */,
+				5460BFD21598A9BC00576252 /* channel.cpp */,
+				5460BFD31598A9BC00576252 /* client_channel_msg.cpp */,
+				5460BFD41598A9BC00576252 /* client_channel.cpp */,
+				5460BFD51598A9BC00576252 /* const_buffer.cpp */,
+				5460BFD61598A9BC00576252 /* deserializer.cpp */,
+				5460BFD71598A9BC00576252 /* exception.cpp */,
+				5460BFD81598A9BC00576252 /* fake_client_channel.cpp */,
+				5460BFD91598A9BC00576252 /* hamcast_logging.cpp */,
+				5460BFDA1598A9BC00576252 /* hamcast.cpp */,
+				5460BFDB1598A9BC00576252 /* interface_property.cpp */,
+				5460BFDC1598A9BC00576252 /* ipc_api.cpp */,
+				5460BFDD1598A9BC00576252 /* membership_event.cpp */,
+				5460BFDE1598A9BC00576252 /* message.cpp */,
+				5460BFDF1598A9BC00576252 /* middleware_configuration.cpp */,
+				5460BFE01598A9BC00576252 /* multicast_packet.cpp */,
+				5460BFE11598A9BC00576252 /* multicast_socket.cpp */,
+				5460BFE21598A9BC00576252 /* read_buffer.cpp */,
+				5460BFE31598A9BC00576252 /* ref_counted.cpp */,
+				5460BFE41598A9BC00576252 /* serialization.cpp */,
+				5460BFE51598A9BC00576252 /* serializer.cpp */,
+				5460BFE61598A9BC00576252 /* sink.cpp */,
+				5460BFE71598A9BC00576252 /* socket_io.cpp */,
+				5460BFE81598A9BC00576252 /* uri.cpp */,
+			);
+			name = libhamcast;
+			sourceTree = "<group>";
+		};
+		5460C0001598AD0100576252 /* modules */ = {
+			isa = PBXGroup;
+			children = (
+				5460C0021598AD1500576252 /* tunnel */,
+				5460C0011598AD0D00576252 /* ipm */,
+			);
+			name = modules;
+			sourceTree = "<group>";
+		};
+		5460C0011598AD0D00576252 /* ipm */ = {
+			isa = PBXGroup;
+			children = (
+				5460C0121598AD9800576252 /* ip_module.hpp */,
+				5460C00F1598AD6200576252 /* ip_exceptions.hpp */,
+				5460C0101598AD6200576252 /* ip_instance.hpp */,
+				5460C0111598AD6200576252 /* ip_socket.hpp */,
+				5460C00B1598AD4F00576252 /* ip_instance.cpp */,
+				5460C00C1598AD4F00576252 /* ip_socket.cpp */,
+			);
+			name = ipm;
+			sourceTree = "<group>";
+		};
+		5460C0021598AD1500576252 /* tunnel */ = {
+			isa = PBXGroup;
+			children = (
+				5460C0041598AD2E00576252 /* tunnel_message.cpp */,
+				5460C0051598AD2E00576252 /* tunnel_message.hpp */,
+				5460C0061598AD2E00576252 /* tunnel.cpp */,
+				5460C0071598AD2E00576252 /* tunnel.hpp */,
+			);
+			name = tunnel;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5460BF8E1598A62C00576252 /* daemon_ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5460BFB01598A62D00576252 /* Build configuration list for PBXNativeTarget "daemon_ios" */;
+			buildPhases = (
+				5460BF8B1598A62C00576252 /* Sources */,
+				5460BF8C1598A62C00576252 /* Frameworks */,
+				5460BF8D1598A62C00576252 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = daemon_ios;
+			productName = daemon_ios;
+			productReference = 5460BF8F1598A62C00576252 /* daemon_ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5460BF861598A62C00576252 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 5460BF891598A62C00576252 /* Build configuration list for PBXProject "daemon_ios" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5460BF841598A62C00576252;
+			productRefGroup = 5460BF901598A62C00576252 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5460BF8E1598A62C00576252 /* daemon_ios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5460BF8D1598A62C00576252 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5460BF9E1598A62D00576252 /* InfoPlist.strings in Resources */,
+				5460BFA71598A62D00576252 /* MainStoryboard_iPhone.storyboard in Resources */,
+				5460BFAA1598A62D00576252 /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5460BF8B1598A62C00576252 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5460BFA01598A62D00576252 /* main.m in Sources */,
+				5460BFA41598A62D00576252 /* AppDelegate.m in Sources */,
+				5460BFAD1598A62D00576252 /* ViewController.mm in Sources */,
+				5460BFBC1598A6E100576252 /* function_wrapper.cpp in Sources */,
+				5460BFBE1598A6E100576252 /* multicast_module.cpp in Sources */,
+				5460BFC01598A6E100576252 /* tcp_client_connection.cpp in Sources */,
+				5460BFCB1598A6F400576252 /* group.cpp in Sources */,
+				5460BFCC1598A6F400576252 /* http_message.cpp in Sources */,
+				5460BFCD1598A6F400576252 /* interface.cpp in Sources */,
+				5460BFCE1598A6F400576252 /* node.cpp in Sources */,
+				5460BFE91598A9BD00576252 /* channel.cpp in Sources */,
+				5460BFEA1598A9BD00576252 /* client_channel_msg.cpp in Sources */,
+				5460BFEB1598A9BD00576252 /* client_channel.cpp in Sources */,
+				5460BFEC1598A9BD00576252 /* const_buffer.cpp in Sources */,
+				5460BFED1598A9BD00576252 /* deserializer.cpp in Sources */,
+				5460BFEE1598A9BD00576252 /* exception.cpp in Sources */,
+				5460BFEF1598A9BD00576252 /* fake_client_channel.cpp in Sources */,
+				5460BFF01598A9BD00576252 /* hamcast_logging.cpp in Sources */,
+				5460BFF11598A9BD00576252 /* hamcast.cpp in Sources */,
+				5460BFF21598A9BD00576252 /* interface_property.cpp in Sources */,
+				5460BFF31598A9BD00576252 /* ipc_api.cpp in Sources */,
+				5460BFF41598A9BD00576252 /* membership_event.cpp in Sources */,
+				5460BFF51598A9BD00576252 /* message.cpp in Sources */,
+				5460BFF61598A9BD00576252 /* middleware_configuration.cpp in Sources */,
+				5460BFF71598A9BD00576252 /* multicast_packet.cpp in Sources */,
+				5460BFF81598A9BD00576252 /* multicast_socket.cpp in Sources */,
+				5460BFF91598A9BD00576252 /* read_buffer.cpp in Sources */,
+				5460BFFA1598A9BD00576252 /* ref_counted.cpp in Sources */,
+				5460BFFB1598A9BD00576252 /* serialization.cpp in Sources */,
+				5460BFFC1598A9BD00576252 /* serializer.cpp in Sources */,
+				5460BFFD1598A9BD00576252 /* sink.cpp in Sources */,
+				5460BFFE1598A9BD00576252 /* socket_io.cpp in Sources */,
+				5460BFFF1598A9BD00576252 /* uri.cpp in Sources */,
+				5460C0091598AD2E00576252 /* tunnel_message.cpp in Sources */,
+				5460C00A1598AD2E00576252 /* tunnel.cpp in Sources */,
+				5460C00D1598AD4F00576252 /* ip_instance.cpp in Sources */,
+				5460C00E1598AD4F00576252 /* ip_socket.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5460BF9C1598A62D00576252 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5460BF9D1598A62D00576252 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5460BFA51598A62D00576252 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5460BFA61598A62D00576252 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		5460BFA81598A62D00576252 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5460BFA91598A62D00576252 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5460BFAE1598A62D00576252 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5460BFAF1598A62D00576252 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5460BFB11598A62D00576252 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../utils/boost_ios\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "daemon_ios/daemon_ios-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../../../libhamcast/**";
+				INFOPLIST_FILE = "daemon_ios/daemon_ios-Info.plist";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DHC_USE_FAKE_MIDDLEWARE",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5460BFB21598A62D00576252 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../utils/boost_ios\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "daemon_ios/daemon_ios-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../../../libhamcast/**";
+				INFOPLIST_FILE = "daemon_ios/daemon_ios-Info.plist";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DHC_USE_FAKE_MIDDLEWARE",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5460BF891598A62C00576252 /* Build configuration list for PBXProject "daemon_ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5460BFAE1598A62D00576252 /* Debug */,
+				5460BFAF1598A62D00576252 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5460BFB01598A62D00576252 /* Build configuration list for PBXNativeTarget "daemon_ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5460BFB11598A62D00576252 /* Debug */,
+				5460BFB21598A62D00576252 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5460BF861598A62C00576252 /* Project object */;
+}

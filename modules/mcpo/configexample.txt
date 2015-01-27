@@ -1,0 +1,9 @@
+[mcpo_modul]
+file=../modules/mcpo/build/libmcpomodule.so
+nodename=node1
+spovnetname=hamcast
+endpoint=tcp_5005
+boot.host.hamcast=ip_141.22.26.251
+boot.port.hamcast=tcp_5005
+port=666
+

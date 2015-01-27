@@ -1,0 +1,10 @@
+#!/bin/sh
+
+#   sudo dummy for OpenWRT on OpenWRT 12.09-RC1
+#
+# place at: /bin/sudo
+#
+# On OpenWRT user is usually always root but there's no sudo command
+# so scripts which use sudo will fail.
+
+$@

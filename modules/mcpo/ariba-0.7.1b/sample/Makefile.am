@@ -1,0 +1,1 @@
+SUBDIRS = pingpong testdht

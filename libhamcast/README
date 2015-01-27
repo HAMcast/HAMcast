@@ -1,0 +1,64 @@
+NAME
+    libhamcast - HAMcast core library
+
+BUILD/INSTALL
+
+Requirements
+    - cmake (Version 2.6+)
+    - boost libraries developers edition
+
+Build
+    We recommend an 'out-of-source' cmake-build. Create a new folder, e.g.
+    'build' within the source directory. Change to new folder (cd build)
+    and run:
+
+        cmake ../
+
+    This will initialize build environment, if no errors occure run:
+
+        make
+
+    afterwards. If build was successful you find the library in the source
+    folder.
+
+Install
+    To install HAMcast library and header files to standard folders run:
+
+        make install
+
+    To remove installed files from the system run:
+
+        make uninstall
+
+SYNOPSIS
+    None.
+
+DESCRIPTION
+    libhamcast is the core library of the HAMcast project and is mandatory
+    for all other software parts. The Library also provides a C++
+    implementation of the common multicast API used by HAMcast.
+
+EXIT STATUS
+
+    None.
+
+OPTIONS
+    None.
+
+EXAMPLES
+    None.
+
+FILES
+    No other files required or used.
+
+ENVIRONMENT
+    NONE.
+
+NOTES
+    libhamcast is mandatory for all other parts of HAMcast.
+
+AUTHOR
+    Dominik Charousset <dominik.charousset (at) haw-hamburg.de>
+    Sebastian Meiling <sebastian.meiling (at) haw-hamburg.de>
+
+    visit our website <http://hamcast.realmv6.org/developers>

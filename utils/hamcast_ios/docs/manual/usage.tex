@@ -1,0 +1,53 @@
+\section{Use it}
+\label{sec:usage}
+
+Hamcast is written in C++. Fortunately you can mix Objective-C, C and C++ in \textit{.mm} files. Rename the ending from \textit{.m} to \textit{.mm} if you want to use hamcast in a class.
+
+The header file for hamcast is named \textit{hamcast.hpp} and should be included as shown below:
+
+\begin{lstlisting}
+	#include "hamcast/hamcast.hpp"
+\end{lstlisting}
+
+The multicast socket implementation of hamacst is called ``\textit{multicast\_socket}''. As expected the socket provides the functions \lstinline^send^, \lstinline^receive^, \lstinline^join^ and \lstinline^leave^. Hamcast uses ``\textit{URIs}'' as group identifiers, complient with RFC 3986. Both join and leave expect a URI as a parameter. The data you receive with the ``\textit{multicast\_socket}'' is packed in a ``\textit{multicast\_packet}'' and can be obtained via the \lstinline^data()^ and \lstinline^size()^ member functions.
+
+Lets see how this works. The following code is an example function mixing Objective-C and C++. It creates a multicast\_socket, joins a group, interprets received data as strings and prints it on your Xcode console.
+
+\newpage
+\begin{lstlisting}
+#include "hamcast/hamcast.hpp"
+...
+	
+- (void) receive
+{
+    hamcast::multicast_socket sck;
+	hamcast::multicast_packet message;
+    hamcast::uri group("ip://239.255.0.1:30001");
+    
+    if(group.empty())
+    {
+        NSLog(@"Not a valid group!");
+        return;
+    }
+    
+    sck.join(group);
+                       
+    while(true)
+    {
+        message = sck.receive();
+        if(message.empty())
+        {
+            std::cout << "received empty multicast_packet"
+            		  << std::endl;
+        }
+        else
+        {
+        	std::string output(reinterpret_cast<const char*>
+        		(message.data()), message.size());
+        	std::cout << "received: " << output << std::endl;
+        }
+    }
+}
+
+...
+\end{lstlisting}

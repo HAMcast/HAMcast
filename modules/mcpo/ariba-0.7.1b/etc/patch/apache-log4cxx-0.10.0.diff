@@ -1,0 +1,11 @@
+--- apache-log4cxx-0.10.0/src/main/include/log4cxx/logstring.h	
++++ apache-log4cxx-0.10.0/src/main/include/log4cxx/logstring.h	
+@@ -25,6 +25,7 @@
+ 
+ 
+ #include <string>
++#include <cstring>
+ #include <log4cxx/log4cxx.h>
+ 
+ #if LOG4CXX_LOGCHAR_IS_WCHAR && LOG4CXX_LOGCHAR_IS_UTF8 && LOG4CXX_LOGCHAR_IS_UNICHAR
+

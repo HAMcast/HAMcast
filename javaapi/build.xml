@@ -1,0 +1,38 @@
+<project>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+	<!-- compile api-->
+	<mkdir dir="build/classes"/>
+        <javac includeAntRuntime="false" srcdir="src/multicastApi" destdir="build/classes"/>
+        <javac includeAntRuntime="false" srcdir="src/libHamCast" destdir="build/classes"/>
+        <!-- compile hc_status-->
+	<mkdir dir="build/examples"/>
+	   <javac includeAntRuntime="false" srcdir="src/multicastApi" destdir="build/examples"/>
+        <javac includeAntRuntime="false" srcdir="src/libHamCast" destdir="build/examples"/>
+	<javac includeAntRuntime="false" srcdir="src/examples" destdir="build/examples"/>
+    </target>
+
+
+    <target name="jar">
+        <jar destfile="build/HAMcastApi.jar" basedir="build/classes"/>
+	<jar destfile="build/hc_status.jar" basedir="build/examples" >
+		<manifest>
+        		<attribute name="Main-Class" value="examples.Hc_status_java" />
+			<attribute name="Class-Path" value="."/>
+      		</manifest>
+	</jar>
+
+	<jar destfile="build/hc_chat.jar" basedir="build/examples" >
+		<manifest>
+        		<attribute name="Main-Class" value="examples.HC_Chat" />
+			<attribute name="Class-Path" value="."/>
+      		</manifest>
+	</jar>
+    </target>
+
+
+</project>

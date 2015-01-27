@@ -1,0 +1,8 @@
+;RECV_IF=GROUPNAME, fwd data from RECV_IF to other IF specified
+;groups for demo app
+2=ip://239.201.108.1:7580
+2=ip://239.201.108.1:7581
+1=ip://239.201.108.1:7582
+;groups for monitoring
+2=ip://239.201.108.2:1234
+1=ip://239.201.108.3:1234

@@ -1,0 +1,131 @@
+#!/bin/bash
+BASEDIR=$(pwd)
+DORELEASE="no"
+if test "$1" = "true" ; then
+  DORELEASE="yes"
+fi
+
+if test $(uname) = "Darwin" ; then
+    # For MacOS X:
+    WGET="curl -O"
+else
+    # For Linux:
+    WGET="wget"
+fi
+RELEASE_DATE=$(date +%y%m%d)
+RELEASE_PATH=hamcast_$RELEASE_DATE
+
+CORE_PATH="hamcast_core"
+JAVA_PATH="hamcast_java"
+TOOL_PATH="hamcast_tool"
+CLONE_PATH=clone
+DOC_PATH=docs
+
+CORE_ARCHIVE="hamcast_core_$RELEASE_DATE.tar.gz"
+JAVA_ARCHIVE="hamcast_java_$RELEASE_DATE.tar.gz"
+TOOL_ARCHIVE="hamcast_tool_$RELEASE_DATE.tar.gz"
+
+CORE_RELEASE="tar czf $CORE_ARCHIVE $CORE_PATH/"
+JAVA_RELEASE="tar czf $JAVA_ARCHIVE $JAVA_PATH/"
+TOOL_RELEASE="tar czf $TOOL_ARCHIVE $TOOL_PATH/"
+RELEASE_CMD="$CORE_RELEASE ; $JAVA_RELEASE ; $TOOL_RELEASE"
+
+REPOPATH="git@inetd.cpt.haw-hamburg.de:hamcast"
+
+function verbose_exec()
+{
+    if eval $1 ; then
+        # success
+        cmd_success=1
+    else
+        echo "!Error! In folder $(pwd) executing:"
+        echo "\t $1"
+        exit
+    fi
+}
+
+echo ; echo
+echo "Generating new HAMcast release"
+echo "=============================="
+if test $DORELEASE = "no" ; then
+    echo " +++ TEST RELEASE +++"
+else
+    echo " +++ RELEASE +++"
+fi
+
+echo ; echo " - Make a clean clone of Repository ..."
+if test -e $CLONE_PATH ; then echo " -- Clone path exists, delete old repo clone ..." && verbose_exec "rm -rf $CLONE_PATH" ; fi
+if test -e $CORE_PATH ; then echo " -- Core release path exists, delete old release ..." && verbose_exec "rm -rf $CORE_PATH" ; fi
+if test -e $JAVA_PATH ; then echo " -- Java release path exists, delete old release ..." && verbose_exec "rm -rf $JAVA_PATH" ; fi
+if test -e $TOOL_PATH ; then echo " -- Tool release path exists, delete old release ..." && verbose_exec "rm -rf $TOOL_PATH" ; fi
+if test -e $CORE_ARCHIVE ; then echo " -- Core release archive exists, delete old release ..." && verbose_exec "rm $CORE_ARCHIVE" ; fi
+if test -e $JAVA_ARCHIVE ; then echo " -- Java release archive exists, delete old release ..." && verbose_exec "rm $JAVA_ARCHIVE" ; fi
+if test -e $TOOL_ARCHIVE ; then echo " -- Tool release archive exists, delete old release ..." && verbose_exec "rm $TOOL_ARCHIVE" ; fi
+verbose_exec "git clone $REPOPATH $CLONE_PATH"
+echo; echo " - Create new release paths ..."
+verbose_exec "mkdir $CORE_PATH"
+verbose_exec "mkdir $JAVA_PATH"
+verbose_exec "mkdir $TOOL_PATH"
+echo ; echo " - Copy content to release paths ..."
+#### GENERATE HAMCAST CORE RELEASE (libhamcast, middleware, and modules) ####
+RELEASE_PATH=$CORE_PATH
+verbose_exec "cp $CLONE_PATH/README $RELEASE_PATH/."
+verbose_exec "cp $CLONE_PATH/COPYING $RELEASE_PATH/."
+verbose_exec "cp $CLONE_PATH/CMakeLists.txt.release $RELEASE_PATH/CMakeLists.txt"
+verbose_exec "cp $CLONE_PATH/run_hamcast.sh $RELEASE_PATH/."
+verbose_exec "cp -r $CLONE_PATH/libhamcast $RELEASE_PATH/."
+verbose_exec "cp -r $CLONE_PATH/middleware $RELEASE_PATH/."
+verbose_exec "mkdir $RELEASE_PATH/modules"
+verbose_exec "cp -r $CLONE_PATH/modules/ipm $RELEASE_PATH/modules/."
+verbose_exec "cp -r $CLONE_PATH/modules/loopback $RELEASE_PATH/modules/."
+verbose_exec "cp -r $CLONE_PATH/modules/scribe $RELEASE_PATH/modules/."
+verbose_exec "cp -r $CLONE_PATH/modules/void $RELEASE_PATH/modules/."
+verbose_exec "mkdir $RELEASE_PATH/utils"
+verbose_exec "cp -r $CLONE_PATH/utils/chimera $RELEASE_PATH/utils/."
+verbose_exec "mkdir $RELEASE_PATH/docs"
+verbose_exec "cd $RELEASE_PATH/docs"
+verbose_exec "$WGET http://tools.ietf.org/id/draft-irtf-samrg-common-api.txt"
+verbose_exec "cd $BASEDIR"
+verbose_exec "cd $CLONE_PATH/libhamcast"
+verbose_exec "doxygen libhamcast.doxygen"
+verbose_exec "cd $BASEDIR"
+verbose_exec "cp -r $CLONE_PATH/libhamcast/html $RELEASE_PATH/docs/libhamcast_doxygen"
+#### GENERATE TOOLS and PROGRAM RELEASE ####
+RELEASE_PATH=$TOOL_PATH
+verbose_exec "cd $BASEDIR"
+verbose_exec "cp -r $CLONE_PATH/programs/hc_chat $RELEASE_PATH/."
+verbose_exec "cp -r $CLONE_PATH/programs/hc_status $RELEASE_PATH/."
+verbose_exec "cp -r $CLONE_PATH/programs/img $RELEASE_PATH/."
+verbose_exec "cp -r $CLONE_PATH/programs/monitoring $RELEASE_PATH/."
+verbose_exec "rm -rf $RELEASE_PATH/monitoring/daemon_ios"
+#### GENERATE JAVA API RELEASE ####
+RELEASE_PATH=$JAVA_PATH
+verbose_exec "cd $BASEDIR"
+verbose_exec "cd $CLONE_PATH/javaapi"
+verbose_exec "ant clean compile jar"
+verbose_exec "doxygen hamcast.doxyfile"
+verbose_exec "cd $BASEDIR"
+verbose_exec "cp -r $CLONE_PATH/javaapi/build/*.jar $RELEASE_PATH/."
+verbose_exec "cp -r $CLONE_PATH/javaapi/README $RELEASE_PATH/."
+verbose_exec "mkdir $RELEASE_PATH/src"
+verbose_exec "cp -r $CLONE_PATH/javaapi/src/libHamCast $RELEASE_PATH/src/."
+verbose_exec "cp -r $CLONE_PATH/javaapi/src/multicastApi $RELEASE_PATH/src/."
+verbose_exec "cp -r $CLONE_PATH/javaapi/src/examples $RELEASE_PATH/src/."
+verbose_exec "cp -r $CLONE_PATH/javaapi/html $RELEASE_PATH/docs"
+
+echo ; echo " - Create archives ..."
+verbose_exec "cd $BASEDIR"
+verbose_exec "$RELEASE_CMD"
+echo ; echo " - Deleting temporary files and paths ..."
+verbose_exec "rm -rf $CORE_PATH"
+verbose_exec "rm -rf $JAVA_PATH"
+verbose_exec "rm -rf $TOOL_PATH"
+verbose_exec "rm -rf $CLONE_PATH"
+if test $DORELEASE = "yes" ; then
+    echo ; echo " - Release, adding new tag ..."
+    verbose_exec "git tag -f release_$RELEASE_DATE"
+    verbose_exec "git push --tags"
+else
+    echo ; echo " - Release test, no tag created"
+fi
+echo ; echo "DONE ..."

@@ -1,0 +1,45 @@
+[global]
+
+;log_level=none
+;log_level=trace
+;log_level=debug
+;log_level=info
+;log_level=warn
+;log_level=error
+;log_level=fatal
+
+;uncommented as needed
+
+;[void]
+;file=../lib/libvoidmodule.dylib
+;file=../lib/libvoidmodule.so
+
+;[loopback]
+;file=../lib/libloopbackmodule.dylib
+;file=../lib/libloopbackmodule.so
+
+;[ip]
+;file=../lib/libipmodule.dylib
+;file=../lib/libipmodule.so
+;Service discovery modes: off, light, full
+;discovery=off
+;Service discovery, ip versions: ipall, ip4, ip6
+;ipversion=ip4
+
+;[scribe]
+;file=../lib/libscribemodule.dylib
+;file=../lib/libscribemodule.so
+;local.addr=<address>
+;local.port=56765
+;bootstrap.addr=<bootstrap IP>
+;bootstrap.port=<bootstrap port>
+;maintenance=true
+
+;[bidirsam]
+;file=../lib/libbidirsammodule.dylib
+;file=../lib/libbidirsammodule.so
+;local.addr=<address>
+;local.port=56765
+;bootstrap.addr=<bootstrap IP>
+;bootstrap.port=<bootstrap port>
+;maintenance=true

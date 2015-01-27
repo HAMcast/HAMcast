@@ -1,0 +1,64 @@
+NAME
+    libloopbackmodule - HAMcast test loopback module
+
+BUILD/INSTALL
+
+Requirements
+    - cmake (Version 2.6+)
+    - boost libraries developers edition
+
+Build
+    We recommend an 'out-of-source' cmake-build. Create a new folder, e.g.
+    'build' within the source directory. Change to new folder (cd build)
+    and run:
+
+        cmake ../
+
+    if you have not install libhamcast to standard directories, run:
+
+        cmake -DHAMCAST_INCLUDE_PATH=<path-to-headers> \
+              -DHAMCAST_LIBRARY_PATH=<path-to-libhamcast> ../
+
+    'path-to-headers' is the absolute path where 'hamcast/hamcast.hpp' can
+    be found. 'path-to-libhamcast' is the absolute path where 'libhamcast.so'
+    can be found. If both are the same, you have to provide only one of them.
+    This will initialize build environment, if no errors occure run:
+
+        make
+
+    afterwards. If build was successful you find the library in build folder.
+
+Install
+    Not supported
+
+SYNOPSIS
+    None.
+
+DESCRIPTION
+    libloopbackmodule provides a simple loopback device to the HAMcast
+    middleware. It was implemented for test and debug cases. You can send
+    and receive data at the same node, no actual network traffic is generated.
+
+EXIT STATUS
+    None.
+
+OPTIONS
+    None.
+
+EXAMPLES
+    None.
+
+FILES
+    No other files required or used.
+
+ENVIRONMENT
+    NONE.
+
+NOTES
+    None.
+
+AUTHORS
+    Dominik Charousset <dominik.charousset (at) haw-hamburg.de>
+    Sebastian Meiling <sebastian.meiling (at) haw-hamburg.de>
+
+    visit our website <http://hamcast.realmv6.org/developers> 

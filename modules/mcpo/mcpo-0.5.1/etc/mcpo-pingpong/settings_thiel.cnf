@@ -1,0 +1,6 @@
+node.name = thiel
+node.initiator = false
+#ariba.ip.addr =
+ariba.tcp.port = 5002
+#ariba.udp.port =
+ariba.bootstrap.hints=pingpong{ip{141.3.70.157},tcp(ip,{5002})}

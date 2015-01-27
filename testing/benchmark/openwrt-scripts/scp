@@ -1,0 +1,13 @@
+#!/bin/sh
+
+#   Wrapper to use /root/.ssh/id_rsa for scp (dropbear)
+#                  on OpenWRT 12.09-RC1
+#
+# To use this script do:
+#   mkdir /usr/bin/scp-id/
+#   mv /usr/bin/scp /usr/bin/scp-id/scp.old
+#   cd /usr/bin/scp-id/
+#   ln -s /usr/sbin/dropbear/scp
+#   mv THIS-SCRIPT /usr/bin/
+
+/usr/bin/scp-id/scp -i /root/.ssh/id_rsa $@

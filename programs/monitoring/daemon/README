@@ -1,0 +1,75 @@
+NAME
+    mdaemon - monitoring daemon to retrieve node information
+
+BUILD/INSTALL
+
+Requirements
+    - cmake (Version 2.6+)
+    - cmake macro 'FindLibHamcast.cmake'
+    - boost libraries developers edition
+    - HAMcast library and middleware
+
+Build
+    We recommend an 'out-of-source' cmake-build. Create a new folder, e.g.
+    'build' within the source directory. Change to new folder (cd build)
+    and run:
+
+        cmake ../
+
+    if you have not install libhamcast to standard directories, run:
+
+        cmake -DHAMCAST_INCLUDE_PATH=<path-to-headers> \
+              -DHAMCAST_LIBRARY_PATH=<path-to-libhamcast> ../
+
+    'path-to-headers' is the absolute path where 'hamcast/hamcast.hpp' can
+    be found. 'path-to-libhamcast' is the absolute path where 'libhamcast.so'
+    can be found. If both are the same, you have to provide only one of them.
+    This will initialize build environment, if no errors occure run:
+
+        make
+
+    If build was successful you find the binary in 'build' folder.
+
+Install
+    Currently not supported. Just run pktgen from build directory.
+
+SYNOPSIS
+    mdaemon [OPTION]...
+
+DESCRIPTION
+    The program serves as a remote interface to the HAMcast service calls.
+    Service calls can be excecuted over a restful web service.
+
+EXIT STATUS
+
+    *****TODO SZ
+
+OPTIONS
+
+    -d, --daemon-id
+	    Sets the daemon-id 
+    -g, --group
+	    Sets the group uri for the multicast group 
+    -h, --help
+            Print this help screen.
+
+EXAMPLES
+    With default settings:
+	./mdaemon
+    With all settings:
+	./mdaemon -g ip://239.0.0.1:1234 -d example
+
+FILES
+    No other files required or used.
+
+ENVIRONMENT
+    LD_LIBRARY_PATH must be set if libhamcast is not installed into
+    standard directories, e.g. /usr/lib.
+
+NOTES
+    Make sure the group is set to the same value as the collectors group.
+
+AUTHOR
+    Sebastian Zagaria <sebastian.zagaria (at) haw-hamburg.de>
+
+    visit our website <http://hamcast.realmv6.org/developers>

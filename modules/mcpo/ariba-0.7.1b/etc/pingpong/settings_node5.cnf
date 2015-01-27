@@ -1,0 +1,7 @@
+node.name = nodefive
+ariba.endpoints = tcp{5007}
+ariba.bootstrap.hints=pingpong{ip{127.0.0.1};tcp{5002}}
+
+pingpong.name=nodefive
+
+

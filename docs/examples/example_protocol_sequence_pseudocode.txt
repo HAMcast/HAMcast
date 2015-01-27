@@ -1,0 +1,49 @@
+// this example code shows, how to create a multicast socket via IPC
+
+// it's NOT a recommendation to implement IPC this way, because this
+// code neither checks for any errors nor is it "good" or safe
+// (because the middleware might send an asynchronous event message
+//  instead of the expected synchronous response)
+
+using namespace hamcast;
+using namespace hamcast::ipc;
+using namespace hamcast::util;
+
+// a native (localhost) socket,
+// connected to the middleware
+socket_t s = ...;
+int socket_flags = 0;
+
+// send a create_socket() response
+message_type mtype = sync_request;
+function_id fid = fid_create_socket;
+request_id rid = 0;
+uint32_t cs = 0;
+send(s, &mtype, sizeof(message_type), socket_flags);
+send(s, &fid, sizeof(function_id), socket_flags);
+send(s, &rid, sizeof(request_id), socket_flags);
+send(s, &cs, sizeof(uint32_t), socket_flags);
+
+// receive the synchronous response
+message_type recv_mtype;
+exception_id recv_eid;
+request_id recv_rid;
+uint32_t recv_cs;
+char* recv_content;
+recv(s, &recv_mtype, sizeof(message_type), socket_flags);
+recv(s, &recv_eid, sizeof(exception_id), socket_flags);
+recv(s, &recv_rid, sizeof(request_id), socket_flags);
+recv(s, &recv_cs, sizeof(uint32_t), socket_flags);
+recv_content = new char[recv_cs];
+recv(s, recv_content, recv_cs, socket_flags);
+
+// check received message
+assert(recv_mtype == sync_response);
+assert(recv_eid == eid_none);
+assert(recv_rid == rid);
+assert(recv_cs > 0);
+
+// deserialize the socket id from the content field
+deserializer d(new read_buffer(recv_cs, recv_content));
+socket_id result;
+d >> result;

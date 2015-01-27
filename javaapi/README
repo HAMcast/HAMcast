@@ -1,0 +1,55 @@
+HAMcast Java-API
+======================================================================
+
+GENERAL
+
+This package provides a Java implementation of the common multicast API.
+It is an interface to develop group communication software based on the
+HAMcast multicast stack. The Java-API only works in conjunction with the
+HAMcast middleware, see http://hamcast.realmv6.org/developers for details.
+
+RELEASE STRUCTURE
+
+    - README                this file
+    - HAMcastApi.jar        packed compiled code
+    - docs/                 documentation
+    - src/libhamcast        use MulticastSocket and HAMcastUtility only
+    - src/multicastApi      values for the application developer
+
+INSTALL
+
+No installation of the Java API required. However, you need the HAMcast
+core release with middleware. To develope group communication software
+based on HAMcast javaapi, you have to include the package into your
+project, if you use Eclipse IDE do the following.
+
+To include the API in Eclipse:
+    - create a new Projekt
+    - goto project properties
+    +->Java Buildpath
+    +-->Libraries
+    +---->add external jar
+
+Download and build the HAMcast Middleware, find all required release
+packages at: <http://hamcast.realmv6.org/developers/>
+
+DOCUMENTATION
+
+A DoxyGen code documentation for the Java API can be found within this
+release or on our developers website at:
+
+    http://hamcast.realmv6.org/developers/wiki/documentation
+
+You can also find more examples in source directory 'src/examples'.
+The examples include:
+    - join/leave multicast groups
+    - add/delete/set interfaces of a socket
+    - exception handling for API calls
+    - get all available interfaces
+    - and more...
+
+AUTHORS
+    Nora Berg <nora.berg (at) haw-hamburg.de>
+    Patrick Wienicke <patrick.wienicke (at) haw-hamburg.de>
+
+    visit our website <http://hamcast.realmv6.org/developers>

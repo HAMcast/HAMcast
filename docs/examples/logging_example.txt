@@ -1,0 +1,23 @@
+#include "hamcast/hamcast_logging.h"
+
+void fun1(int arg1, int arg2)
+{
+	// writes an ENTER message to the log with "arg1 = 1, arg2 = 2"
+	// and an EXIT message if this function returns
+	HC_LOG_TRACE("arg1 = " << arg1 << ", arg2 = " << arg2);
+	// writes an DEBUG message with "arg1 + arg2 = 3"
+	HC_LOG_DEBUG("arg1 + arg2 = " << (arg1 + arg2));
+	// fun1 returns now to main (an trace EXIT message is written)
+}
+
+int main(int, char**)
+{
+	// enable logging
+	hc_set_default_log_fun(HC_LOG_TRACE_LVL);
+	// fun1 writes three messages to the log
+	fun1(1, 2);
+	// fourth log message
+	HC_LOG_DEBUG("done");
+	return 0;
+}
+

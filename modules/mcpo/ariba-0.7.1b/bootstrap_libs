@@ -1,0 +1,80 @@
+#!/bin/bash
+
+function catch_errors() {
+   echo "Script aborted, because an unexpected error occured.";
+   exit 1;
+}
+
+if [ ! `which wget` ]; then
+ echo "You need wget for this script. Please install it first, e.g., sudo apt-get install wget. Aborted."
+ exit 1
+fi
+
+mkdir build
+
+# setup
+export PREFIX=`cd ./build; pwd`
+mkdir libs
+cd libs
+
+# now set the error trap so that re-running the script doesn't fail
+# on previous directory commands...
+# this will trap any subsequent errors or commands with non-zero exit status
+# by calling function catch_errors()
+trap catch_errors ERR;
+
+
+# apache runtime
+#wget http://apache.linux-mirror.org/apr/apr-1.4.2.tar.gz
+#tar xvvzf apr-1.4.2.tar.gz
+#cd apr-1.4.2 
+#./configure --prefix=$PREFIX 
+#make && make install 
+#cd ..
+
+# apache runtime utilities
+#wget http://apache.linux-mirror.org/apr/apr-util-1.3.10.tar.gz
+#tar xvvzf apr-util-1.3.10.tar.gz
+#cd apr-util-1.3.10
+#./configure --prefix=$PREFIX --with-apr=$PREFIX
+#make && make install 
+#cd ..
+
+# log4cxx
+#wget http://ftp.uni-erlangen.de/pub/mirrors/apache/logging/log4cxx/0.10.0/apache-log4cxx-0.10.0.tar.gz
+#cp ../etc/patch/apache-log4cxx-0.10.0.diff ./
+#tar xvvzf apache-log4cxx-0.10.0.tar.gz
+#patch -p0 <apache-log4cxx-0.10.0.diff
+#cd apache-log4cxx-0.10.0 
+#./configure --prefix=$PREFIX --with-apr=$PREFIX --with-apr-util=$PREFIX
+#make && make install 
+#cd ..
+
+# boost 1.39.0
+boostpkg=boost_1_39_0
+wget http://downloads.sourceforge.net/sourceforge/boost/${boostpkg}.tar.gz || { echo "** Failed to retrieve ${boostpkg}. Please check network connectivity or availability of the package on the server. Stop."; exit 1; }
+echo -n "Unpacking ${boostpkg}... " &&  tar xzf ${boostpkg}.tar.gz && echo " done."
+cd ${boostpkg}
+echo -n "Calling bootstrap.sh ... " && ./bootstrap.sh --libdir=$PREFIX/lib --prefix=$PREFIX --with-libraries="date_time,system,thread,test,regex" >/dev/null && echo " done."
+echo "Calling bjam. This may take a while..."
+./bjam install
+cd ..
+
+# gnu multiprecision library
+gmppkg=gmp-4.3.1
+wget ftp://ftp.gmplib.org/pub/${gmppkg}/${gmppkg}.tar.gz || { echo "** Failed to retrieve ${gmppkg}. Please check network connectivity or availability of the package on the server. Stop."; exit 1; }
+echo -n "Unpacking ${gmppkg}... " &&  tar xzf ${gmppkg}.tar.gz  && echo " done."
+cd ${gmppkg}
+./configure --prefix=$PREFIX
+make && make install 
+cd ..
+
+cd ..
+./configure --prefix=$PREFIX --with-boost=$PREFIX CPPFLAGS=-I$PREFIX/include LDFLAGS=-L$PREFIX/lib
+make && make install
+
+echo "Done."
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PREFIX/lib
+
+# end of script

@@ -1,0 +1,6 @@
+node.name = magnum
+node.initiator = true
+#ariba.ip.addr =
+ariba.tcp.port = 5002
+#ariba.udp.port =
+#ariba.bootstrap.hints=pingpong{ip{127.0.0.1},tcp(ip,{5002})}

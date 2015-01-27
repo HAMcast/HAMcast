@@ -1,0 +1,85 @@
+NAME
+    monitoring - A monitoring framework for HAMcast nodes and networks
+
+BUILD/INSTALL
+
+Requirements
+    - cmake (Version 2.6+)
+    - cmake macro 'FindLibHamcast.cmake'
+    - boost libraries developers version
+    - QT libraries developers version (mviewer only)
+    - iGraph library (< v0.6) developers version (mviewer only)
+    - HAMcast library and middleware
+
+Build
+    We recommend an 'out-of-source' cmake-build. Create a new folder, e.g.
+    'build' within the source directory. Change to new folder (cd build)
+    and run:
+
+        cmake ../
+
+    if you have not install libhamcast to standard directories, run:
+
+        cmake -DHAMCAST_INCLUDE_PATH=<path-to-headers> \
+              -DHAMCAST_LIBRARY_PATH=<path-to-libhamcast> ../
+
+    'path-to-headers' is the absolute path where 'hamcast/hamcast.hpp' can
+    be found. 'path-to-libhamcast' is the absolute path where 'libhamcast.so'
+    can be found. If both are the same, you have to provide only one of them.
+    This will initialize build environment, if no errors occure run:
+
+        make
+
+    If build was successful you find the binaries in 'build' folder.
+
+Install
+    Currently not supported. Just run framework from build folder.
+
+EXAMPLES
+    To run the monitoring framework you have to start the monitoring daemon 
+    on every HAMcast node you want to monitor. The second program that
+    needs to be running is the monitoring collector. 
+    The collector only has to run once on any desired machine. 
+    There is no execution order for the daemons and collector. 
+    If daemons and collector are running the monitoring viewer can be executed. 
+    The viewer is the graphical user interface of the monitoring framework. 
+    It captures and displays HAMcast node information.	
+    
+    DAEMON EXAMPLE
+	The daemon needs two command line arguments in order to run. 
+	The first argument is a daemon-id "-d" to define the name of the node.
+	This id will be used as a representation for the node. 
+	The second argument is a HAMcast group uri "-g". 
+	This argument needs to be set to the same value as the group 
+	of the collector. This group is used by the monitoring framework 
+	in order to find nodes. 
+	All arguments are optional, the program can also run on default settings.
+	
+	./mdaemon -d example -g ip://239.0.0.1:1234
+	
+    COLLECTOR EXAMPLE
+	In order to run the collector takes four command line arguments.
+	A port that has to be reachable "-p". 
+	A HAMcast group uri that has to be the same as the daemons uri "-g". 
+	Two time intervals that define how frequently nodes will be fetched "-m" 
+	and how frequently node information will be updated "-s". 
+	The time is indicated in seconds. 
+	All arguments are optional and can be run on default.	
+	
+	./mcollector -g ip://239.0.0.1:1234 -p 35000 -s 10 -m 30
+
+    VIEWER EXAMPLE
+	The monitoring viewer takes no command line argument. On startup the view
+	opens a window where the ip-address and port of the collector has to be
+  	committed.	
+
+NOTES
+    The monitoring framework consists of three components (i) mdaemon,
+    (ii) mcollector, and (iii) mviewer. Additional information on these
+    can be found in corresponding REAMDE in subdirectories.
+
+AUTHORS
+    Sebastian Zagaria <sebastian.zagaria (at) haw-hamburg.de>
+    Sebastian Meiling <sebastian.meiling (at) haw-hamburg.de>
+
+    visit our website <http://hamcast.realmv6.org/developers>

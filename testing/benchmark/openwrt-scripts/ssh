@@ -1,0 +1,12 @@
+#!/bin/sh
+
+#   Wrapper to use /root/.ssh/id_rsa for dropbear on OpenWRT 12.09-RC1
+#
+# delete softlink /usr/bin/ssh -> ../sbin/dropbear
+# place at: /usr/bin/ssh
+# chmod +x /usr/bin/ssh
+#
+# Uses the second softlink to dropbear which calls the ssh client:
+#   /usr/bin/dbclient -> ../sbin/dropbear
+
+dbclient -i /root/.ssh/id_rsa $@

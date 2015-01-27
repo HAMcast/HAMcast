@@ -1,0 +1,2 @@
+simple AribaService
+endsimple

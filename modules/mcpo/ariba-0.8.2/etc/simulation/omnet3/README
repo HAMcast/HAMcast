@@ -1,0 +1,1 @@
+./configure CPPFLAGS='-I/home/mayer/Distack/omnet/include -I/home/mayer/Distack/inet/Network/IPv4 -I/home/mayer/Distack/inet/Base -I/home/mayer/Distack/inet/Network/Contract -I/home/mayer/Distack/inet/NetworkInterfaces/Contract -I/home/mayer/Distack/inet/Transport/TCP -I/home/mayer/Distack/inet/Transport/UDP -I/home/mayer/Distack/inet/Transport/Contract' --enable-simulation=yes

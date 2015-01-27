@@ -1,0 +1,172 @@
+Please see the latest Installation instructions on http://ariba-underlay.org/
+here: http://ariba-underlay.org/trac/spovnet-base/wiki/BaseInstall
+
+Please see also http://spovnet.de/ for further information
+about Ariba and its application.
+
+
+Prerequisites
+=============
+ariba depends on libraries that may not be installed on your system:
+
+    * Boost (version >=1.42)
+    * GMP
+    * CMake (version >=2.8)
+
+and optionally on
+
+    * Log4Cxx (version >= 0.10.0) for more sophisticated logging
+    * Avahi for more efficient bootstrapping in local networks
+    * LibBluetooth/Bluez for bluetooth support
+    * Doxygen to build the documentation
+
+Furthermore, you need default development tools - that are most likely already
+installed on your system - such as gcc/g++, libtool, liblt-dev ...
+
+
+Quick Install
+=============
+
+ariba currently builds on Linux systems. Our reference platform is Ubuntu 8.04
+with the g++ compiler version 4.1. However, latest Ubuntu releases should work 
+too.
+
+Download the latest ariba package from the the download site
+http://ariba-underlay.org/downloads:
+
+Extract the archive and change into the project directory:
+> tar xfz ./ariba-x.x.x.tar.gz
+> cd ariba-x.x.x
+
+Alternatively, you could try to use the latest development code from our SVN
+trunk (attention: the code on trunk might break from time to time):
+> svn co https://svn.tm.kit.edu/SpoVNet-KA/entwicklung/ariba/trunk ariba-trunk
+> cd ariba-trunk
+
+Now create a directory to build ariba in:
+> mkdir build
+> cd build
+
+Next the makefiles have to be generated and the source compiled:
+> cmake ..
+> make
+
+HINT: you may use 
+> make -j 2 
+for a dual processor/core system to speed up the compilation,
+make -j 4 if you have quad-core respectively, and so on. If 
+the compilation stops, try make without the -j option again.
+
+And finally ariba will be installed into the system:
+> make install
+
+
+Custom Build Options
+====================
+The build may be customized in various ways by setting CMake options. This can
+be done by giving them as arguments on the command line:
+> cmake .. -DOPTION=value
+
+by using the CMake GUI which lets you set the variables graphically:
+> cmake-gui ..
+
+or running cmake in interactive mode:
+> cmake -i ..
+
+The last two ways also give an overview which options exist.
+
+Important options:
+
+CMAKE_INSTALL_PREFIX - Where to install the compiled files. The default on Unix
+                       platforms is /usr/local/. If you for example don't want
+                       or can't install system wide, you can specify a directory
+                       you have control over. The files will be installed to
+                       "${prefix}/include/", "${prefix}/lib/" and so on.
+
+CMAKE_BUILD_TYPE     - One of "", "Release", "Debug", "RelWithDebInfo" or
+                       "MinSizeRel". This influences the build in various ways
+                       (which compiler optimizations are turned on, whether
+                       debug symbols are included, what warnings to show etc.).
+
+ENABLE_{AVAHI,BLUETOOTH,LOG4CXX}
+                     - If set to OFF or 0 (ON is the default) it disables the
+                       support of the feature even if the corresponding library
+                       (see above) was detected to be present.
+
+<library>_INCLUDE_DIR - Where the directory containing the header files for
+                       <library> is located. If the library is installed in the
+                       usual system paths CMake should be able to automatically
+                       find the right location. If the library is located
+                       elsewhere (e.g. because you compiled it yourself in your
+                       home directory) then you may need to set this variable
+                       manually.
+
+<library>_LIBRARY    - Where the library file (aka the .so, .a or .dll file) for
+                       <library> is located. If the library is installed in the
+                       usual system paths CMake should be able to automatically
+                       find the right location. If the library is located
+                       elsewhere (e.g. because you compiled it yourself in your
+                       home directory) then you may need to set this variable
+                       manually.
+
+DOCUMENTATION_GENERATE_GRAPHICS
+                     - Whether the documentation should include graphics such as
+                       inheritance and include graphs (OFF by default). This
+                       might take a long time and consume a lot of space.
+
+CMAKE_{C,CXX}_COMPILER - Which C/C++ compiler to use
+CMAKE_{C,CXX}_FLAGS  - Which additional flags to give to the compiler (e.g. -pg
+                       for profiling support)
+
+
+Building the Documentation
+==========================
+To build the documentation once you can build the "docu" target:
+> make docu
+
+If you want to build the documentation on every build you can enable the
+ALWAYS_BUILD_DOCUMENTATION option in CMake.
+
+
+Running the PingPong Sample
+===========================
+The PingPong binary pingpong is installed in "${prefix}/lib/ariba/" or found
+directly in the build tree at "sample/pingpong/pingpong". It has one parameter,
+a configuration file. You can find sample configuration files in the
+"etc/pingpong" folder. If no configuration file is given, the node will randomly
+select its NodeID but will not find other nodes. This is because bootstrap
+modules are selected in the configuration file.
+> ./sample/pingpong/pingpong ../etc/pingpong/settings_node1.cnf
+
+When running the pingpong application it will output a large number of log
+messages and the initiator will wait for other nodes to join. You can start them
+using the configuration files settings_node1.cnf and settings_node2.cnf. You may
+need to adjust the configurations files: currently both node1 and node2 try to
+join the initiator on the local machine. This will only work if you start all
+instances on a local machine.
+
+Once the PingPong sample is running and the nodes have connected, each node will
+send out ping messages to every node he knows in the overlay structure every
+5 seconds. You can now e.g. test mobility of ariba and change the IP address of
+a node, or switch from LAN connection to WLAN. The links established by the
+PingPong sample through ariba are mobility invariant and automatically repaired.
+
+
+Cross-Compiling for Maemo
+=========================
+Ariba runs on Nokia Maemo 4 (tested) and probably Maemo 5. We have tested ariba
+on an N810 device. Cross-Compiling is done using Scratchbox. Use the
+preassembled Scratchbox version provided by Nokia which will install and
+configure the complete Scratchbox system automatically.
+
+If you compile for Maemo you have to set the HAVE_MAEMO option in CMake.
+
+Internally there are a number of special cases where handling on Maemo is
+different from normal Linux. If you require special handling, do the following
+in your code:
+
+#include "ariba/config.h"
+...
+#ifdef HAVE_MAEMO
+ // special Maemo handling
+#endif

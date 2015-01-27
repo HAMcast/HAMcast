@@ -1,0 +1,23 @@
+installing mcpo
+
+ariba 0.7.1b
+./configure LIBS="-L/home/berg/hamcast/hamcast/modules/mcpo/ariba-0.7.1b/source/ariba/.libs -lariba -lboost_system" CXXFLAGS=-I/home/berg/hamcast/hamcast/modules/mcpo/ariba-0.7.1b/source/
+
+ariba 0.8.1
+./configure LIBS="-L/home/berg/hamcast/hamcast/modules/mcpo/ariba-0.8.1/source/ariba/.libs -lariba -lboost_system -L/home/berg/hamcast/hamcast/modules/mcpo/ariba-0.8.1/source/services/dht/.libs -lariba_dht " CXXFLAGS=-I/home/berg/hamcast/hamcast/modules/mcpo/ariba-0.8.1/source/ariba
+
+
+
+
+make
+
+
+
+installing mcpo-module
+
+cmake -DCMAKE_BUILD_TYPE=Debug -DHAMCAST_INCLUDE_PATH=/home/berg/hamcast/hamcast/libhamcast -DHAMCAST_LIBRARY_PATH=/home/berg/hamcast/hamcast/lib  -DARIBA_INCLUDE_PATH=/home/berg/hamcast/hamcast/modules/mcpo/ariba-0.7.1b/source -DARIBA_LIBRARY_PATH=/home/berg/hamcast/hamcast/modules/mcpo/ariba-0.7.1b/source/ariba/.libs -DMCPO_INCLUDE_PATH=/home/berg/hamcast/hamcast/modules/mcpo/mcpo-0.5.1/source -DMCPO_LIBRARY_PATH=/home/berg/hamcast/hamcast/modules/mcpo/mcpo-0.5.1/source/mcpo/.libs  ../
+
+ariba-0.8-1
+cmake -DHAMCAST_INCLUDE_PATH=/home/berg/hamcast/hamcast/libhamcast -DHAMCAST_LIBRARY_PATH=/home/berg/hamcast/hamcast/lib  -DARIBA_INCLUDE_PATH=/home/berg/hamcast/hamcast/modules/mcpo/ariba-0.8.1/source -DARIBA_LIBRARY_PATH=/home/berg/hamcast/hamcast/modules/mcpo/ariba-0.8.1/source/ariba/.libs -DMCPO_INCLUDE_PATH=/home/berg/hamcast/hamcast/modules/mcpo/mcpo-0.5.1/source -DMCPO_LIBRARY_PATH=/home/berg/hamcast/hamcast/modules/mcpo/mcpo-0.5.1/source/mcpo/.libs -DARIBA_DHT_LIBRARY_PATH=/home/berg/hamcast/hamcast/modules/mcpo/ariba-0.8.1/source/services/dht/.libs CMAKE_BUILD_TYPE=Debug ../
+
+

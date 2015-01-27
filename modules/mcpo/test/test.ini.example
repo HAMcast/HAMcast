@@ -1,0 +1,10 @@
+;time in sec -> NO COMMENTS BEHIND LINES plz ;)
+
+;time in sec
+duration=200 		
+ival=1 			
+program=/nora/hamcast/modules/mcpo/performance-ariba/build/performance-ariba
+arguments=-s -i 1 -p 100 -n hamcast -t 23 -b "hamcast{ip{141.22.26.251};tcp{5005}}" -e "ip{141.22.26.252}tcp{5005}" -c node1 -m ip
+
+;hamcast_path=/nora/hamcast/  
+;mw_args	

@@ -1,0 +1,171 @@
+Please see the latest Installation instructions on http://ariba-underlay.org/
+here: http://ariba-underlay.org/trac/spovnet-base/wiki/BaseInstall
+
+Please see also http://spovnet.de/ for further information
+about Ariba and its application.
+
+Prerequisites
+=============
+ariba depends on libraries that may not be installed on your system:
+
+    * Boost (version >=1.39)
+    * Log4cxx (version >= 0.10.0)
+    * GMP (no specific version) 
+
+Furthermore, you need default development tools - that are most likely already installed on your system - such as 
+gcc/g++, autoconf, automake, aclocal, libtool, liblt-dev ...
+
+Quick Install (If all dependencies are satisfied)
+=============
+
+ariba currently build on Linux systems. Our reference platform is
+Ubuntu 8.04 with the g++ compiler version 4.1. Download the latest
+ariba package from the the download site 
+http://ariba-underlay.org/downloads
+
+Extract the archive and change into the project directory:
+
+> tar xfz ./ariba-x.x.x.tar.gz
+> cd ariba-x.x.x
+
+Now, configure, compile, and install ariba (if not all libraries
+needed by Ariba are available on your system, read the section
+'Prequisites'). 
+
+If no configure script is available (e.g. when you checked out an svn
+version), run the ./bootstrap script first and then type:
+
+> ./configure
+> make
+> make install
+
+HINT: you may use 
+> make -j 2 
+for a double processor/core system to speed up the compilation,
+make -j 4 if you have quad-core respectively, and so on. If 
+the compilation stops, try make without the -j option again.
+
+
+In case you don't want to install Ariba into your system but to a
+local place, do:
+
+> mkdir build
+> ./configure --prefix=$PWD/build
+> make
+> make install
+
+
+Local install (Download library dependencies and install ariba in a
+=============  local subdirectory)
+
+
+If the required libraries are not available on your system or don't
+want to install them to the system you can use the bootstrap_libs
+script that comes with the ariba package. It will download all
+dependencies, compile and install them locally, and compile and
+install ariba:
+
+> tar xfz ./ariba-x.x.x.tar.gz
+> cd ariba-x.x.x
+> ./bootstrap_libs
+
+This script will automatically download all necessary libraries and
+compile them inside a new ./libs subdirectory and install them into
+./build. In the end the ariba library itself is compiled to
+./build. You can safely delete the ./libs subdirectory after the
+process.
+
+Here is the manual way to go: If you install Ariba locally and have
+the required libraries also installed locally, you can use a
+config.site script to make it easier. The config.site file must reside
+in a folder called share. If your install path is /home/foo/local and
+you do a ./configure --prefix=/home/foo/local, ariba headers will be
+installed in /home/foo/local/include, and the ariba library in
+/home/foo/local/lib. To use a config.site script, create a folder
+/home/foo/local/share and create a file config.site. Such a file has
+paths towards required header files and libraries.
+
+with_boost=/home/foo/Libraries/include
+test -z "$CPPFLAGS" && CPPFLAGS='-I/home/foo/Libraries/include'
+test -z "$LDFLAGS" && LDFLAGS='-L/home/foo/Libraries/lib'
+
+If you now do a ./configure --prefix=/home/foo/local, the config.site
+will be found and the paths therein used for finding libraries. If you
+e.g. have multiple libraries distributed in their own include folders,
+you can also have multiple includes:
+
+test -z "$CPPFLAGS" && CPPFLAGS='-I/home/foo/Libraries/include -I/home/foo/otherlibrary/include'
+
+Running the PingPong Sample
+===========================
+The PingPong binary pingpong is installed in build/bin. It has one
+parameter, a configuration file. You can find sample configuration
+files in the etc/pingpongconfig folder. If no configuration file is
+given, the node will randomly select its NodeID but will not find
+other nodes. This is because bootstrap modules are selected in the
+configuration file.
+
+> ./pingpong ../../etc/pingpong/settings_node1.cnf
+
+If this fails to find the libariba you may have to set 
+the LD_LIBRARY_PATH correctly in your current terminal, 
+or better add it to your .bashrc
+
+> export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/user/ariba/build/lib
+
+When running the pingpong application it will output a large number of
+log messages and the initiator will wait for other nodes to join. You
+can start them using the configuration files settings_node1.cnf and
+settings_node2.cnf. You may need to adjust the configurations files:
+currently both node1 and node2 try to join the initiator on the local
+machine. This will only work if you start all instances on a local
+machine.
+
+Once the PingPong sample is running and the nodes have connected, each
+node will send out ping messages to every node he knows in the overlay
+structure every 5 seconds. You can now e.g. test mobility of Ariba and
+change the IP address of a node, or swith from LAN connection to
+WLAN. The links established by the PingPong sample through Ariba are
+mobility invariant and automatically repaired.  Selecting a compiler
+
+As the g++-4.3 compiler is very restrictive when compiling C++ and you
+will have some trouble with Boost and Log4cxx, we suggest to use
+e.g. g++-4.1. You then have to compile the libraries and Ariba with
+this compiler. You can tell Log4cxx and Ariba to use a different
+compiler using:
+
+./configure --prefix=... CXX=g++-4.1
+
+This will not work in Boost as the configure script is just a wrapper around the Boost Build.System bjam. You can edit the jamfile in the Boost root directory:
+
+using gcc : 4.1 ;
+
+and then build using bjam as described in http://www.boost.org/doc/libs/1_38_0/more/getting_started/unix-variants.html.
+
+Cross-Comiling for Maemo
+========================
+Ariba runs on Nokia Maemo 4 (tested) and probably Maemo 5. We have
+tested Ariba on an N810 device. Cross-Compiling is done using
+Scratchbox. Use the preassembled Scratchbox version provided by Nokia
+which will install and configure the complete Scratchbox system
+automatically.
+
+The Ariba configure will test for Maemo systems. Internally there are
+a number of special cases where handling on Maemo is different from
+normal Linux. If you require special handling, do the following in
+your code:
+
+#include "ariba/config.h"
+...
+#ifdef HAVE_MAEMO
+ // special Maemo handling
+#endif
+
+Overview of special configure options
+=====================================
+There are several options to configure that are specific to Ariba:
+
+    * --enable-debug=yes - for building a debug build
+    * --enable-profiling=yes - for profiling with gprof
+    * --enable-logcolors=yes - for colorful logging output
+    * --enable-doxygen=yes - for generating doxygen documentation (do a make html-local in ariba/docu/doxygen) 

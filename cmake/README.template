@@ -1,0 +1,33 @@
+## Template for a README file within the HAMcast Project.
+## The content should follow standard manual-page layout
+## as follows:
+
+# name and short (functional) description of the software
+NAME
+
+# howto build the program, and optional install instructions
+BUILD/INSTALL
+
+# short usage instruction 
+SYNOPSIS
+
+# long description 
+DESCRIPTION
+
+# argument and parameter
+OPTIONS
+
+# usage and call examples
+EXAMPLES
+
+# optional files to be used with or by the program
+FILES
+
+# add env variables, e.g LD_LIBRARY_PATH to libhamcast
+ENVIRONMENT
+
+# additional notes
+NOTES
+
+# developer and contact details
+AUTHOR
