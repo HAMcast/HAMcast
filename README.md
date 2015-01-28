@@ -81,29 +81,6 @@ Library (source code) is also available on <http://www.boost.org/>.
 Build HAMcast
 =============
 
-General
--------
-Our build toolchain uses the cmake framework. For all build processes we
-recommend an out-of-source build, this complies to cmake BCP. Our core
-release contains a main CMakeLists.txt, that recursivly builds libhamcast,
-middleware and modules. To build the full core release, follow these
-steps:
-
-    - change to core release folder hamcast_core/
-    - create a build folder, e.g. hamcast_core/build
-    - change to build folder
-    - run cmake:
-        cmake ../
-      or for debugging
-        cmake -DCMAKE_BUILD_TYPE=Debug ../
-
-    - If no errors occure cmake creates a Makefile, run in build folder:
-        make
-
-Afterwards all libraries (libhamcast and modules) are stored in
-hamcast_core/lib and the middleware in hamcast_core/bin You can also compile
-each part of HAMcast separately, see instructions below.
-
 Libhamcast
 ----------
 Libhamcast is the core library of the HAMcast prototype and must be build
@@ -116,6 +93,8 @@ first. Follow these steps to compile libhamcast:
     - If no errors occure cmake creates a Makefile, now run in build folder:
         make
     - Compiled library is stored in build folder.
+    - Install library
+        make install
 
 Note: you may copy libhamcast.so files to source folder, then you only
 have to specify HAMCAST_INCLUDE_PATH for other builds that depend on
