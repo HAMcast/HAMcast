@@ -174,7 +174,7 @@ void send (const hamcast::uri &group, const size_t &payload,
         struct sockaddr_in addr_in;
         addr_in.sin_family = AF_INET;
         addr_in.sin_port = htons(atoi(group.port().c_str()));
-        if (inet_pton(AF_INET, group.host().c_str(), &(addr_in.sin_addr)) != 1)
+        if (inet_pton(AF_INET, group.group().c_str(), &(addr_in.sin_addr)) != 1)
         {
           perror("inet_pton");
           exit(1);
@@ -348,9 +348,9 @@ void recv (const hamcast::uri &group, const size_t &payload,
         struct group_req mgroup;
         mgroup.gr_interface = 0; //kernel choose interface
         reinterpret_cast<struct sockaddr_in*>(&mgroup.gr_group)->sin_family = AF_INET;
-        if ((inet_pton(AF_INET, group.host().c_str(), &(reinterpret_cast<struct sockaddr_in*>(&mgroup.gr_group)->sin_addr))) != 1)
+        if ((inet_pton(AF_INET, group.group().c_str(), &(reinterpret_cast<struct sockaddr_in*>(&mgroup.gr_group)->sin_addr))) != 1)
         {
-            std::cout << "group: " << group.host() << std::endl;
+            std::cout << "group: " << group.group() << std::endl;
             perror("inet_pton");
             exit(1);
         }

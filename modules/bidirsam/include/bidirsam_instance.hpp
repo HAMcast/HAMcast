@@ -103,7 +103,14 @@ private:
      */
     inline std::string plain_uri_str (const hamcast::uri &group_uri)
     {
-        return (group_uri.scheme () + "://" + group_uri.user_information_and_host ());
+        if(group_uri.instantiation().empty())
+        {
+            return (group_uri.ham_scheme() + group_uri.ham_namespace() + ":" + group_uri.group());
+        }
+        else
+        {
+            return (group_uri.ham_scheme() + group_uri.ham_namespace() + ":" + group_uri.group() + "@" + group_uri.instantiation());
+        }
     }
 
     /**

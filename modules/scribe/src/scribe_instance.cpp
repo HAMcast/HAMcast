@@ -63,8 +63,12 @@ Key scribe_instance::uri_mapping(const uri &group_uri)
 {
     HC_LOG_TRACE("");
     Key k;
-    string sch = group_uri.scheme ();
-    string grp = group_uri.user_information_and_host ();
+    string sch = group_uri.ham_namespace ();
+    string grp = group_uri.group();
+    if(!group_uri.instantiation().empty()){
+        grp += "@" + group_uri.instantiation();   
+    }
+
     string prt = group_uri.port ();
     uint32_t prti = 0;
     boost::mutex::scoped_lock guard (m_map_mutex);

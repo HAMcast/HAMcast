@@ -151,7 +151,7 @@ void ip_instance::receive_loop()
                     case iio_join: {
                             uri grp_uri (msg->uri_arg);
                             HC_LOG_DEBUG("Join group: " << grp_uri.str());
-                            if (!grp_uri.authority().empty()) { // uri valid
+                            if (!grp_uri.empty()) { // uri valid
                                 sit = l_sockets.find(grp_uri);
                                 if (sit == l_sockets.end()) {
                                     ip_socket *nsock = new ip_socket(m_if_addr, m_if_index, m_if_name);
@@ -199,7 +199,7 @@ void ip_instance::receive_loop()
                         }
                     case iio_leave: {
                             uri grp_uri (msg->uri_arg);
-                            if (!grp_uri.authority().empty()) { // uri valid
+                            if (!grp_uri.empty()) { // uri valid
                                 sit = l_sockets.find(grp_uri);
                                 if (sit != l_sockets.end()) {
                                     try {
@@ -323,7 +323,7 @@ int ip_instance::send(const uri& group_uri, const void* buf, int len, unsigned c
     HC_LOG_TRACE("");
     int numbytes = 0;
     // check destination group
-    if(group_uri.authority().empty()){
+    if(group_uri.empty()){
         return HC_INVALID_URI;
     }
 
@@ -344,7 +344,7 @@ int ip_instance::send(const uri& group_uri, const void* buf, int len, unsigned c
         hints.ai_family = AF_UNSPEC;
         hints.ai_socktype = SOCK_DGRAM;
 
-        if ((ret = getaddrinfo (group_uri.host().c_str(), group_uri.port().c_str(), &hints, &grp)) != 0) {
+        if ((ret = getaddrinfo (group_uri.group().c_str(), group_uri.port().c_str(), &hints, &grp)) != 0) {
             HC_LOG_WARN ("sendto, getaddrinfo: " << gai_strerror (ret));
             throw ipm_address_exception ("sendto, getaddrinfo");
         }
@@ -368,8 +368,7 @@ uri ip_instance::map(const uri& group_uri)
      * FIXME: need to check if uri contains valid IP,
      * otherwise return NULL or query some other mapping service
      */
-    string tmp_scheme = boost::to_upper_copy(group_uri.scheme());
-    if (!group_uri.empty() && (tmp_scheme == "IP")) {
+    if (!group_uri.empty() && (group_uri.ham_namespace() == "ip")) {
         HC_LOG_DEBUG ("URI valid, return mapping (copy).");
         result = uri (group_uri);
     }
@@ -387,11 +386,12 @@ void ip_instance::neighbor_set(vector<uri>& result)
     for (it = t_neighbors.begin(); it != t_neighbors.end(); ++it) {
         uri u = (*it);
         std::stringstream ss;
-        ss << u.scheme() << "://";
-        if (!u.user_information().empty()) {
-            ss << u.user_information() << "@";
+        ss << u.ham_scheme() << ":";
+        ss << u.ham_namespace() << ":";
+        ss << u.group() << ":";
+        if (!u.instantiation().empty()) {
+            ss << "@" << u.instantiation();
         }
-        ss << u.host();
         u = uri (ss.str());
         if (!u.empty()) {
             result.push_back(u);
@@ -407,11 +407,12 @@ void ip_instance::group_set(std::vector<std::pair<hamcast::uri, int> >& result)
     for (it = t_groups.begin(); it != t_groups.end(); ++it) {
         uri u = (*it);
         std::stringstream ss;
-        ss << u.scheme() << "://";
-        if (!u.user_information().empty()) {
-            ss << u.user_information() << "@";
+        ss << u.ham_scheme() << ":";
+        ss << u.ham_namespace() << ":";
+        ss << u.group() << ":";
+        if (!u.instantiation().empty()) {
+            ss << "@" << u.instantiation();
         }
-        ss << u.host();
         u = uri (ss.str());
         if (!u.empty()) {
             result.push_back(pair<uri, int>(u, HC_LISTENER_STATE));

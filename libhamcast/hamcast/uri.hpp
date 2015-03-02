@@ -127,17 +127,6 @@ class uri : util::comparable<uri, uri>, util::comparable<uri, const char*>
     bool empty() const { return str().empty(); }
 
     /**
-     * @brief Get the host subcomponent of authority.
-     *
-     * The host subcomponent of authority is identified by an IP literal
-     * encapsulated within square brackets, an IPv4 address in dotted-
-     * decimal form, or a registered name.
-     *
-     * @returns The host subcomponent of {@link authority()}.
-     */
-    const std::string& host() const;
-
-    /**
      * @brief Check if {@link host()} returns an IPv4 address.
      * @note The testing is done in the constructor, so this member
      *       function only checks an internal flag (and has no
@@ -183,67 +172,39 @@ class uri : util::comparable<uri, uri>, util::comparable<uri, const char*>
     boost::uint16_t port_as_int() const;
 
     /**
-     * @brief Get the user information subcomponent of authority.
+     * @brief Get the security credentials of this URI object.
      *
-     * The userinfo subcomponent may consist of a user name and, optionally,
-     * scheme-specific information about how to gain authorization to access
-     * the resource.
-     * @returns The user information subcomponent of {@link authority()}.
+     * @returns The security credentials.
      */
-    const std::string& user_information() const;
+    const std::string& sec_credentials() const;
 
     /**
-     * @brief Get the user information plus host subcomponents of authority.
+     * @brief Get the instatiation of this URI object.
+     *
+     * @returns The group component.
      */
-    const std::string& user_information_and_host() const;
+    const std::string& instantiation() const;
 
     /**
-     * @brief Get the path component of this URI object.
+     * @brief Get the group of this URI object.
      *
-     * The path component contains data that serves to identifiy a resource
-     * within the scope of the URI's scheme and naming authority (if any).
-     * @returns The path component.
+     * @returns The group component.
      */
-    const std::string& path() const;
+    const std::string& group() const;
 
     /**
-     * @brief Get the query component of this URI object.
+     * @brief Get the namespace of this URI object.
      *
-     * The query component contains non-hierarchical data that, along with
-     * data in the path component (Section 3.3), serves to identify a
-     * resource within the scope of the URI's scheme and naming authority
-     * (if any).
-     * @returns The query component.
+     * @returns The namespace component.
      */
-    const std::string& query() const;
+    const std::string& ham_namespace() const;
 
     /**
-     * @brief Get the scheme component of this URI object.
+     * @brief Get the ham-scheme component of this URI object.
      *
-     * Each URI begins with a scheme name that refers to a specification for
-     * assigning identifiers within that scheme.
-     * @returns The scheme component.
+     * @returns The ham-scheme component.
      */
-    const std::string& scheme() const;
-
-    /**
-     * @brief Get the fragment component of this URI object.
-     *
-     * The fragment identifier component of a URI allows indirect
-     * identification of a secondary resource by reference to a primary
-     * resource and additional identifying information.
-     * @returns The fragment component.
-     */
-    const std::string& fragment() const;
-
-    /**
-     * @brief Get the authority component of this URI object.
-     *
-     * The subcomponents of authority could be queried with
-     * {@link user_information()}, {@link host()} and {@link port()}.
-     * @returns The authority component.
-     */
-    const std::string& authority() const;
+    const std::string& ham_scheme() const;
 
     /**
      * @brief Exchanges the contents of <code>this</code> and @p other.
@@ -254,11 +215,13 @@ class uri : util::comparable<uri, uri>, util::comparable<uri, const char*>
 
     /**
      * @brief Equivalent to <code>uri(other).swap(*this)</code>.
+        "namespace://group.com@instantiation:1234/seccredentials",
      * @param other Original {@link hamcast::uri uri} object.
      * @returns <code>*this</code>.
      */
     uri& operator=(const uri& other);
-
+  
+    //static void test_uri();
  private:
 
     intrusive_ptr<detail::uri_private, add_ref, release> d;

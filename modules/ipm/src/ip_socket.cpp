@@ -514,7 +514,7 @@ ip_socket::ip_socket(const hamcast::uri &grp_uri, const int& ifindex, const std:
     hints.ai_socktype = SOCK_DGRAM;
 
     // resolve uri to address struct
-    if ((ret = getaddrinfo (grp_uri.host().c_str(), grp_uri.port().c_str(), &hints, &grp)) != 0) {
+    if ((ret = getaddrinfo (grp_uri.group().c_str(), grp_uri.port().c_str(), &hints, &grp)) != 0) {
         HC_LOG_WARN ("getaddrinfo: " << gai_strerror (ret));
         throw ipm_address_exception ("getaddrinfo");
     }
@@ -531,12 +531,12 @@ void ip_socket::join (const hamcast::uri &grp_uri)
     struct addrinfo hints, *grp, *src;
     int ret;
     // resolve source to addresss struct
-    if (!grp_uri.user_information().empty()) {
+    if (!grp_uri.instantiation().empty()) {
         memset (&hints, 0, sizeof(hints));
         hints.ai_family = AF_UNSPEC;
         hints.ai_socktype = SOCK_DGRAM;
 
-        if ((ret = getaddrinfo (grp_uri.user_information().c_str(), "0", &hints, &src)) != 0) {
+        if ((ret = getaddrinfo (grp_uri.instantiation().c_str(), "0", &hints, &src)) != 0) {
             HC_LOG_WARN ("getaddrinfo: " << gai_strerror (ret));
             src = NULL;
         }
@@ -550,7 +550,7 @@ void ip_socket::join (const hamcast::uri &grp_uri)
     hints.ai_socktype = SOCK_DGRAM;
 
     // resolve group to address struct
-    if ((ret = getaddrinfo (grp_uri.host().c_str(), grp_uri.port().c_str(), &hints, &grp)) != 0) {
+    if ((ret = getaddrinfo (grp_uri.group().c_str(), grp_uri.port().c_str(), &hints, &grp)) != 0) {
         HC_LOG_WARN ("getaddrinfo: " << gai_strerror (ret));
         return;
     }
@@ -579,12 +579,12 @@ void ip_socket::leave (const hamcast::uri &grp_uri)
     struct addrinfo hints, *grp, *src;
     int ret;
     // resolve source to address struct
-    if (!grp_uri.user_information().empty()) {
+    if (!grp_uri.instantiation().empty()) {
         memset (&hints, 0, sizeof(hints));
         hints.ai_family = AF_UNSPEC;
         hints.ai_socktype = SOCK_DGRAM;
 
-        if ((ret = getaddrinfo (grp_uri.user_information().c_str(), "0", &hints, &src)) != 0) {
+        if ((ret = getaddrinfo (grp_uri.instantiation().c_str(), "0", &hints, &src)) != 0) {
             HC_LOG_WARN (" getaddrinfo: " << gai_strerror (ret));
             src = NULL;
         }
@@ -597,7 +597,7 @@ void ip_socket::leave (const hamcast::uri &grp_uri)
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_DGRAM;
     // resolve group to address struct
-    if ((ret = getaddrinfo (grp_uri.host().c_str(), grp_uri.port().c_str(), &hints, &grp)) != 0) {
+    if ((ret = getaddrinfo (grp_uri.group().c_str(), grp_uri.port().c_str(), &hints, &grp)) != 0) {
         HC_LOG_WARN (" getaddrinfo: " << gai_strerror (ret));
         return;
     }
@@ -701,7 +701,7 @@ void ip_socket::bind(const hamcast::uri& grp_uri)
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_DGRAM;
 
-    if ((ret = getaddrinfo (grp_uri.host().c_str(), grp_uri.port().c_str(), &hints, &grp)) != 0) {
+    if ((ret = getaddrinfo (grp_uri.group().c_str(), grp_uri.port().c_str(), &hints, &grp)) != 0) {
         HC_LOG_ERROR ("getaddrinfo: " << gai_strerror (ret));
         return;
     }

@@ -43,8 +43,8 @@ std::vector<uri_mapping> possible_mappings(const hamcast::uri& group)
         std::string msg;
         msg = "Possible mappings of ";
         msg += group.str();
-        msg += " (scheme = ";
-        msg += group.scheme();
+        msg += " (namespace = ";
+        msg += group.ham_namespace();
         msg += ") { ";
         for (size_t i = 0; i < result.size(); ++i)
         {

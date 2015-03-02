@@ -24,6 +24,7 @@
 \******************************************************************************/
 
 #include <string>
+#include <cctype>
 #include <iostream>
 #include <boost/regex.hpp>
 #include <boost/lexical_cast.hpp>
@@ -38,21 +39,27 @@
 
 namespace {
 
-boost::regex m_authority_rx("(?:([a-zA-Z0-9:_\\.]+)@)?"
-                            "([a-zA-Z0-9_\\.]+|\\[[a-fA-F0-9:\\.]+])"
-                            "(?:[:]([0-9]+))?");
-
 boost::regex m_v4_rx(HC_OCTET HC_DOT HC_OCTET HC_DOT HC_OCTET HC_DOT HC_OCTET);
 
 } // namespace <anonymous>
 
-//    foo://example.com:8042/over/there?name=ferret#nose
-//    \_/   \______________/\_________/ \_________/ \__/
-//     |           |            |            |        |
-//  scheme     authority       path        query   fragment
-//     |   _____________________|__
-//    / \ /                        \.
-//    urn:example:animal:ferret:nose
+
+//  ham-URI = ham-scheme ":" namespace ":" group [ "@" instantiation ]
+//                                 [ ":" port ] [ "/" sec-credentials ]
+//      
+//        ham:namespace:group.com@instantiation:1234/sec-credentials
+//        \_/ \_______/ \_______/ \___________/ \__/ \_____________/
+//         |      |           |         |         |         |
+// ham_scheme  ham_namespace  |    instantiation  | sec_credentials
+//                          group                port   
+
+// e.g. ham:namespace:group
+// e.g. ham:namespace:group@instantiation
+// e.g. ham:namespace:group@instantiation:1234
+// e.g. ham:namespace:group@instantiation:1234/sec-credentials
+//  
+// e.g. ham:namespace:group:1234
+// e.g. ham:namespace:group/sec-credentials
 
 namespace hamcast { namespace detail {
 
@@ -63,30 +70,17 @@ class uri_private : public ref_counted
     // each "state" has the implicit transition "{default} -> self"
     enum
     {
-        // ":" -> parse_auth_or_path
-        //  $  -> error
-        parse_scheme,
-        // "[^/]" -> parse_path
-        //  "/"   -> parse_auth_or_path_first_slash_read
-        parse_auth_or_path,
-        // "[^/]" -> parse_path
-        //  "/"   -> parse_auth
-        parse_auth_or_path_first_slash_read,
-        // "/" -> parse_path
-        // "?" -> parse_query
-        // "#" -> parse_fragment
-        parse_auth,
-        // "?" -> parse_query
-        // "#" -> parse_fragment
-        parse_path,
-        // "#" -> parse_fragment
-        parse_query,
-        // no transitions
-        parse_fragment,
-        // no transitions
+        parse_ham_scheme,
+        parse_ham_namespace,
+        parse_group,
+        parse_instantiation,
+        parse_port,
+        parse_sec_credentials,
         parse_error
     }
     m_state;
+
+    bool m_waitfor_square_bracket;
 
     enum
     {
@@ -96,31 +90,27 @@ class uri_private : public ref_counted
     }
     m_flag;
 
+    std::string m_ham_scheme;
+    std::string m_ham_namespace;
+    std::string m_group;
+    std::string m_instantiation;
+    std::string m_port;
+    std::string m_sec_credentials;
+    
     // uri components
     std::string m_uri;
-    std::string m_path;
-    std::string m_query;
-    std::string m_scheme;
-    std::string m_fragment;
-    std::string m_authority;
 
-    // authority subcomponents
-    std::string m_user_information;
-    std::string m_host;
-    std::string m_user_information_and_host;
-    std::string m_port;
-
-    // convenience fields
+     //convenience fields
     boost::uint16_t m_int_port;
 
     void clear()
     {
-        m_uri.clear();
-        m_path.clear();
-        m_query.clear();
-        m_scheme.clear();
-        m_fragment.clear();
-        m_authority.clear();
+        m_ham_scheme.clear();
+        m_ham_namespace.clear();
+        m_group.clear();
+        m_instantiation.clear();
+        m_port.clear();
+        m_sec_credentials.clear();
     }
 
     bool consume(char c)
@@ -128,65 +118,82 @@ class uri_private : public ref_counted
         switch (m_state)
         {
 
-         case parse_scheme:
-            if (c == ':') m_state = parse_auth_or_path;
-            else m_scheme += c;
+         case parse_ham_scheme:
+            if (c == ':') m_state = parse_ham_namespace;
+            else m_ham_scheme += c;
             return true;
 
-         case parse_auth_or_path:
-            if (c == '/') m_state = parse_auth_or_path_first_slash_read;
-            else
+         case parse_ham_namespace:
+            if (c == ':') m_state = parse_group;
+            else m_ham_namespace += c;
+            return true;
+
+         case parse_group:
+            if(!m_waitfor_square_bracket)
             {
-                m_state = parse_path;
-                m_path += c;
+                if (c == '@')
+                {
+                    m_state = parse_instantiation;
+                    return true;
+                }
+                else if (c == ':')
+                {
+                    m_state = parse_port;
+                    return true;
+                }
+                else if (c == '/')
+                {
+                    m_state = parse_sec_credentials;
+                    return true;
+                }
+                else if (c == '[')
+                {
+                    m_waitfor_square_bracket = true;
+                }
             }
-            return true;
-
-         case parse_auth_or_path_first_slash_read:
-            if (c == '/') m_state = parse_auth;
-            else
+            
+            if (c == ']')
             {
-                m_state = parse_path;
-                m_path += '/';
-                m_path += c;
+                m_waitfor_square_bracket = false;
             }
+            
+            m_group += c;
             return true;
 
-         case parse_auth:
-            switch (c)
+         case parse_instantiation:
+            if(!m_waitfor_square_bracket)
             {
-
-             case '/':
-                m_state = parse_path;
-                m_path += '/';
-                break;
-
-             case '?':
-                m_state = parse_query;
-                break;
-
-             case '#':
-                m_state = parse_fragment;
-                break;
-
-             default: m_authority += c;
-
+                if (c == ':')
+                {
+                    m_state = parse_port;
+                    return true;
+                }
+                else if (c == '/')
+                {
+                    m_state = parse_sec_credentials;
+                    return true;
+                }
+                else if (c == '[')
+                {
+                    m_waitfor_square_bracket = true;                
+                }
             }
+            
+            if (c == ']')
+            {
+                m_waitfor_square_bracket = false; 
+            }
+            
+            m_instantiation += c;
             return true;
 
-         case parse_path:
-            if (c == '?') m_state = parse_query;
-            else if (c == '#') m_state = parse_fragment;
-            else m_path += c;
+         case parse_port:
+            if (c == '/') m_state = parse_sec_credentials;
+            else m_port += c;
             return true;
 
-         case parse_query:
-            if (c == '#') m_state = parse_fragment;
-            else m_query += c;
-            return true;
-
-         case parse_fragment:
-            m_fragment += c;
+         case parse_sec_credentials:
+            m_sec_credentials += c;
             return true;
 
          default:
@@ -196,18 +203,31 @@ class uri_private : public ref_counted
         }
     }
 
-    // this parses the given uri to the form
-    // {scheme} {authority} {path} {query} {fragment}
+    // this parses the given uri 
     bool parse_uri(const std::string& what)
     {
-        m_state = parse_scheme;
+        m_state = parse_ham_scheme;
+        m_waitfor_square_bracket = false;
         clear();
-        m_uri = what;
-        for (size_t i = 0; i < m_uri.size(); ++i)
+        for (size_t i = 0; i < what.size(); ++i)
         {
-            if (!consume(m_uri[i])) return false;
+            char c = std::tolower(what[i]);
+            m_uri += c;
+            if (!consume(c)) return false;
         }
-        return m_state != parse_scheme && m_state != parse_error;
+    
+        if(m_ham_scheme.compare("ham") == 0
+               && !m_ham_namespace.empty()
+               && !m_group.empty()
+               && !m_waitfor_square_bracket)
+        {
+            return true;
+        }
+        else
+        {
+            clear(); 
+            return false;
+        }
     }
 
     // parse $what with parse_uri and then parse $authority
@@ -215,42 +235,29 @@ class uri_private : public ref_counted
     {
         boost::smatch sm;
         m_flag = default_flag;
-        if (parse_uri(what)
-            && (m_authority.empty()
-                || boost::regex_match(m_authority, sm, m_authority_rx)))
+        if (parse_uri(what))
         {
-            if (!m_authority.empty())
+            if (!m_group.empty() && m_group[0] == '[')
             {
-                m_user_information = sm[1];
-                m_host = sm[2];
-                if (!m_host.empty() && m_host[0] == '[')
-                {
-                    // ipv6 address
-                    m_flag = ipv6_flag;
-                    // erase leading "[" and trailing "]"
-                    m_host = m_host.substr(1, m_host.size() - 2);
-                }
-                else if (!m_host.empty() && boost::regex_match(m_host, m_v4_rx))
-                {
-                    m_flag = ipv4_flag;
-                }
-                m_port = sm[3];
-                if (m_port.empty()) m_int_port = 0;
-                else
-                {
-                    m_int_port =
-                            static_cast<boost::uint16_t>(atoi(m_port.c_str()));
-                }
+                // ipv6 address
+                m_flag = ipv6_flag;
+                // erase leading "[" and trailing "]"
+                m_group = m_group.substr(1, m_group.size() - 2);
             }
-            if (m_user_information.empty())
+            else if (!m_group.empty() && boost::regex_match(m_group, m_v4_rx))
             {
-                m_user_information_and_host = m_host;
+                m_flag = ipv4_flag;
             }
+           
+            if (!m_instantiation.empty() && m_instantiation[0] == '[')
+            {
+                m_instantiation = m_instantiation.substr(1, m_instantiation.size() - 2);
+            }
+
+            if (m_port.empty()) m_int_port = 0;
             else
             {
-                m_user_information_and_host  = m_user_information;
-                m_user_information_and_host += "@";
-                m_user_information_and_host += m_host;
+                m_int_port = static_cast<boost::uint16_t>(atoi(m_port.c_str()));
             }
             return true;
         }
@@ -264,34 +271,22 @@ public:
     static uri_private* from(const std::string& what);
 
     static uri_private* from(const char* what);
+    
+    inline const std::string& ham_scheme() const { return m_ham_scheme; }
 
-    inline const std::string& path() const { return m_path; }
+    inline const std::string& ham_namespace() const { return m_ham_namespace; }
 
-    inline const std::string& query() const { return m_query; }
+    inline const std::string& group() const { return m_group; }
 
-    inline const std::string& scheme() const { return m_scheme; }
-
-    inline const std::string& fragment() const { return m_fragment; }
-
-    inline const std::string& authority() const { return m_authority; }
-
-    inline const std::string& as_string() const { return m_uri; }
-
-    inline const std::string& host() const { return m_host; }
+    inline const std::string& instantiation() const { return m_instantiation; }
 
     inline const std::string& port() const { return m_port; }
 
+    inline const std::string& sec_credentials() const { return m_sec_credentials; }
+
+    inline const std::string& as_string() const { return m_uri; }
+
     inline boost::uint16_t port_as_int() const { return m_int_port; }
-
-    inline const std::string& user_information_and_host() const
-    {
-        return m_user_information_and_host;
-    }
-
-    inline const std::string& user_information() const
-    {
-        return m_user_information;
-    }
 
     inline bool host_is_ipv4addr() const
     {
@@ -359,11 +354,6 @@ const std::string& uri::str() const
     return d->as_string();
 }
 
-const std::string& uri::host() const
-{
-    return d->host();
-}
-
 const std::string& uri::port() const
 {
     return d->port();
@@ -372,41 +362,6 @@ const std::string& uri::port() const
 boost::uint16_t uri::port_as_int() const
 {
     return d->port_as_int();
-}
-
-const std::string& uri::user_information() const
-{
-    return d->user_information();
-}
-
-const std::string& uri::path() const
-{
-    return d->path();
-}
-
-const std::string& uri::query() const
-{
-    return d->query();
-}
-
-const std::string& uri::scheme() const
-{
-    return d->scheme();
-}
-
-const std::string& uri::fragment() const
-{
-    return d->fragment();
-}
-
-const std::string& uri::authority() const
-{
-    return d->authority();
-}
-
-const std::string& uri::user_information_and_host() const
-{
-    return d->user_information_and_host();
 }
 
 bool uri::host_is_ipv4addr() const
@@ -419,6 +374,32 @@ bool uri::host_is_ipv6addr() const
     return d->host_is_ipv6addr();
 }
 
+const std::string& uri::ham_scheme() const
+{
+    return d->ham_scheme();
+}
+
+const std::string& uri::ham_namespace() const
+{
+    return d->ham_namespace();    
+}
+
+const std::string& uri::group() const
+{
+    return d->group();
+}
+
+const std::string& uri::instantiation() const
+{
+    return d->instantiation();
+}
+
+const std::string& uri::sec_credentials() const
+{
+    return d->sec_credentials();
+}
+
+
 void uri::add_ref::operator()(detail::uri_private* rc)
 {
     ref_counted::add_ref(rc);
@@ -429,22 +410,46 @@ void uri::release::operator()(detail::uri_private* rc)
     ref_counted::release(rc);
 }
 
+
+//void print_uri(const uri& u)
+//{
+    //std::cout << u << std::endl;
+    //std::cout << "\tham_scheme:" << u.ham_scheme() << std::endl;
+    //std::cout << "\tham_namespace: " << u.ham_namespace() << std::endl;
+    //std::cout << "\thost_is_ipv4addr: " << u.host_is_ipv4addr() << std::endl;
+    //std::cout << "\thost_is_ipv6addr: " << u.host_is_ipv6addr() << std::endl;
+    //std::cout << "\tport: " << u.port() << std::endl;
+    //std::cout << "\tport_as_int: " << u.port_as_int() << std::endl;
+    //std::cout << "\tgroup: " << u.group() << std::endl;
+    //std::cout << "\tinstantiation: " << u.instantiation() << std::endl;
+    //std::cout << "\tsec_credentials: " << u.sec_credentials() << std::endl;
+//}
+
+//void uri::test_uri()
+//{
+    //const char* uris1[] = {
+        //"ham:namespace:group.com",
+        //"ham:namespace:*",
+        //"ham:namespace:group.com@instantiation",
+        //"ham:namespace:*@instantiation",
+        //"ham:namespace:group.com@instantiation:1234",
+        //"ham:namespace:group.com@instantiation:1234/seccredentials",
+        //"ham:namespace:*@instantiation:1234/seccredentials",
+        //"ham:namespace:GROUP.com@instantiAtIon:1234/SECCREDENTIALS",
+        //"ham:ip:224.1.2.3:5000",
+        //"ham:sip:news@cnn.com",
+        //"ham:opaque:news@cnn.com",
+        //"ham:ip:[2::2:2]:5000",
+        //"ham:ip:[123::22]:5000",
+        //"ham:ip:[123::22]@[123::99]:33"
+    //};
+  ////ham-URI   = ham-scheme ":" namespace ":" group [ "@" instantiation ]
+      ////[ ":" port ] [ "/" sec-credentials ]
+    //for(unsigned int i= 0; i < sizeof(uris1)/sizeof(char*); ++i){
+        //std::cout << uris1[i] << std::endl;
+        //print_uri(uri(uris1[i]));
+    //}
+//}
+
 } // namespace hamcast
 
-/*
-void test_uri_parser()
-{
-    const char* uris[] = {
-        "ftp://ftp.is.co.za/rfc/rfc1808.txt",
-        "http://www.ietf.org/rfc/rfc2396.txt",
-        "ldap://[2001:db8::7]/c=GB?objectClass?one",
-        "mailto:John.Doe@example.com",
-        "news:comp.infosystems.www.servers.unix",
-        "tel:+1-816-555-1212",
-        "telnet://192.0.2.16:80/",
-        "urn:oasis:names:specification:docbook:dtd:xml:4.1.2",
-        "foo://example.com:8042/over/there?name=ferret#nose",
-        0
-    };
-}
-*/
