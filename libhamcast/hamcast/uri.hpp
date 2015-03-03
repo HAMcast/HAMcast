@@ -39,9 +39,7 @@ namespace hamcast {
 namespace detail { class uri_private; }
 
 /**
- * @brief Uniform Resource Identifier (as defined in RFC 3986).
- * @include uri_documentation.txt
- * @note The documentation of the accessors are taken from RFC 3986.
+ * @brief Multicast URI (as defined in RFC 7046).
  */
 class uri : util::comparable<uri, uri>, util::comparable<uri, const char*>
           , util::comparable<uri, std::string>
